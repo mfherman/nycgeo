@@ -25,3 +25,6 @@
 #'
 #' @source <https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page>
 "nyc_tract"
+
+#' @rdname nyc_tract
+"nyc_tract_simple"

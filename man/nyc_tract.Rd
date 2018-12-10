@@ -3,6 +3,7 @@
 \docType{data}
 \name{nyc_tract}
 \alias{nyc_tract}
+\alias{nyc_tract_simple}
 \title{NYC census tract boundaries}
 \format{An sf object with 2166 rows and 13 variables:
 \describe{
@@ -27,6 +28,8 @@ NAD83 / New York Long Island (ftUS); EPSG:2263}
 }
 \usage{
 nyc_tract
+
+nyc_tract_simple
 }
 \description{
 A simple features (sf) dataset containing the geometry of all census tracts

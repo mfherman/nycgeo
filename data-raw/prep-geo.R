@@ -1,6 +1,7 @@
 library(tidyverse)
 library(sf)
 library(devtools)
+library(rmapshaper)
 
 # reference tables --------------------------------------------------------
 
@@ -117,9 +118,22 @@ nyc_nta <- nyc_sf %>%
   arrange(boro_id, nta_id)
 
 
+# simplify sf objects -----------------------------------------------------
+
+# set up list of sf objects to simplify
+to_simplify <- lst(nyc_boro, nyc_nta, nyc_tract)
+
+# simplify each object to make smaller boundary files available
+nyc_sf_simple <- map(to_simplify, ~ ms_simplify(.x, keep_shapes = TRUE)) %>%
+  set_names(paste0(names(to_simplify), "_simple")) %>%
+  map(~ st_as_sf(as_tibble(.x)))
+
 # save data ---------------------------------------------------------------
 
-use_data(nyc_tract, nyc_boro, nyc_nta, overwrite = TRUE)
-
+# loop over list of simplified objects and save to /data
+walk2(nyc_sf_simple, names(nyc_sf_simple), function(obj, name) {
+  assign(name, obj)
+  invoke("use_data", list(as.name(name), overwrite = TRUE))
+})
 
 

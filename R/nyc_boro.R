@@ -19,3 +19,6 @@
 #'
 #' @source <https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page>
 "nyc_boro"
+
+#' @rdname nyc_boro
+"nyc_boro_simple"

@@ -3,6 +3,7 @@
 \docType{data}
 \name{nyc_nta}
 \alias{nyc_nta}
+\alias{nyc_nta_simple}
 \title{NYC neigborhood tabulation area boundaries}
 \format{An sf object with 195 rows and 10 variables:
 \describe{
@@ -23,6 +24,8 @@ NAD83 / New York Long Island (ftUS); EPSG:2263}
 }
 \usage{
 nyc_nta
+
+nyc_nta_simple
 }
 \description{
 A simple features (sf) dataset containing the geometry of all neighborhood

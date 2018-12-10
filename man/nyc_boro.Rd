@@ -3,6 +3,7 @@
 \docType{data}
 \name{nyc_boro}
 \alias{nyc_boro}
+\alias{nyc_boro_simple}
 \title{NYC borough boundaries}
 \format{An sf object with 5 rows and 8 variables:
 \describe{
@@ -21,6 +22,8 @@ NAD83 / New York Long Island (ftUS); EPSG:2263}
 }
 \usage{
 nyc_boro
+
+nyc_boro_simple
 }
 \description{
 A simple features (sf) dataset containing the geometry of the five boroughs
