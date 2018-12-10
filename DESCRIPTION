@@ -11,7 +11,7 @@ Maintainer: Matt Herman <mfherman@gmail.com>
 Description: Spatial data files for various geographic
     boundaries in New York City.  Data is in the in the sf (simple
     features) format and includes boundaries for boroughs (counties),
-    neighborhood tabulation areas, community districts, public microdata
+    neighborhood tabulation areas, community districts, public use microdata
     areas, census tracts, and census blocks.
 License: MIT + file LICENSE
 Depends:
