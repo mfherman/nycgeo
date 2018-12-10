@@ -3,8 +3,8 @@
 \docType{data}
 \name{nyc_tract}
 \alias{nyc_tract}
-\title{NYC Census Tracts, 2010}
-\format{An sf object with 2166 rows and 12 variables:
+\title{NYC census tract boundaries}
+\format{An sf object with 2166 rows and 13 variables:
 \describe{
 \item{boro_tract_id}{NYC DCP borough code and census tract number}
 \item{geoid}{Census Bureau GEOID; can be used to join spatial data with

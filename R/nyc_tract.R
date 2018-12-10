@@ -1,10 +1,10 @@
-#' NYC Census Tracts, 2010
+#' NYC census tract boundaries
 #'
 #' A simple features (sf) dataset containing the geometry of all census tracts
 #' in New York City from the 2010 Census.
 #'
 #'
-#' @format An sf object with 2166 rows and 12 variables:
+#' @format An sf object with 2166 rows and 13 variables:
 #' \describe{
 #'   \item{boro_tract_id}{NYC DCP borough code and census tract number}
 #'   \item{geoid}{Census Bureau GEOID; can be used to join spatial data with

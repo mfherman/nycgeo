@@ -2,27 +2,6 @@ library(tidyverse)
 library(sf)
 library(devtools)
 
-# import geo files --------------------------------------------------------
-
-# https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page
-# set up urls for dowloading geojson boundaries from nyc dcp
-base_url <- "http://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/"
-tail_url <- "/FeatureServer/0/query?where=1=1&outFields=*&outSR=4326&f=geojson"
-
-# geographies to download
-geos <- list(
-  tract = "nyct2010",
-  nta = "nynta",
-  boro = "nybb"
-  )
-
-# build list of urls
-urls <- map(geos, ~ paste0(base_url, .x, tail_url))
-
-# download geojson and covert to sf
-nyc_sf <- map(urls, read_sf)
-
-
 # reference tables --------------------------------------------------------
 
 # create boro code to county lookup table
@@ -46,15 +25,35 @@ boro_id_lookup <- tribble(
 puma_name_lookup <- read_csv("data-raw/puma-names.csv", col_types = "cc")
 
 
+# import geo files --------------------------------------------------------
+
+# https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page
+# set up urls for dowloading geojson boundaries from nyc dcp
+base_url <- "http://services5.arcgis.com/GfwWNkhOj9bNBqoJ/arcgis/rest/services/"
+tail_url <- "/FeatureServer/0/query?where=1=1&outFields=*&outSR=4326&f=geojson"
+
+# geographies to download
+geos <- list(
+  tract = "nyct2010",
+  nta = "nynta",
+  boro = "nybb"
+  )
+
+# build list of urls
+urls <- map(geos, ~ paste0(base_url, .x, tail_url))
+
+# download geojson and covert to sf
+nyc_sf <- map(urls, read_sf) %>%
+  map(~ mutate_at(.x, vars(-geometry), as.character)) %>%
+  map(~ left_join(.x, boro_id_lookup, by = c("BoroCode" = "boro_id"))) %>%
+  map(~ mutate(.x, state_fips = "36")) %>%
+  map(st_transform, 2263)
+
 # process tracts ----------------------------------------------------------
 
 nyc_tract <- nyc_sf %>%
   pluck("tract") %>%
-  left_join(boro_id_lookup, by = c("BoroCode" = "boro_id")) %>%
-  mutate(
-    state_fips = "36",
-    geoid = paste0(state_fips, county_fips, CT2010)
-  ) %>%
+  mutate(geoid = paste0(state_fips, county_fips, CT2010)) %>%
   select(
     boro_tract_id = BoroCT2010,
     geoid,
@@ -85,9 +84,42 @@ nta_puma_crosswalk <- tract_nta_puma_crosswalk %>%
   filter(!str_detect(nta_id, "98|99")) # remove ntas with pumas (park, cemetary, etc)
 
 
+# process boroughs --------------------------------------------------------
+
+nyc_boro <- nyc_sf %>%
+  pluck("boro") %>%
+  mutate(geoid = paste0(state_fips, county_fips)) %>%
+  select(
+    geoid,
+    state_fips,
+    county_fips,
+    county_name,
+    boro_name = BoroName,
+    boro_id = BoroCode
+  ) %>%
+  arrange(boro_id)
 
 
-use_data(nyc_tract, overwrite = TRUE)
+# process ntas ------------------------------------------------------------
+
+nyc_nta <- nyc_sf %>%
+  pluck("nta") %>%
+  select(
+    nta_id = NTACode,
+    nta_name = NTAName,
+    state_fips,
+    county_fips,
+    county_name,
+    boro_name = BoroName,
+    boro_id = BoroCode
+  ) %>%
+  left_join(nta_puma_crosswalk, by = "nta_id") %>%
+  arrange(boro_id, nta_id)
+
+
+# save data ---------------------------------------------------------------
+
+use_data(nyc_tract, nyc_boro, nyc_nta, overwrite = TRUE)
 
 
 
