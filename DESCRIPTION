@@ -15,9 +15,10 @@ Description: Spatial data files for various geographic
     areas, census tracts, and census blocks.
 License: MIT + file LICENSE
 Depends:
-    R (>= 2.10)
-Suggests: 
-    sf
+    R (>= 2.10),
+Imports:
+    sf,
+    tibble
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
