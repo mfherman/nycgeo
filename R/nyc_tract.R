@@ -1,7 +1,8 @@
-#' NYC census tract spatial dataset
+#' NYC Census Tracts, 2010
 #'
-#' A dataset in sf format containing boundaries of all census tracts in New York
-#' City.
+#' A simple features (sf) dataset containing the geometry of all census tracts
+#' in New York City from the 2010 Census.
+#'
 #'
 #' @format An sf object with 2166 rows and 12 variables:
 #' \describe{
@@ -21,5 +22,6 @@
 #'   \item{geometry}{sfc_MULTIPOLYGON \cr
 #'   NAD83 / New York Long Island (ftUS); EPSG:2263}
 #' }
+#'
 #' @source \url{https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page}
 "nyc_tract"

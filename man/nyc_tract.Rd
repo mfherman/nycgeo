@@ -3,7 +3,7 @@
 \docType{data}
 \name{nyc_tract}
 \alias{nyc_tract}
-\title{NYC census tract spatial dataset}
+\title{NYC Census Tracts, 2010}
 \format{An sf object with 2166 rows and 12 variables:
 \describe{
   \item{boro_tract_id}{NYC DCP borough code and census tract number}
@@ -29,7 +29,7 @@
 nyc_tract
 }
 \description{
-A dataset in sf format containing boundaries of all census tracts in New York
-City.
+A simple features (sf) dataset containing the geometry of all census tracts
+in New York City from the 2010 Census.
 }
 \keyword{datasets}
