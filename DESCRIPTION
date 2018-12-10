@@ -15,8 +15,9 @@ Description: Spatial data files for various geographic
     areas, census tracts, and census blocks.
 License: MIT + file LICENSE
 Depends:
-    R (>= 2.10),
-Imports:
+    R
+Suggests:
+    spelling,
     sf,
     tibble
 Encoding: UTF-8
@@ -25,3 +26,4 @@ RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 URL: https://github.com/mfherman/nycgeo
 BugReports: https://github.com/mfherman/nycgeo/issues
+Language: en-US
