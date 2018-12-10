@@ -15,7 +15,7 @@ Description: Spatial data files for various geographic
     areas, census tracts, and census blocks.
 License: MIT + file LICENSE
 Depends:
-    R
+    R (>= 2.10)
 Suggests:
     spelling,
     sf,
