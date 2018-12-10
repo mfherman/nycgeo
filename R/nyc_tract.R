@@ -23,5 +23,5 @@
 #'   NAD83 / New York Long Island (ftUS); EPSG:2263}
 #' }
 #'
-#' @source \url{https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page}
+#' @source <https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page>
 "nyc_tract"
