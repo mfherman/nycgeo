@@ -12,12 +12,12 @@ remotes::install_github("mfherman/nycgeo")
 
 ## Available Datasets
 
-* `nyc_tract`-- Census tracts
+* `nyc_tract` - Census tracts
 
 ## Future Datasets
 
-* `nyc_block` -- Census blocks
-* `nyc_nta`-- Neighborhood tabulation areas (NTAs)
-* `nyc_cd`-- Community districts (CDs)
-* `nyc_puma`-- Public use microdata areas (PUMAs)
-* `nyc_boro`-- Boroughs
+* `nyc_block` - Census blocks
+* `nyc_nta` - Neighborhood tabulation areas (NTAs)
+* `nyc_cd` - Community districts (CDs)
+* `nyc_puma` - Public use microdata areas (PUMAs)
+* `nyc_boro` - Boroughs
