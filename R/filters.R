@@ -1,0 +1,41 @@
+filter_by_boro <- function(shp, borough = NULL) {
+  if (is.null(borough)) return(shp)
+
+  stopifnot(is.character(borough))
+
+  # borough <- tolower(borough)
+
+  filter <- (tolower(shp$boro_name) %in% borough) |
+    (tolower(shp$county_name) %in% borough)
+
+  if (sum(filter, na.rm = TRUE) < 1) stop("No matches found for those boroughs.")
+
+  shp[filter, ]
+}
+
+filter_by_nta <- function(shp, nta = NULL) {
+  if (is.null(nta)) return(shp)
+
+  stopifnot(is.character(nta))
+
+  # nta <- tolower(nta)
+
+  filter <- (tolower(shp$nta_id) %in% nta) |
+    (tolower(shp$nta_name) %in% nta)
+
+  if (sum(filter, na.rm = TRUE) < 1) stop("No matches found for those NTAs")
+
+  shp[filter, ]
+}
+
+filter_by_puma <- function(shp, puma = NULL) {
+  if (is.null(puma)) return(shp)
+
+  puma <- as.character(puma)
+
+  filter <- as.character(shp$puma_id) %in% puma
+
+  if (sum(filter, na.rm = TRUE) < 1) stop("No matches found for those PUMAs")
+
+  shp[filter, ]
+}
