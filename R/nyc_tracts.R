@@ -37,15 +37,6 @@ nyc_tracts <- function(filter_by = NULL,
                       region = NULL,
                       resolution = c("low", "high")) {
 
-  # make arguments lower case
-  if (!is.null(filter_by)) {
-    filter_by <- tolower(filter_by)
-  }
-
-  if (!is.null(region)) {
-    region <- tolower(region)
-  }
-
   # check argument validity
   # only one geography to filter by
   if (length(filter_by) > 1) {
@@ -54,7 +45,7 @@ nyc_tracts <- function(filter_by = NULL,
 
   # must choose region(s) if filtering
   if (!is.null(filter_by) & is.null(region)) {
-    stop("Please specify one or more region to filter by")
+    stop("Please specify one or more regions to filter by")
   }
 
   # must choose geography if regions are specified
@@ -62,12 +53,16 @@ nyc_tracts <- function(filter_by = NULL,
     stop("Please specify a geography to filter by")
   }
 
-  # # geography must be boro, nta or puma
-  # if (!is.null(filter_by) &
-  #       !(filter_by %in% c("borough", "boro", "nta", "puma")) &
-  #       !is.null(region)) {
-  #   stop("Please choose a valid geography to filter by")
-  # }
+   # make arguments lower case
+  if (!is.null(filter_by) & !is.null(region)) {
+    filter_by <- tolower(filter_by)
+    region <- tolower(region)
+
+    # geography must be boro, nta or puma
+    if (!(filter_by %in% c("boro", "borough", "nta", "puma"))) {
+         stop("Please choose a valid geography to filter by")
+    }
+  }
 
   # set low or high resolution
   resolution <- match.arg(resolution)
