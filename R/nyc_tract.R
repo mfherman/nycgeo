@@ -1,30 +1,91 @@
 #' NYC census tract boundaries
 #'
-#' A simple features (sf) dataset containing the geometry of all census tracts
-#' in New York City from the 2010 Census.
+#' Get current (2010) boundaries for census tracts in New York City in the
+#' simple features {sf} format. Either get all census tracts or subset of tracts
+#' filtered by borough, neighborhood tabulation area (NTA), or public use
+#' microdata area (PUMA).
 #'
+#' @param filter_by The geography to filter by. Possible values are `borough,
+#'   nta, puma`. If `NULL`, all census tracts are returned.
+#' @param region A character vector of boroughs, NTAs, or PUMAs. Selected
+#'   regions much match the geography indicated by `filter_by` argument.
+#' @param resolution The resolution of the map. Defaults to lower resolution.
 #'
-#' @format An sf object with 2166 rows and 13 variables:
-#' \describe{
-#'   \item{boro_tract_id}{NYC DCP borough code and census tract number}
-#'   \item{geoid}{Census Bureau GEOID; can be used to join spatial data with
-#'   Census estimates}
-#'   \item{state_fips}{ANSI state FIPS code}
-#'   \item{county_fips}{ANSI county FIPS code}
-#'   \item{tract_id}{Census Bureau tract number}
-#'   \item{county_name}{County name}
-#'   \item{boro_name}{Borough name}
-#'   \item{boro_id}{NYC DCP borough code and census tract number}
-#'   \item{nta_id}{NYC neighborhood tabulation area id}
-#'   \item{nta_name}{NYC neighborhood tabulation area name}
-#'   \item{puma_id}{Census Bureau public use microdata area id}
-#'   \item{puma_name}{Census Bureau public use microdata area name}
-#'   \item{geometry}{sfc_MULTIPOLYGON \cr
-#'   NAD83 / New York Long Island (ftUS); EPSG:2263}
+#' @return An `sf` object of census tract boundaries
+#'
+#' @details For more information about the data fields included with boundaries,
+#'   see [tracts].
+#'
+#' @examples
+#' if (require(sf)) {
+#'
+#'   # get sf boundaires
+#'   all_nyc_tracts <- nyc_tract()
+#'   queens_tracts <- nyc_tract(filter_by = "borough", region = "Queens")
+#'   north_si_tracts <- nyc_tract(
+#'     filter_by = "nta",
+#'     region = c("SI22", "SI35"),
+#'     resolution = "high"
+#'     )
+#'
+#'   # plot boundaries
+#'   plot(st_geometry(all_nyc_tracts))
+#'   plot(st_geometry(queens_tracts))
+#'   plot(st_geometry(queens_tracts))
 #' }
 #'
-#' @source <https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page>
-"nyc_tract"
+#' @export
 
-#' @rdname nyc_tract
-"nyc_tract_simple"
+nyc_tract <- function(filter_by = NULL,
+                      region = NULL,
+                      resolution = c("low", "high")) {
+
+  # check argument validity
+  # only one geography to filter by
+  if (length(filter_by) > 1) {
+    stop("Can only filter by one geography")
+  }
+
+  # must choose region(s) if filtering
+  if (!is.null(filter_by) & is.null(region)) {
+    stop("Please specify one or more regions to filter by")
+  }
+
+  # must choose geography if regions are specified
+  if (is.null(filter_by) & !is.null(region)) {
+    stop("Please specify a geography to filter by")
+  }
+
+   # make arguments lower case
+  if (!is.null(filter_by) & !is.null(region)) {
+    filter_by <- tolower(filter_by)
+    region <- tolower(region)
+
+    # geography must be boro, nta or puma
+    if (!(filter_by %in% c("boro", "borough", "nta", "puma"))) {
+         stop("Please choose a valid geography to filter by")
+    }
+  }
+
+  # set low or high resolution
+  resolution <- match.arg(resolution)
+
+  # get low or high resolution sf file
+  if (resolution == "low") {
+    shp <- nycgeo::tracts_simple
+  } else if (resolution == "high") {
+    shp <- nycgeo::tracts
+  }
+
+  # if filter is set, subset file by given regions
+  if (!is.null(filter_by)) {
+    if (filter_by %in% c("borough", "boro")) {
+      shp <- filter_by_boro(shp, region)
+    } else if (filter_by == c("nta")) {
+      shp <- filter_by_nta(shp, region)
+    } else if (filter_by == c("puma")) {
+      shp <- filter_by_puma(shp, region)
+    }
+  }
+  shp
+}

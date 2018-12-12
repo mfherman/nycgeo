@@ -52,7 +52,7 @@ nyc_sf <- map(urls, read_sf) %>%
 
 # process tracts ----------------------------------------------------------
 
-nyc_tract <- nyc_sf %>%
+tracts <- nyc_sf %>%
   pluck("tract") %>%
   mutate(geoid = paste0(state_fips, county_fips, CT2010)) %>%
   select(
@@ -75,7 +75,7 @@ nyc_tract <- nyc_sf %>%
 # build geo crosswalks ----------------------------------------------------
 
 # create crosswalk to add nta, puma info to blocks
-tract_nta_puma_crosswalk <- nyc_tract %>%
+tract_nta_puma_crosswalk <- tracts %>%
   st_set_geometry(NULL) %>%
   select(county_fips, tract_id, nta_id, nta_name, puma_id, puma_name)
 
@@ -87,7 +87,7 @@ nta_puma_crosswalk <- tract_nta_puma_crosswalk %>%
 
 # process boroughs --------------------------------------------------------
 
-nyc_boro <- nyc_sf %>%
+boros <- nyc_sf %>%
   pluck("boro") %>%
   mutate(geoid = paste0(state_fips, county_fips)) %>%
   select(
@@ -103,7 +103,7 @@ nyc_boro <- nyc_sf %>%
 
 # process ntas ------------------------------------------------------------
 
-nyc_nta <- nyc_sf %>%
+ntas <- nyc_sf %>%
   pluck("nta") %>%
   select(
     nta_id = NTACode,
@@ -121,19 +121,25 @@ nyc_nta <- nyc_sf %>%
 # simplify sf objects -----------------------------------------------------
 
 # set up list of sf objects to simplify
-to_simplify <- lst(nyc_boro, nyc_nta, nyc_tract)
+boundaries <- lst(boros, ntas, tracts)
 
 # simplify each object to make smaller boundary files available
-nyc_sf_simple <- map(to_simplify, ~ ms_simplify(.x, keep_shapes = TRUE)) %>%
-  set_names(paste0(names(to_simplify), "_simple")) %>%
+boundaries_simple <- map(boundaries, ~ ms_simplify(.x, keep_shapes = TRUE)) %>%
+  set_names(paste0(names(boundaries), "_simple")) %>%
   map(~ st_as_sf(as_tibble(.x)))
 
 # save data ---------------------------------------------------------------
 
-# loop over list of simplified objects and save to /data
-walk2(nyc_sf_simple, names(nyc_sf_simple), function(obj, name) {
+# loop over list of boundaries and save to /data
+walk2(boundaries, names(boundaries), function(obj, name) {
   assign(name, obj)
-  invoke("use_data", list(as.name(name), overwrite = TRUE))
+  invoke(use_data, list(as.name(name), overwrite = TRUE))
+})
+
+# loop over list of simplified boundaries and save to /data
+walk2(boundaries_simple, names(boundaries_simple), function(obj, name) {
+  assign(name, obj)
+  invoke(use_data, list(as.name(name), overwrite = TRUE))
 })
 
 
