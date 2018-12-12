@@ -5,10 +5,12 @@
 \alias{nyc_tract}
 \alias{tracts_simple}
 \title{NYC census tract boundaries}
-\format{An object of class \code{sf} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 2166 rows and 13 columns.}
+\format{\itemize{
+\item 
+}}
 \usage{
-nyc_tract(filter_by = NULL, region = NULL, resolution = c("low",
-  "high"))
+nyc_tract(filter_by = NULL, region = NULL, add_acs_data = FALSE,
+  resolution = c("low", "high"))
 
 tracts_simple
 }
@@ -17,6 +19,10 @@ tracts_simple
 
 \item{region}{A character vector of boroughs, NTAs, or PUMAs. Selected
 regions much match the geography indicated by \code{filter_by} argument.}
+
+\item{add_acs_data}{If \code{TRUE}, selected demographic, social, and economic
+data from the U.S. Census Bureau American Community Survey is appended to
+tract boundaries.}
 
 \item{resolution}{The resolution of the map. Defaults to lower resolution.}
 }
@@ -38,17 +44,25 @@ if (require(sf)) {
 
   # get sf boundaires
   all_nyc_tracts <- nyc_tract()
-  queens_tracts <- nyc_tract(filter_by = "borough", region = "Queens")
+
   north_si_tracts <- nyc_tract(
     filter_by = "nta",
     region = c("SI22", "SI35"),
     resolution = "high"
     )
 
+  queens_tracts <- nyc_tract(
+    filter_by = "borough",
+    region = "Queens",
+    add_acs_data = TRUE
+    )
+
   # plot boundaries
   plot(st_geometry(all_nyc_tracts))
+
   plot(st_geometry(queens_tracts))
-  plot(st_geometry(queens_tracts))
+
+  plot(queens_tracts["med_hhinc"])
 }
 
 }

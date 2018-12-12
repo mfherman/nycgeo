@@ -8,10 +8,15 @@
 #' @param filter_by The geography to filter by. Possible values are `borough,
 #'   nta, puma`. If `NULL`, all census tracts are returned.
 #' @param region A character vector of boroughs, NTAs, or PUMAs. Selected
-#'   regions much match the geography indicated by `filter_by` argument.
+#' regions much match the geography indicated by `filter_by` argument.
+#' @param add_acs_data If `TRUE`, selected demographic, social, and economic
+#'   data from the U.S. Census Bureau American Community Survey is appended to
+#'   tract boundaries.
 #' @param resolution The resolution of the map. Defaults to lower resolution.
 #'
 #' @return An `sf` object of census tract boundaries
+#'
+#' @format -
 #'
 #' @details For more information about the data fields included with boundaries,
 #'   see [tracts].
@@ -21,23 +26,32 @@
 #'
 #'   # get sf boundaires
 #'   all_nyc_tracts <- nyc_tract()
-#'   queens_tracts <- nyc_tract(filter_by = "borough", region = "Queens")
+#'
 #'   north_si_tracts <- nyc_tract(
 #'     filter_by = "nta",
 #'     region = c("SI22", "SI35"),
 #'     resolution = "high"
 #'     )
 #'
+#'   queens_tracts <- nyc_tract(
+#'     filter_by = "borough",
+#'     region = "Queens",
+#'     add_acs_data = TRUE
+#'     )
+#'
 #'   # plot boundaries
 #'   plot(st_geometry(all_nyc_tracts))
+#'
 #'   plot(st_geometry(queens_tracts))
-#'   plot(st_geometry(queens_tracts))
+#'
+#'   plot(queens_tracts["med_hhinc"])
 #' }
 #'
 #' @export
 
 nyc_tract <- function(filter_by = NULL,
                       region = NULL,
+                      add_acs_data = FALSE,
                       resolution = c("low", "high")) {
 
   # check argument validity
@@ -86,6 +100,11 @@ nyc_tract <- function(filter_by = NULL,
     } else if (filter_by == c("puma")) {
       shp <- filter_by_puma(shp, region)
     }
+  }
+
+  # append census data?
+  if (add_acs_data) {
+    shp <- merge(shp, nycgeo::tracts_acs_data, by = "geoid", all.x = TRUE)
   }
   shp
 }
