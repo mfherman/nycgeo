@@ -1,8 +1,8 @@
-library(tidyverse)
-library(sf)
 library(devtools)
+library(tidyverse)
 library(tidycensus)
 
+# variables to download from acs
 variables <- c(
   "B01001_001",  # total population
   "B03002_003",  # non hispanic white
@@ -22,6 +22,7 @@ variables <- c(
 
 nyc_counties <- c("New York", "Bronx", "Queens", "Richmond", "Kings")
 
+# get acs data for all tracts each of the counties
 tract_data <- map_dfr(
   nyc_counties, ~ get_acs(
     state = "NY",
@@ -35,7 +36,8 @@ tract_data <- map_dfr(
     )
   )
 
-tract_processed <- tract_data %>%
+# calculate new vars, pcts, moes, etc
+tracts_acs_data <- tract_data %>%
   mutate(
     pop_white_pct = B03002_003E / B01001_001E,
     pop_white_pct_moe = moe_prop(B03002_003E, B01001_001E,
@@ -92,3 +94,5 @@ tract_processed <- tract_data %>%
   mutate_at(vars(contains("pct")),
             ~ as.numeric(round(.x * 100, digits = 1))) %>%
   mutate_all(~ replace(.x, is.nan(.x), NA))
+
+use_data(tracts_acs_data, overwrite = TRUE)
