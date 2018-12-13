@@ -86,8 +86,12 @@ tracts_acs_data <- tract_data %>%
     pop_asian_moe = B03002_006M,
     pop_ba_above,
     pop_ba_above_moe,
+    pop_educ_denom = B15003_001E,
+    pop_educ_denom_moe = B15003_001M,
     pop_inpov = B17021_002E,
     pop_inpov_moe = B17021_002M,
+    pop_inpov_denom = B17021_001E,
+    pop_inpov_denom_moe = B17021_001M,
     pop_white_pct:pop_inpov_pct_moe
   ) %>%
   mutate(pop_ba_above_moe = as.numeric(round(pop_ba_above_moe))) %>%
