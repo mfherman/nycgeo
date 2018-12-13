@@ -32,7 +32,7 @@
 #' }
 #'
 #' @source <https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-nynta.page>
-"ntas"
+"ntas_sf"
 
-#' @rdname ntas
-"ntas_simple"
+#' @rdname ntas_sf
+"ntas_sf_simple"

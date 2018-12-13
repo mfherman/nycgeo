@@ -18,7 +18,7 @@
 #' }
 #'
 #' @source <https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page>
-"boros"
+"boros_sf"
 
-#' @rdname boros
-"boros_simple"
+#' @rdname boros_sf
+"boros_sf_simple"

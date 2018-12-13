@@ -17,21 +17,21 @@
 #' @return An `sf` object of census tract boundaries
 #'
 #' @details For more information about the data fields included with boundaries,
-#'   see [tracts].
+#'   see [tracts_sf].
 #'
 #' @examples
 #' if (require(sf)) {
 #'
 #'   # get sf boundaires
-#'   all_nyc_tracts <- nyc_tract()
+#'   all_nyc_tracts <- nyc_tracts()
 #'
-#'   north_si_tracts <- nyc_tract(
+#'   north_si_tracts <- nyc_tracts(
 #'     filter_by = "nta",
 #'     region = c("SI22", "SI35"),
 #'     resolution = "high"
 #'     )
 #'
-#'   queens_tracts <- nyc_tract(
+#'   queens_tracts <- nyc_tracts(
 #'     filter_by = "borough",
 #'     region = "Queens",
 #'     add_acs_data = TRUE
@@ -47,7 +47,7 @@
 #'
 #' @export
 
-nyc_tract <- function(filter_by = NULL,
+nyc_tracts <- function(filter_by = NULL,
                       region = NULL,
                       add_acs_data = FALSE,
                       resolution = c("low", "high")) {
@@ -84,9 +84,9 @@ nyc_tract <- function(filter_by = NULL,
 
   # get low or high resolution sf file
   if (resolution == "low") {
-    shp <- nycgeo::tracts_simple
+    shp <- nycgeo::tracts_sf_simple
   } else if (resolution == "high") {
-    shp <- nycgeo::tracts
+    shp <- nycgeo::tracts_sf
   }
 
   # if filter is set, subset file by given regions

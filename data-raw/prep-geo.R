@@ -52,7 +52,7 @@ nyc_sf <- map(urls, read_sf) %>%
 
 # process tracts ----------------------------------------------------------
 
-tracts <- nyc_sf %>%
+tracts_sf <- nyc_sf %>%
   pluck("tract") %>%
   mutate(geoid = paste0(state_fips, county_fips, CT2010)) %>%
   select(
@@ -87,7 +87,7 @@ nta_puma_crosswalk <- tract_nta_puma_crosswalk %>%
 
 # process boroughs --------------------------------------------------------
 
-boros <- nyc_sf %>%
+boros_sf <- nyc_sf %>%
   pluck("boro") %>%
   mutate(geoid = paste0(state_fips, county_fips)) %>%
   select(
@@ -103,7 +103,7 @@ boros <- nyc_sf %>%
 
 # process ntas ------------------------------------------------------------
 
-ntas <- nyc_sf %>%
+ntas_sf <- nyc_sf %>%
   pluck("nta") %>%
   select(
     nta_id = NTACode,
@@ -121,7 +121,7 @@ ntas <- nyc_sf %>%
 # simplify sf objects -----------------------------------------------------
 
 # set up list of sf objects to simplify
-boundaries <- lst(boros, ntas, tracts)
+boundaries <- lst(boros_sf, ntas_sf, tracts_sf)
 
 # simplify each object to make smaller boundary files available
 boundaries_simple <- map(boundaries, ~ ms_simplify(.x, keep_shapes = TRUE)) %>%
