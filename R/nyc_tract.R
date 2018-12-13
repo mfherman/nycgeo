@@ -16,8 +16,6 @@
 #'
 #' @return An `sf` object of census tract boundaries
 #'
-#' @format -
-#'
 #' @details For more information about the data fields included with boundaries,
 #'   see [tracts].
 #'

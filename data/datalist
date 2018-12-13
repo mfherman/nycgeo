@@ -1,6 +1,7 @@
-nyc_boro
-nyc_boro_simple
-nyc_nta
-nyc_nta_simple
-nyc_tract
-nyc_tract_simple
+boros
+boros_simple
+ntas
+ntas_simple
+tracts
+tracts_acs_data
+tracts_simple

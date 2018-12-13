@@ -3,7 +3,6 @@
 #' A simple features (sf) dataset containing the geometry of all census tracts
 #' in New York City from the 2010 Census.
 #'
-#'
 #' @format An sf object with 2166 rows and 13 variables:
 #' \describe{
 #'   \item{boro_tract_id}{NYC DCP borough code and census tract number}
@@ -26,5 +25,5 @@
 #' @source <https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page>
 "tracts"
 
-#' @rdname nyc_tract
+#' @rdname tracts
 "tracts_simple"
