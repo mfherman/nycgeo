@@ -14,17 +14,24 @@ library(rmapshaper)
 # 5 = Staten Island
 
 boro_id_lookup <- tribble(
-  ~boro_id, ~county_fips, ~county_name,
-  "1",        "061",        "New York",
-  "2",        "005",        "Bronx",
-  "3",        "047",        "Kings",
-  "4",        "081",        "Queens",
-  "5",        "085",        "Richmond"
+  ~boro_id, ~boro_name, ~county_fips, ~county_name,
+  "1",      "Manhattan", "061",       "New York",
+  "2",      "Bronx",     "005",       "Bronx",
+  "3",      "Brooklyn",  "047",       "Kings",
+  "4",      "Queens",    "081",       "Queens",
+  "5",      "Richmond",  "085",       "Richmond"
 )
 
 # read in puma name lookup table
-puma_name_lookup <- read_csv("data-raw/puma-names.csv", col_types = "cc")
-
+puma_name_lookup <- read_csv("data-raw/puma-names.csv", col_types = "cc") %>%
+  mutate(BoroCode = case_when(
+    str_detect(puma_name, "Manhattan")     ~ "1",
+    str_detect(puma_name, "Bronx")         ~ "2",
+    str_detect(puma_name, "Brooklyn")      ~ "3",
+    str_detect(puma_name, "Queens")        ~ "4",
+    str_detect(puma_name, "Staten Island") ~ "5"
+    )
+  )
 
 # import geo files --------------------------------------------------------
 
@@ -37,7 +44,8 @@ tail_url <- "/FeatureServer/0/query?where=1=1&outFields=*&outSR=4326&f=geojson"
 geos <- list(
   tract = "nyct2010",
   nta = "nynta",
-  boro = "nybb"
+  boro = "nybb",
+  puma = "nypuma"
   )
 
 # build list of urls
@@ -46,9 +54,13 @@ urls <- map(geos, ~ paste0(base_url, .x, tail_url))
 # download geojson and covert to sf
 nyc_sf <- map(urls, read_sf) %>%
   map(~ mutate_at(.x, vars(-geometry), as.character)) %>%
+  modify_at("puma",
+            ~ left_join(.x, puma_name_lookup, by = c("PUMA" = "puma_id"))
+            ) %>%
   map(~ left_join(.x, boro_id_lookup, by = c("BoroCode" = "boro_id"))) %>%
   map(~ mutate(.x, state_fips = "36")) %>%
   map(st_transform, 2263)
+
 
 # process tracts ----------------------------------------------------------
 
@@ -62,20 +74,21 @@ tracts_sf <- nyc_sf %>%
     county_fips,
     tract_id = CT2010,
     county_name,
-    boro_name = BoroName,
+    boro_name,
     boro_id = BoroCode,
     nta_id = NTACode,
     nta_name = NTAName,
     puma_id = PUMA
   ) %>%
   left_join(puma_name_lookup, by = "puma_id") %>%
+  select(-BoroCode) %>%
   arrange(boro_tract_id)
 
 
 # build geo crosswalks ----------------------------------------------------
 
 # create crosswalk to add nta, puma info to blocks
-tract_nta_puma_crosswalk <- tracts %>%
+tract_nta_puma_crosswalk <- tracts_sf %>%
   st_set_geometry(NULL) %>%
   select(county_fips, tract_id, nta_id, nta_name, puma_id, puma_name)
 
@@ -95,7 +108,7 @@ boros_sf <- nyc_sf %>%
     state_fips,
     county_fips,
     county_name,
-    boro_name = BoroName,
+    boro_name,
     boro_id = BoroCode
   ) %>%
   arrange(boro_id)
@@ -111,17 +124,34 @@ ntas_sf <- nyc_sf %>%
     state_fips,
     county_fips,
     county_name,
-    boro_name = BoroName,
+    boro_name,
     boro_id = BoroCode
   ) %>%
   left_join(nta_puma_crosswalk, by = "nta_id") %>%
   arrange(boro_id, nta_id)
 
 
+
+# process pumas -----------------------------------------------------------
+
+pumas_sf <- nyc_sf %>%
+  pluck("puma") %>%
+  select(
+    puma_id = PUMA,
+    puma_name,
+    state_fips,
+    county_fips,
+    county_name,
+    boro_name,
+    boro_id = BoroCode
+    ) %>%
+  arrange(boro_id, puma_id)
+
+
 # simplify sf objects -----------------------------------------------------
 
 # set up list of sf objects to simplify
-boundaries <- lst(boros_sf, ntas_sf, tracts_sf)
+boundaries <- lst(boros_sf, ntas_sf, tracts_sf, pumas_sf)
 
 # simplify each object to make smaller boundary files available
 boundaries_simple <- map(boundaries, ~ ms_simplify(.x, keep_shapes = TRUE)) %>%
@@ -141,5 +171,3 @@ walk2(boundaries_simple, names(boundaries_simple), function(obj, name) {
   assign(name, obj)
   invoke(use_data, list(as.name(name), overwrite = TRUE))
 })
-
-
