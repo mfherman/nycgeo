@@ -25,8 +25,22 @@ ntas_acs_data
 \description{
 A dataset containing U.S. Census Bureau American Community Survey (ACS)
 estimates and margins of error of selected demographic, social, and economic
-variables for all nighborhood tabulation areas in New York City. Variables
-are five-year tract-level estimates from the 2012-2017 ACS aggregated to
-NTAs.
+variables for all nighborhood tabulation areas (NTAs) in New York City.
+Variables are five-year tract-level estimates from the 2012-2017 ACS
+aggregated to NTAs.
+}
+\details{
+NTAs were created by the NYC Department of City Planning to project
+populations at a small area level. The boundaries roughly match
+neighborhoods, but some neighborhoods were combined to reach the minimum
+population of 15,000 per NTA. Each NTA was created from whole census tracts
+to allow for aggregating census data to the NTA level. Additionally, NTAs do
+not cross public use microdata area (PUMA) boundaries.
+
+NTAs are useful geographies because they offer a compromise between very
+small areas like census blocks or tracts and larger areas like counties,
+community districts, or PUMAs. Especially when using data from the American
+Community Survey, NTAs can be useful to reduce the margin of error of single
+census tract estimates.
 }
 \keyword{datasets}

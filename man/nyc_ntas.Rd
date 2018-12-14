@@ -25,7 +25,7 @@ An \code{sf} object of NTA boundaries
 }
 \description{
 Get current boundaries for neighborhood tabulation areas (NTAs) in New York
-City in the simple features {sf} format. Either get all NTAs or subset of
+City in the simple features {sf} format. Either get all NTAs or a subset of
 NTAs filtered by borough or public use microdata area (PUMA).
 }
 \details{
