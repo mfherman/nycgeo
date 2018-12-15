@@ -98,7 +98,7 @@ nyc_pumas <- function(filter_by = NULL,
 
   # append census data?
   if (add_acs_data) {
-    shp <- merge(shp, nycgeo::pumas_acs_data, by = "puma_id", all.x = TRUE)
+    shp <- merge(shp, nycgeo::pumas_acs_data, by = "geoid", all.x = TRUE)
   }
   shp
 }
