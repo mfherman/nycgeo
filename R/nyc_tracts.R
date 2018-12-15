@@ -103,6 +103,11 @@ nyc_tracts <- function(filter_by = NULL,
   # append census data?
   if (add_acs_data) {
     shp <- merge(shp, nycgeo::tracts_acs_data, by = "geoid", all.x = TRUE)
+
+    if (requireNamespace("sf", quietly = TRUE) &&
+        requireNamespace("tibble", quietly = TRUE)) {
+      shp <- sf::st_as_sf(tibble::as_tibble(shp))
+    }
   }
   shp
 }

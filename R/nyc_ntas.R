@@ -102,5 +102,10 @@ nyc_ntas <- function(filter_by = NULL,
   if (add_acs_data) {
     shp <- merge(shp, nycgeo::ntas_acs_data, by = "nta_id", all.x = TRUE)
   }
+
+  if (requireNamespace("sf", quietly = TRUE) &&
+      requireNamespace("tibble", quietly = TRUE)) {
+    shp <- sf::st_as_sf(tibble::as_tibble(shp))
+  }
   shp
 }
