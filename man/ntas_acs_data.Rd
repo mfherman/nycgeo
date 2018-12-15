@@ -5,7 +5,8 @@
 \alias{ntas_acs_data}
 \title{Neighborhood tabulation area-level American Community Survey estimates}
 \format{A tibble with 195 rows and 27 variables:
-\describe{ \item{nta_id}{NYC neighborhood tabulation area id}
+\describe{
+\item{nta_id}{NYC neighborhood tabulation area id}
 \item{pop_total_est, pop_total_moe}{Total population; B01001_001}
 \item{pop_white_est, pop_white_moe, pop_white_pct_est,
 pop_white_pct_moe}{Non-hispanic white population; B03002_003}
@@ -15,7 +16,8 @@ pop_white_pct_moe}{Non-hispanic white population; B03002_003}
 \item{pop_ba_above, pop_ba_above_pct}{Population 25 years or older with at
 least a Bachelor's degree; B15003_022, B15003_023, B15003_024, B15003_025}
 \item{pop_inpov, pop_inpov_pct}{Population with income below poverty line;
-B17021002} }}
+B17021002}
+}}
 \source{
 \url{https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml}
 }
@@ -25,7 +27,7 @@ ntas_acs_data
 \description{
 A dataset containing U.S. Census Bureau American Community Survey (ACS)
 estimates and margins of error of selected demographic, social, and economic
-variables for all nighborhood tabulation areas (NTAs) in New York City.
+variables for all neighborhood tabulation areas (NTAs) in New York City.
 Variables are five-year tract-level estimates from the 2012-2017 ACS
 aggregated to NTAs.
 }
