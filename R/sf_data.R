@@ -93,3 +93,29 @@
 
 #' @rdname boros_sf
 "boros_sf_simple"
+
+#' NYC public use microdata area boundaries
+#'
+#' A simple features (sf) dataset containing the geometry of all public use
+#' microdata areas (PUMAs) in New York City.
+#'
+#' @format An sf object with 55 rows and 9 variables:
+#' \describe{
+#'   \item{geoid}{Census Bureau GEOID; can be used to join spatial data with
+#'   Census estimates}
+#'   \item{puma_id}{Census Bureau public use microdata area id}
+#'   \item{puma_name}{Census Bureau public use microdata area name}
+#'   \item{state_fips}{ANSI state FIPS code}
+#'   \item{county_fips}{ANSI county FIPS code}
+#'   \item{county_name}{County name}
+#'   \item{boro_name}{Borough name}
+#'   \item{boro_id}{NYC DCP borough code and census tract number}
+#'   \item{geometry}{sfc_MULTIPOLYGON \cr
+#'   NAD83 / New York Long Island (ftUS); EPSG:2263}
+#' }
+#'
+#' @source <https://www1.nyc.gov/site/planning/data-maps/open-data.page#other>
+"pumas_sf"
+
+#' @rdname pumas_sf
+"pumas_sf_simple"

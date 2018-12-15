@@ -136,7 +136,9 @@ ntas_sf <- nyc_sf %>%
 
 pumas_sf <- nyc_sf %>%
   pluck("puma") %>%
+  mutate(geoid = paste0("360", PUMA)) %>%
   select(
+    geoid,
     puma_id = PUMA,
     puma_name,
     state_fips,
