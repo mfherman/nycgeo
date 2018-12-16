@@ -106,7 +106,7 @@ ggplot(bk_qn_tracts) +
   theme_minimal()
 ```
 
-<img src="man/figures/README-filter by-1.png" width="100%" />
+<img src="man/figures/README-filter-by-1.png" width="100%" />
 
 Note, you can select multiple regions by passing a character vector to
 the `region` argument, but you can only select a single geography to
@@ -175,4 +175,4 @@ ggplot(mn_ntas) +
   labs(title = "Which neighborhoods in Manhattan are most educated?")
 ```
 
-<img src="man/figures/README-add acs data-1.png" width="100%" />
+<img src="man/figures/README-add-acs-data-1.png" width="100%" />

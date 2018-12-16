@@ -39,7 +39,7 @@ remotes::install_github("mfherman/nycgeo")
 
 ### Basic Usage
 
-```{r load packages, include = FALSE, echo = FALSE}
+```{r load-packages, include = FALSE, echo = FALSE}
 library(nycgeo)
 library(sf)
 library(tidyverse)
@@ -47,7 +47,7 @@ library(tidyverse)
 
 The most basic usage of `nycgeo` is to get boundaries in the `sf` format. Use `nyc_tracts()`, `nyc_pumas()`, or `nyc_ntas()` to get your desired geography. To make best use of the package, you should also load the `sf` package when using `nycgeo`. For these examples, I'll also load `tidyverse` as this will allow us to take advantage of pretty `tibble` printing and will come in handy when we want to manipulate and map the spatial data later.
 
-```{r basic usage}
+```{r basic-usage}
 library(nycgeo)
 library(sf)
 library(tidyverse)
@@ -59,7 +59,7 @@ nyc_tracts()
 
 If you don't need census tracts for the entire city, you can use the `filter_by` and `region` arguments of `nyc_tracts()` to specify the area you are interested in. For example, the following code returns only census tracts in Brooklyn and Queens.
 
-```{r filter by}
+```{r filter-by}
 bk_qn_tracts <- nyc_tracts(
   filter_by = "borough",
   region = c("brooklyn", "queens")
@@ -76,13 +76,13 @@ Note, you can select multiple regions by passing a character vector to the `regi
 
 `nycgeo` includes selected estimates from the American Community Survey as datasets. You can access these datasets directly or have them appended to the spatial data. To print a `tibble` of ACS data, simply call the data you want.
 
-```{r print acs data}
+```{r print-acs-data}
 ntas_acs_data
 ```
 
 To add census estimates to an `sf` object, just use `add_acs_data = TRUE` in the appropriate `nyc_*()`call. For example, here we get all NTAs in Manhattan with the ACS data appended. One continence of having the ACS data joined to the `sf` object is that you can very simply make a choropleth map. Here we do it with `ggplot2`, but you could use `tmap`, `leaflet` or any other spatial package that works with `sf` objects.
 
-```{r add acs data}
+```{r add-acs-data}
 mn_ntas <- nyc_ntas(
   filter_by = "borough",
   region = "manhattan",
