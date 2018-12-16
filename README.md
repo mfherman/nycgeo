@@ -17,14 +17,14 @@ neighborhood tabulation areas (NTAs), and census tracts. In the future,
 more boundaries will be added, such as community districts, census
 blocks, and city council districts.
 
-The spatial files contained in the `nycgeo` package are avaiable on
+The spatial files contained in the `nycgeo` package are available on
 websites such as the [New York City Deparment of City Planning’s Bytes
 of the Big
 Apple](https://www1.nyc.gov/site/planning/data-maps/open-data.page#district_political)
 and the [U.S. Census Bureau TIGER/Line®
 Shapefiles](https://www.census.gov/geo/maps-data/data/tiger-line.html),
 but this package aims to make accessing the spatial data more
-convineient. Instead of downloading and converting shapefiles each time
+convenient. Instead of downloading and converting shapefiles each time
 you need them, `nycgeo` provides the files in a consistent format (`sf`)
 with added metadata that enable joins with non-spatial data.
 
@@ -109,15 +109,15 @@ ggplot(bk_qn_tracts) +
 <img src="man/figures/README-filter by-1.png" width="100%" />
 
 Note, you can select multiple regions by passing a character vector to
-the `region` argument, but you can only select a single geograhy to
-`filter_by`. Additionaly, you can only filter by a geography that is
+the `region` argument, but you can only select a single geography to
+`filter_by`. Additionally, you can only filter by a geography that is
 *larger than or equal to* the boundaries you request. For example, it is
 not possible to filter PUMAs by NTAs because NTAs are smaller than
 PUMAs.
 
 ### Adding American Community Survey Data
 
-`nycgeo` incldues selected estimates from the American Community Survey
+`nycgeo` includes selected estimates from the American Community Survey
 as datasets. You can access these datasets directly or have them
 appended to the spatial data. To print a `tibble` of ACS data, simply
 call the data you want.
@@ -150,7 +150,7 @@ ntas_acs_data
 
 To add census estimates to an `sf` object, just use `add_acs_data =
 TRUE` in the appropriate `nyc_*()`call. For example, here we get all
-NTAs in Manhattan with the ACS data appended. One convinence of having
+NTAs in Manhattan with the ACS data appended. One continence of having
 the ACS data joined to the `sf` object is that you can very simply make
 a choropleth map. Here we do it with `ggplot2`, but you could use
 `tmap`, `leaflet` or any other spatial package that works with `sf`
