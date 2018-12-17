@@ -1,10 +1,12 @@
 ACS
 asian
+choropleth
 DCP
 EPSG
 ftUS
 GEOID
 hispanic
+lifecycle
 microdata
 MULTIPOLYGON
 NAD
@@ -12,6 +14,8 @@ nta
 NTA
 ntas
 NTAs
+Planning's
+Planning’s
 PUMAs
 sfc
 tibble

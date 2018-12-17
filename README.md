@@ -18,7 +18,7 @@ more boundaries will be added, such as community districts, census
 blocks, and city council districts.
 
 The spatial files contained in the `nycgeo` package are available on
-websites such as the [New York City Deparment of City Planning’s Bytes
+websites such as the [New York City Department of City Planning’s Bytes
 of the Big
 Apple](https://www1.nyc.gov/site/planning/data-maps/open-data.page#district_political)
 and the [U.S. Census Bureau TIGER/Line®
@@ -30,11 +30,11 @@ with added metadata that enable joins with non-spatial data.
 
 In addition, selected demographic, social, and economic estimates from
 the U.S. Census Bureau American Community Survey can be added to the
-geographic boundaries in `nycgeo`, allowing for contextualization of
-added non-spatial data and easy choropleth mapping.
+geographic boundaries in `nycgeo`, allowing for contextualization and
+easy choropleth mapping.
 
-Finally, `nycgeo` makes it easy to access a subset of spatial data in a
-particular geographic area, such as all census tracts in Brooklyn and
+Finally, `nycgeo` makes it simple to access a subset of spatial data in
+a particular geographic area, such as all census tracts in Brooklyn and
 Queens.
 
 ## Installation

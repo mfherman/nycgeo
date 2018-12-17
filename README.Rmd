@@ -21,11 +21,11 @@ knitr::opts_chunk$set(
   
 The `nycgeo` package contains spatial data files for various geographic and administrative boundaries in New York City. Data is in the [`sf` (simple features)](https://r-spatial.github.io/sf/) format and includes boundaries for boroughs (counties), public use microdata areas (PUMAs), neighborhood tabulation areas (NTAs), and census tracts. In the future, more boundaries will be added, such as community districts, census blocks, and city council districts.
 
-The spatial files contained in the `nycgeo` package are available on websites such as the [New York City Deparment of City Planning's Bytes of the Big Apple](https://www1.nyc.gov/site/planning/data-maps/open-data.page#district_political) and the [U.S. Census Bureau TIGER/Line® Shapefiles](https://www.census.gov/geo/maps-data/data/tiger-line.html), but this package aims to make accessing the spatial data more convenient. Instead of downloading and converting shapefiles each time you need them, `nycgeo` provides the files in a consistent format (`sf`) with added metadata that enable joins with non-spatial data.
+The spatial files contained in the `nycgeo` package are available on websites such as the [New York City Department of City Planning's Bytes of the Big Apple](https://www1.nyc.gov/site/planning/data-maps/open-data.page#district_political) and the [U.S. Census Bureau TIGER/Line® Shapefiles](https://www.census.gov/geo/maps-data/data/tiger-line.html), but this package aims to make accessing the spatial data more convenient. Instead of downloading and converting shapefiles each time you need them, `nycgeo` provides the files in a consistent format (`sf`) with added metadata that enable joins with non-spatial data.
 
-In addition, selected demographic, social, and economic estimates from the U.S. Census Bureau American Community Survey can be added to the geographic boundaries in `nycgeo`, allowing for contextualization of added non-spatial data and easy choropleth mapping.
+In addition, selected demographic, social, and economic estimates from the U.S. Census Bureau American Community Survey can be added to the geographic boundaries in `nycgeo`, allowing for contextualization and easy choropleth mapping.
 
-Finally, `nycgeo` makes it easy to access a subset of spatial data in a particular geographic area, such as all census tracts in Brooklyn and Queens.
+Finally, `nycgeo` makes it simple to access a subset of spatial data in a particular geographic area, such as all census tracts in Brooklyn and Queens.
 
 ## Installation
 
