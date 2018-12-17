@@ -4,7 +4,7 @@
 \name{ntas_sf}
 \alias{ntas_sf}
 \alias{ntas_sf_simple}
-\title{NYC neigborhood tabulation area boundaries}
+\title{NYC neighborhood tabulation area boundaries}
 \format{An sf object with 195 rows and 10 variables:
 \describe{
 \item{nta_id}{NYC neighborhood tabulation area id}

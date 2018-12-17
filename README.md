@@ -148,13 +148,12 @@ ntas_acs_data
 #> #   pop_inpov_pct_est <dbl>, pop_inpov_pct_moe <dbl>
 ```
 
-To add census estimates to an `sf` object, just use `add_acs_data =
-TRUE` in the appropriate `nyc_*()`call. For example, here we get all
-NTAs in Manhattan with the ACS data appended. One continence of having
-the ACS data joined to the `sf` object is that you can very simply make
-a choropleth map. Here we do it with `ggplot2`, but you could use
-`tmap`, `leaflet` or any other spatial package that works with `sf`
-objects.
+To add census estimates to an `sf` object, use `add_acs_data = TRUE` in
+the appropriate `nyc_*()`call. For example, here we get all NTAs in
+Manhattan with ACS data appended. One convenience of having the ACS data
+joined to the `sf` object is that you can very simply make a choropleth
+map. Here we do it with `ggplot2`, but you could use `tmap`, `leaflet`
+or any other spatial package that works with `sf` objects.
 
 ``` r
 mn_ntas <- nyc_ntas(

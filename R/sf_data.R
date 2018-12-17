@@ -29,7 +29,7 @@
 "tracts_sf_simple"
 
 
-#' NYC neigborhood tabulation area boundaries
+#' NYC neighborhood tabulation area boundaries
 #'
 #' A simple features (sf) dataset containing the geometry of all neighborhood
 #' tabulation areas (NTAs) in New York City.

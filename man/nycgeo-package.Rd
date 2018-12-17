@@ -7,10 +7,11 @@
 \title{nycgeo: Spatial Data Files for NYC}
 \description{
 Spatial data files for various geographic
-    boundaries in New York City.  Data is in the in the sf (simple
+    boundaries in New York City. Data is in the in the sf (simple
     features) format and includes boundaries for boroughs (counties),
-    neighborhood tabulation areas, community districts, public use microdata
-    areas, census tracts, and census blocks.
+    public use microdata areas, neighborhood tabulation areas, and census tracts
+    . In addition, selected demographic, social, and economic estimates from the
+    U.S. Census Bureau American Community Survey are included.
 }
 \seealso{
 Useful links:
