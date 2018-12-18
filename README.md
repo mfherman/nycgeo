@@ -17,6 +17,15 @@ neighborhood tabulation areas (NTAs), and census tracts. In the future,
 more boundaries will be added, such as community districts, census
 blocks, and city council districts.
 
+In addition, selected demographic, social, and economic estimates from
+the U.S. Census Bureau American Community Survey can be added to the
+geographic boundaries in `nycgeo`, allowing for contextualization and
+easy choropleth mapping. Finally, `nycgeo` makes it simple to access a
+subset of spatial data in a particular geographic area, such as all
+census tracts in Brooklyn and Queens.
+
+## Why `nycgeo`?
+
 The spatial files contained in the `nycgeo` package are available on
 websites such as the [New York City Department of City Planning’s Bytes
 of the Big
@@ -28,14 +37,18 @@ convenient. Instead of downloading and converting shapefiles each time
 you need them, `nycgeo` provides the files in a consistent format (`sf`)
 with added metadata that enable joins with non-spatial data.
 
-In addition, selected demographic, social, and economic estimates from
-the U.S. Census Bureau American Community Survey can be added to the
-geographic boundaries in `nycgeo`, allowing for contextualization and
-easy choropleth mapping.
+Other R packages share some features with `nycgeo`. In particular, the
+wonderful [`tidycensus`](https://walkerke.github.io/tidycensus/) package
+can access the Census Bureau’s API and download ACS estimates as well as
+TIGER/Line® Shapefiles (via
+[`tigris`](https://github.com/walkerke/tigris)).
 
-Finally, `nycgeo` makes it simple to access a subset of spatial data in
-a particular geographic area, such as all census tracts in Brooklyn and
-Queens.
+One difference between the boundaries included here and the TIGER/Line®
+Shapefiles available through `tigris` is that these boundaries are
+clipped to the waterfront, allowing for better mapping of New York City.
+Additionally, `nycgeo` contains boundaries for geographic areas that are
+not available from the Census Bureau. This includes neighborhood
+tabulation areas (NTAs) and community districts (CDs).
 
 ## Installation
 
@@ -175,3 +188,37 @@ ggplot(mn_ntas) +
 ```
 
 <img src="man/figures/README-add-acs-data-1.png" width="100%" />
+
+### Joining with other data
+
+One use case of `nycgeo()` is if you have non-spatial data that relates
+to census tracts, NTAs, or other geographies and need to join that data
+with spatial boundaries to plot or otherwise analyze. This non-spatial
+data may be coded in a variety of ways and might not have names or IDs
+that match your spatial data. The `sf` data provided in `nycgeo` seeks
+to have a variety of geographic metadata that will match whatever labels
+your non-spatial data has.
+
+In this example, we have non-spatial data from the [NYC Neighborhood
+Health
+Atlas](https://www1.nyc.gov/site/doh/health/neighborhood-health/nyc-neighborhood-health-atlas.page)
+at the NTA-level from which we would like to make a choropleth map. To
+do this, we import the .csv file and then join it to the spatial NTA
+object matching on NTA IDs. Then, we can map it as in the above
+example.
+
+``` r
+nta_health <- read_csv("https://raw.githubusercontent.com/mfherman/nycgeo/master/inst/extdata/nta-health.csv") %>% 
+  select(NTA_Code, BlackCarbon)
+
+nyc_ntas() %>% 
+  left_join(nta_health, by = c("nta_id" = "NTA_Code")) %>% 
+  ggplot() +
+  geom_sf(aes(fill = BlackCarbon)) +
+  scale_fill_viridis_c(name = "Black carbon (absorbance units)", option = "inferno") +
+  theme_void() +
+  theme(panel.grid = element_line(color = "transparent")) +
+  labs(title = "Which neighborhoods have high levels of black carbon pollution?")
+```
+
+<img src="man/figures/README-join-health-1.png" width="100%" />
