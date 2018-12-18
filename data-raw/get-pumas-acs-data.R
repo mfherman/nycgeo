@@ -1,6 +1,7 @@
 library(devtools)
 library(tidyverse)
 library(tidycensus)
+library(nycgeo)
 
 # variables to download from acs
 variables <- c(
@@ -32,7 +33,7 @@ puma_data <- get_acs(
 )
 
 puma_data_nyc <- puma_data %>%
-  filter(GEOID %in% pumas_sf$geoid)
+  filter(GEOID %in% nycgeo::pumas_sf$geoid)
 
 # calculate new vars, pcts, moes, etc
 pumas_acs_data <- puma_data_nyc %>%
@@ -68,7 +69,6 @@ pumas_acs_data <- puma_data_nyc %>%
     ) %>%
   select(
     geoid = GEOID,
-    puma_id =
     pop_total_est = B01001_001E,
     pop_total_moe = B01001_001M,
     med_age_est = B01002_001E,

@@ -29,7 +29,7 @@ in the simple features {sf} format. Either get all PUMAs or a subset of PUMAs
 filtered by borough or PUMA.
 }
 \details{
-For more information about the data fields included with boundaries,
+For more information about the metadata included with boundaries,
 see \link{pumas_sf}.
 }
 \examples{

@@ -29,7 +29,7 @@ City in the simple features {sf} format. Either get all NTAs or a subset of
 NTAs filtered by borough or public use microdata area (PUMA).
 }
 \details{
-For more information about the data fields included with boundaries,
+For more information about the metadata included with boundaries,
 see \link{ntas_sf}.
 }
 \examples{

@@ -15,7 +15,7 @@
 #'
 #' @return An `sf` object of PUMA boundaries
 #'
-#' @details For more information about the data fields included with boundaries,
+#' @details For more information about the metadata included with boundaries,
 #'   see [pumas_sf].
 #'
 #' @examples
@@ -57,17 +57,17 @@ nyc_pumas <- function(filter_by = NULL,
   }
 
   # must choose region(s) if filtering
-  if (!is.null(filter_by) & is.null(region)) {
+  if (!is.null(filter_by) && is.null(region)) {
     stop("Please specify one or more regions to filter by")
   }
 
   # must choose geography if regions are specified
-  if (is.null(filter_by) & !is.null(region)) {
+  if (is.null(filter_by) && !is.null(region)) {
     stop("Please specify a geography to filter by")
   }
 
   # make arguments lower case
-  if (!is.null(filter_by) & !is.null(region)) {
+  if (!is.null(filter_by) && !is.null(region)) {
     filter_by <- tolower(filter_by)
     region <- tolower(region)
 

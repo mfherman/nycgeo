@@ -29,7 +29,7 @@ filtered by borough, neighborhood tabulation area (NTA), or public use
 microdata area (PUMA).
 }
 \details{
-For more information about the data fields included with boundaries,
+For more information about the metadata included with boundaries,
 see \link{tracts_sf}.
 }
 \examples{
@@ -55,7 +55,7 @@ if (require(sf)) {
 
   plot(st_geometry(queens_tracts))
 
-  plot(queens_tracts["med_hhinc"])
+  plot(queens_tracts["med_hhinc_est"])
 }
 
 }

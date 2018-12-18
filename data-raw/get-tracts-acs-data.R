@@ -39,19 +39,19 @@ tract_data <- map_dfr(
 # calculate new vars, pcts, moes, etc
 tracts_acs_data <- tract_data %>%
   mutate(
-    pop_white_pct = B03002_003E / B01001_001E,
+    pop_white_pct_est = B03002_003E / B01001_001E,
     pop_white_pct_moe = moe_prop(B03002_003E, B01001_001E,
                                  B03002_003M, B01001_001M),
-    pop_black_pct = B03002_004E / B01001_001E,
+    pop_black_pct_est = B03002_004E / B01001_001E,
     pop_black_pct_moe = moe_prop(B03002_004E, B01001_001E,
                                  B03002_004M, B01001_001M),
-    pop_hisp_pct = B03002_012E / B01001_001E,
+    pop_hisp_pct_est = B03002_012E / B01001_001E,
     pop_hisp_pct_moe = moe_prop(B03002_012E, B01001_001E,
                                 B03002_012M, B01001_001M),
-    pop_asian_pct = B03002_006E / B01001_001E,
+    pop_asian_pct_est = B03002_006E / B01001_001E,
     pop_asian_pct_moe = moe_prop(B03002_006E, B01001_001E,
                                  B03002_006M, B01001_001M),
-    pop_ba_above = B15003_022E + B15003_023E + B15003_024E + B15003_025E,
+    pop_ba_above_est = B15003_022E + B15003_023E + B15003_024E + B15003_025E,
     pop_ba_above_moe = pmap_dbl(
       list(B15003_022M, B15003_023M, B15003_024M, B15003_025M,
            B15003_022E, B15003_023E, B15003_024E, B15003_025E),
@@ -61,38 +61,38 @@ tracts_acs_data <- tract_data %>%
         na.rm = TRUE
       )
     ),
-    pop_ba_above_pct = pop_ba_above / B15003_001E,
-    pop_ba_above_pct_moe = moe_prop(pop_ba_above, B15003_001E,
+    pop_ba_above_pct_est = pop_ba_above_est / B15003_001E,
+    pop_ba_above_pct_moe = moe_prop(pop_ba_above_est, B15003_001E,
                                     pop_ba_above_moe, B15003_001M),
-    pop_inpov_pct = B17021_002E / B17021_001E,
+    pop_inpov_pct_est = B17021_002E / B17021_001E,
     pop_inpov_pct_moe = moe_prop(B17021_002E, B17021_001E,
                                  B17021_002M, B17021_001M)
-    ) %>%
+  ) %>%
   select(
     geoid = GEOID,
-    pop_total = B01001_001E,
+    pop_total_est = B01001_001E,
     pop_total_moe = B01001_001M,
-    med_age = B01002_001E,
+    med_age_est = B01002_001E,
     med_age_moe = B01002_001M,
-    med_hhinc = B19013_001E,
+    med_hhinc_est = B19013_001E,
     med_hhinc_moe = B19013_001M,
-    pop_white = B03002_003E,
+    pop_white_est = B03002_003E,
     pop_white_moe = B03002_003M,
-    pop_black = B03002_004E,
+    pop_black_est = B03002_004E,
     pop_black_moe = B03002_004M,
-    pop_hisp = B03002_012E,
+    pop_hisp_est = B03002_012E,
     pop_hisp_moe = B03002_012M,
-    pop_asian = B03002_006E,
+    pop_asian_est = B03002_006E,
     pop_asian_moe = B03002_006M,
-    pop_ba_above,
+    pop_ba_above_est,
     pop_ba_above_moe,
-    pop_educ_denom = B15003_001E,
+    pop_educ_denom_est = B15003_001E,
     pop_educ_denom_moe = B15003_001M,
-    pop_inpov = B17021_002E,
+    pop_inpov_est = B17021_002E,
     pop_inpov_moe = B17021_002M,
-    pop_inpov_denom = B17021_001E,
+    pop_inpov_denom_est = B17021_001E,
     pop_inpov_denom_moe = B17021_001M,
-    pop_white_pct:pop_inpov_pct_moe
+    pop_white_pct_est:pop_inpov_pct_moe
   ) %>%
   mutate(pop_ba_above_moe = as.numeric(round(pop_ba_above_moe))) %>%
   mutate_at(vars(contains("pct")),
