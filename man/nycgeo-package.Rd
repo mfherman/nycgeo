@@ -6,7 +6,7 @@
 \alias{nycgeo-package}
 \title{nycgeo: Spatial Data Files for NYC}
 \description{
-Spatial data files for various geographic
+Spatial data files for various geographic and administrative
     boundaries in New York City. Data is in the in the sf (simple
     features) format and includes boundaries for boroughs (counties),
     public use microdata areas, neighborhood tabulation areas, and census tracts

@@ -31,6 +31,8 @@ Other R packages share some features with `nycgeo`. In particular, the wonderful
 
 One difference between the boundaries included here and the TIGER/Line® Shapefiles available through `tigris` is that these boundaries are clipped to the waterfront, allowing for better mapping of New York City. Additionally, `nycgeo` contains boundaries for geographic areas that are not available from the Census Bureau. This includes neighborhood tabulation areas (NTAs) and community districts (CDs).
 
+Finally, all spatial data included in the package uses the [NAD83 / New York Long Island (ftUS) State Plane projected coordinate system (EPSG 2263)](https://epsg.io/2263), which is the standard projection used by New York City government agencies.
+
 
 ## Installation
 

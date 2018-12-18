@@ -50,6 +50,11 @@ Additionally, `nycgeo` contains boundaries for geographic areas that are
 not available from the Census Bureau. This includes neighborhood
 tabulation areas (NTAs) and community districts (CDs).
 
+Finally, all spatial data included in the package uses the [NAD83 / New
+York Long Island (ftUS) State Plane projected coordinate system
+(EPSG 2263)](https://epsg.io/2263), which is the standard projection
+used by New York City government agencies.
+
 ## Installation
 
 You can install `nycgeo` from

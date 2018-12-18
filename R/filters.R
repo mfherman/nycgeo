@@ -1,5 +1,7 @@
 .onAttach <- function(libname, pkgname) {
+  if (!isNamespaceLoaded("sf")) {
   packageStartupMessage("To work with the spatial data included in this package, you should also load the {sf} package with library(sf).")
+  }
 }
 
 filter_by_boro <- function(shp, borough = NULL) {

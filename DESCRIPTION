@@ -8,7 +8,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "mfherman@gmail.com")
 Maintainer: Matt Herman <mfherman@gmail.com>
-Description: Spatial data files for various geographic
+Description: Spatial data files for various geographic and administrative
     boundaries in New York City. Data is in the in the sf (simple
     features) format and includes boundaries for boroughs (counties),
     public use microdata areas, neighborhood tabulation areas, and census tracts
