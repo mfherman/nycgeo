@@ -19,7 +19,7 @@ boro_id_lookup <- tribble(
   "2",      "Bronx",     "005",       "Bronx",
   "3",      "Brooklyn",  "047",       "Kings",
   "4",      "Queens",    "081",       "Queens",
-  "5",      "Richmond",  "085",       "Richmond"
+  "5",      "Staten Island", "085",   "Richmond"
 )
 
 # read in puma name lookup table

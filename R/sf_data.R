@@ -74,7 +74,6 @@
 #' A simple features (sf) dataset containing the geometry of the five boroughs
 #' of New York City. The boroughs of New York City are equivalent to counties.
 #'
-#'
 #' @format An sf object with 5 rows and 8 variables:
 #' \describe{
 #'   \item{geoid}{Census Bureau GEOID; can be used to join spatial data with
