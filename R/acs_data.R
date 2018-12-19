@@ -16,10 +16,10 @@
 #'   pop_white_pct_moe}{Non-hispanic white population; B03002_003}
 #'   \item{pop_black_est, pop_black_moe, pop_black_pct_est,
 #'   pop_black_pct_moe}{Non-hispanic black population; B03002_004}
-#'   \item{pop_hisp_est, pop_hisp_moe, pop_hisp_pct_est,
-#'   pop_hisp_pct_moe}{Hispanic, any race population; B03002_012}
 #'   \item{pop_asian_est, pop_asian_moe, pop_asian_pct_est,
 #'   pop_asian_pct_moe}{Non-hispanic asian population; B03002_006}
+#'   \item{pop_hisp_est, pop_hisp_moe, pop_hisp_pct_est,
+#'   pop_hisp_pct_moe}{Hispanic, any race population; B03002_012}
 #'   \item{pop_ba_above_est, pop_ba_above_moe, pop_ba_above_pct_est,
 #'   pop_ba_above_pct_moe}{Population 25 years or older with at least a
 #'   Bachelor's degree; B15003_022, B15003_023, B15003_024, B15003_025}
@@ -66,10 +66,10 @@
 #'   pop_white_pct_moe}{Non-hispanic white population; B03002_003}
 #'   \item{pop_black_est, pop_black_moe, pop_black_pct_est,
 #'   pop_black_pct_moe}{Non-hispanic black population; B03002_004}
-#'   \item{pop_hisp_est, pop_hisp_moe, pop_hisp_pct_est,
-#'   pop_hisp_pct_moe}{Hispanic, any race population; B03002_012}
 #'   \item{pop_asian_est, pop_asian_moe, pop_asian_pct_est,
 #'   pop_asian_pct_moe}{Non-hispanic asian population; B03002_006}
+#'   \item{pop_hisp_est, pop_hisp_moe, pop_hisp_pct_est,
+#'   pop_hisp_pct_moe}{Hispanic, any race population; B03002_012}
 #'   \item{pop_ba_above_est, pop_ba_above_moe, pop_ba_above_pct_est,
 #'   pop_ba_above_pct_moe}{Population 25 years or older with at least a
 #'   Bachelor's degree; B15003_022, B15003_023, B15003_024, B15003_025}
@@ -105,10 +105,10 @@
 #'   pop_white_pct_moe}{Non-hispanic white population; B03002_003}
 #'   \item{pop_black_est, pop_black_moe, pop_black_pct_est,
 #'   pop_black_pct_moe}{Non-hispanic black population; B03002_004}
-#'   \item{pop_hisp_est, pop_hisp_moe, pop_hisp_pct_est,
-#'   pop_hisp_pct_moe}{Hispanic, any race population; B03002_012}
 #'   \item{pop_asian_est, pop_asian_moe, pop_asian_pct_est,
 #'   pop_asian_pct_moe}{Non-hispanic asian population; B03002_006}
+#'   \item{pop_hisp_est, pop_hisp_moe, pop_hisp_pct_est,
+#'   pop_hisp_pct_moe}{Hispanic, any race population; B03002_012}
 #'   \item{pop_ba_above_est, pop_ba_above_moe, pop_ba_above_pct_est,
 #'   pop_ba_above_pct_moe}{Population 25 years or older with at least a
 #'   Bachelor's degree; B15003_022, B15003_023, B15003_024, B15003_025}
@@ -143,10 +143,10 @@
 #'   pop_white_pct_moe}{Non-hispanic white population; B03002_003}
 #'   \item{pop_black_est, pop_black_moe, pop_black_pct_est,
 #'   pop_black_pct_moe}{Non-hispanic black population; B03002_004}
-#'   \item{pop_hisp_est, pop_hisp_moe, pop_hisp_pct_est,
-#'   pop_hisp_pct_moe}{Hispanic, any race population; B03002_012}
 #'   \item{pop_asian_est, pop_asian_moe, pop_asian_pct_est,
 #'   pop_asian_pct_moe}{Non-hispanic asian population; B03002_006}
+#'   \item{pop_hisp_est, pop_hisp_moe, pop_hisp_pct_est,
+#'   pop_hisp_pct_moe}{Hispanic, any race population; B03002_012}
 #'   \item{pop_ba_above_est, pop_ba_above_moe, pop_ba_above_pct_est,
 #'   pop_ba_above_pct_moe}{Population 25 years or older with at least a
 #'   Bachelor's degree; B15003_022, B15003_023, B15003_024, B15003_025}
@@ -161,3 +161,23 @@
 #'
 #' @source <https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml>
 "boros_acs_data"
+
+#' Block-level Decennial Census counts
+#'
+#' A dataset containing U.S. Census Bureau Decennial Census population and race
+#' counts for all census blocks in New York City. Counts are from the 2010
+#' Decennial Census.
+#'
+#' @format A tibble with 39148 rows and 11 variables:
+#' \describe{
+#'   \item{geoid}{Census Bureau GEOID}
+#'   \item{pop_total}{Total population; P001001}
+#'   \item{med_age}{Median age; P013001}
+#'   \item{pop_white, pop_white_pct}{Non-hispanic white population; P005003}
+#'   \item{pop_black, pop_black_pct}{Non-hispanic black population; P005004}
+#'   \item{pop_asian, pop_asian_pct}{Non-hispanic asian population; P005006}
+#'   \item{pop_hisp, pop_hisp_pct}{Hispanic, any race population; P004003}
+#' }
+#'
+#' @source <https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml>
+"blocks_census_data"
