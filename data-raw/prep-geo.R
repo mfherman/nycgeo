@@ -45,7 +45,9 @@ geos <- list(
   tract = "nyct2010",
   nta = "nynta",
   boro = "nybb",
-  puma = "nypuma"
+  puma = "nypuma",
+  block = "nycb2010",
+  cd = "nycd"
   )
 
 # build list of urls
@@ -57,6 +59,8 @@ nyc_sf <- map(urls, read_sf) %>%
   modify_at("puma",
             ~ left_join(.x, puma_name_lookup, by = c("PUMA" = "puma_id"))
             ) %>%
+  modify_at("cd",
+            ~ mutate(.x, BoroCode = str_sub(BoroCD, end = 1L))) %>%
   map(~ left_join(.x, boro_id_lookup, by = c("BoroCode" = "boro_id"))) %>%
   map(~ mutate(.x, state_fips = "36")) %>%
   map(st_transform, 2263)
@@ -68,8 +72,8 @@ tracts_sf <- nyc_sf %>%
   pluck("tract") %>%
   mutate(geoid = paste0(state_fips, county_fips, CT2010)) %>%
   select(
-    boro_tract_id = BoroCT2010,
     geoid,
+    boro_tract_id = BoroCT2010,
     state_fips,
     county_fips,
     tract_id = CT2010,
@@ -131,7 +135,6 @@ ntas_sf <- nyc_sf %>%
   arrange(boro_id, nta_id)
 
 
-
 # process pumas -----------------------------------------------------------
 
 pumas_sf <- nyc_sf %>%
@@ -150,15 +153,71 @@ pumas_sf <- nyc_sf %>%
   arrange(boro_id, puma_id)
 
 
+# process blocks ----------------------------------------------------------
+
+blocks_sf <- nyc_sf %>%
+  pluck("block") %>%
+  mutate(geoid = paste0(state_fips, county_fips, CT2010, CB2010)) %>%
+  left_join(
+    tract_nta_puma_crosswalk,
+    by = c("CT2010" = "tract_id", "county_fips")
+    ) %>%
+  select(
+    geoid,
+    boro_block_tract_id = BCTCB2010,
+    state_fips,
+    county_fips,
+    block_id = CB2010,
+    tract_id = CT2010,
+    county_name,
+    boro_name,
+    boro_id = BoroCode,
+    nta_id,
+    nta_name,
+    puma_id,
+    puma_name
+  ) %>%
+  arrange(boro_block_tract_id)
+
+
+# process cds -------------------------------------------------------------
+
+cds_sf <- nyc_sf %>%
+  pluck("cd") %>%
+  mutate(
+    cd_id = as.character(as.integer(str_sub(BoroCD, 2, 3))),
+    cd_name = case_when(
+      cd_id %in% c(26:28, 55:56, 64, 80:84, 95) ~
+        paste(boro_name, "Joint Interest Area", cd_id),
+      TRUE ~
+        paste(boro_name, "Community District", cd_id)
+      )
+    ) %>%
+  select(
+    boro_cd_id = BoroCD,
+    cd_id,
+    cd_name,
+    state_fips,
+    county_fips,
+    county_name,
+    boro_name,
+    boro_id = BoroCode
+  ) %>%
+  arrange(boro_cd_id)
+
+
 # simplify sf objects -----------------------------------------------------
 
 # set up list of sf objects to simplify
-boundaries <- lst(boros_sf, ntas_sf, tracts_sf, pumas_sf)
+boundaries <- lst(boros_sf, ntas_sf, tracts_sf, pumas_sf, blocks_sf, cds_sf)
 
 # simplify each object to make smaller boundary files available
-boundaries_simple <- map(boundaries, ~ ms_simplify(.x, keep_shapes = TRUE)) %>%
-  set_names(paste0(names(boundaries), "_simple")) %>%
+boundaries_simple <- boundaries %>%
+  list_modify("blocks_sf" = NULL) %>% # don't simplify blocks_sf
+  map(~ ms_simplify(.x, keep_shapes = TRUE)) %>%
+  set_names(paste0(names(list_modify(boundaries, "blocks_sf" = NULL)), "_simple")) %>%
   map(~ st_as_sf(as_tibble(.x)))
+
 
 # save data ---------------------------------------------------------------
 
