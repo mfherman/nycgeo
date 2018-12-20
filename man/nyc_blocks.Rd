@@ -15,8 +15,6 @@ regions much match the geography indicated by \code{filter_by} argument.}
 \item{add_census_data}{If \code{TRUE}, selected demographic, social, and economic
 data from the U.S. Census 2010 decennial census is appended to block
 boundaries.}
-
-\item{resolution}{The resolution of the map. Defaults to lower resolution.}
 }
 \value{
 An \code{sf} object of census block boundaries
@@ -39,14 +37,13 @@ if (require(sf)) {
 
   north_si_blocks <- nyc_blocks(
     filter_by = "nta",
-    region = c("SI22", "SI35"),
-    resolution = "high"
+    region = c("SI22", "SI35")
     )
 
   queens_blocks <- nyc_blocks(
     filter_by = "borough",
     region = "Queens",
-    add_acs_data = TRUE
+    add_census_data = TRUE
     )
 
   # plot boundaries
@@ -54,7 +51,7 @@ if (require(sf)) {
 
   plot(st_geometry(queens_blocks))
 
-  plot(queens_blocks["med_hhinc_est"])
+  plot(queens_blocks["med_age"])
 }
 
 }

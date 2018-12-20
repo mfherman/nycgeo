@@ -12,7 +12,6 @@
 #' @param add_census_data If `TRUE`, selected demographic, social, and economic
 #'   data from the U.S. Census 2010 decennial census is appended to block
 #'   boundaries.
-#' @param resolution The resolution of the map. Defaults to lower resolution.
 #'
 #' @return An `sf` object of census block boundaries
 #'
@@ -27,14 +26,13 @@
 #'
 #'   north_si_blocks <- nyc_blocks(
 #'     filter_by = "nta",
-#'     region = c("SI22", "SI35"),
-#'     resolution = "high"
+#'     region = c("SI22", "SI35")
 #'     )
 #'
 #'   queens_blocks <- nyc_blocks(
 #'     filter_by = "borough",
 #'     region = "Queens",
-#'     add_acs_data = TRUE
+#'     add_census_data = TRUE
 #'     )
 #'
 #'   # plot boundaries
@@ -42,7 +40,7 @@
 #'
 #'   plot(st_geometry(queens_blocks))
 #'
-#'   plot(queens_blocks["med_hhinc_est"])
+#'   plot(queens_blocks["med_age"])
 #' }
 #'
 #' @export
