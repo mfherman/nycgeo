@@ -45,7 +45,7 @@ TIGER/Line® Shapefiles (via
 
 One difference between the boundaries included here and the TIGER/Line®
 Shapefiles available through `tigris` is that these boundaries are
-clipped to the waterfront, allowing for better mapping of New York City.
+clipped to the shoreline, allowing for better mapping of New York City.
 Additionally, `nycgeo` contains boundaries for geographic areas that are
 not available from the Census Bureau. This includes neighborhood
 tabulation areas (NTAs) and community districts (CDs).

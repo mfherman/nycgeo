@@ -164,7 +164,7 @@ blocks_sf <- nyc_sf %>%
     ) %>%
   select(
     geoid,
-    boro_block_tract_id = BCTCB2010,
+    boro_tract_block_id = BCTCB2010,
     state_fips,
     county_fips,
     block_id = CB2010,
@@ -177,7 +177,7 @@ blocks_sf <- nyc_sf %>%
     puma_id,
     puma_name
   ) %>%
-  arrange(boro_block_tract_id)
+  arrange(boro_tract_block_id)
 
 
 # process cds -------------------------------------------------------------

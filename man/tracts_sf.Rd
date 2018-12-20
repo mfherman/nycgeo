@@ -7,9 +7,9 @@
 \title{NYC census tract boundaries}
 \format{An sf object with 2166 rows and 13 variables:
 \describe{
-\item{boro_tract_id}{NYC DCP borough code and census tract number}
 \item{geoid}{Census Bureau GEOID; can be used to join spatial data with
 Census estimates}
+\item{boro_tract_id}{NYC DCP borough code and census tract number}
 \item{state_fips}{ANSI state FIPS code}
 \item{county_fips}{ANSI county FIPS code}
 \item{tract_id}{Census Bureau tract number}

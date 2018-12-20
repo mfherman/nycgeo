@@ -12,10 +12,10 @@
 pop_white_pct_moe}{Non-hispanic white population; B03002_003}
 \item{pop_black_est, pop_black_moe, pop_black_pct_est,
 pop_black_pct_moe}{Non-hispanic black population; B03002_004}
-\item{pop_hisp_est, pop_hisp_moe, pop_hisp_pct_est,
-pop_hisp_pct_moe}{Hispanic, any race population; B03002_012}
 \item{pop_asian_est, pop_asian_moe, pop_asian_pct_est,
 pop_asian_pct_moe}{Non-hispanic asian population; B03002_006}
+\item{pop_hisp_est, pop_hisp_moe, pop_hisp_pct_est,
+pop_hisp_pct_moe}{Hispanic, any race population; B03002_012}
 \item{pop_ba_above_est, pop_ba_above_moe, pop_ba_above_pct_est,
 pop_ba_above_pct_moe}{Population 25 years or older with at least a
 Bachelor's degree; B15003_022, B15003_023, B15003_024, B15003_025}
