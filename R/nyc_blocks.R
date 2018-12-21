@@ -46,33 +46,17 @@
 #' @export
 
 nyc_blocks <- function(filter_by = NULL,
-                      region = NULL,
-                      add_census_data = FALSE) {
+                       region = NULL,
+                       add_census_data = FALSE) {
 
-  # check argument validity
-  # only one geography to filter by
-  if (length(filter_by) > 1) {
-    stop("Can only filter by one geography")
-  }
-
-  # must choose region(s) if filtering
-  if (!is.null(filter_by) && is.null(region)) {
-    stop("Please specify one or more regions to filter by")
-  }
-
-  # must choose geography if regions are specified
-  if (is.null(filter_by) && !is.null(region)) {
-    stop("Please specify a geography to filter by")
-  }
-
-   # make arguments lower case
-  if (!is.null(filter_by) && !is.null(region)) {
+  # validate filter by
+  if (!is.null(filter_by)) {
     filter_by <- tolower(filter_by)
-    region <- tolower(region)
 
     # geography must be boro, nta or puma
-    if (!(filter_by %in% c("boro", "borough", "nta", "puma"))) {
-         stop("Please choose a valid geography to filter by")
+    if (!is.null(filter_by) &&
+        !(filter_by %in% c("boro", "borough", "nta", "puma"))) {
+      stop("Please choose a valid geography to filter by")
     }
   }
 
@@ -89,15 +73,9 @@ nyc_blocks <- function(filter_by = NULL,
 
   shp <- nycgeo::blocks_sf
 
-  # if filter is set, subset file by given regions
-  if (!is.null(filter_by)) {
-    if (filter_by %in% c("borough", "boro")) {
-      shp <- filter_by_boro(shp, region)
-    } else if (filter_by == c("nta")) {
-      shp <- filter_by_nta(shp, region)
-    } else if (filter_by == c("puma")) {
-      shp <- filter_by_puma(shp, region)
-    }
+  # if filter is requested subset by region(s)
+  if (!is.null(filter_by) || !is.null(region)) {
+    shp <- filter_by_region(shp, filter_by, region)
   }
 
   # append census data?

@@ -42,11 +42,6 @@ nyc_boros <- function(region = NULL,
                       add_acs_data = FALSE,
                       resolution = c("low", "high")) {
 
-  # make arguments lower case
-  if (!is.null(region)) {
-    region <- tolower(region)
-  }
-
   # set low or high resolution
   resolution <- match.arg(resolution)
 
@@ -57,9 +52,9 @@ nyc_boros <- function(region = NULL,
     shp <- nycgeo::boros_sf
   }
 
-  # if filter is set, subset file by given regions
+  # if filter is requested subset by region(s)
   if (!is.null(region)) {
-    shp <- filter_by_boro(shp, region)
+    shp <- filter_by_region(shp, filter_by = "boro", region)
   }
 
   # append census data?

@@ -2,6 +2,7 @@
 
 export(nyc_blocks)
 export(nyc_boros)
+export(nyc_cds)
 export(nyc_ntas)
 export(nyc_pumas)
 export(nyc_tracts)
