@@ -5,12 +5,12 @@
 #' subset of CDs filtered by borough.
 #'
 #' @param filter_by The geography to filter by. Possible values are
-#'   "borough" or "cd. If `NULL`, all CDs are returned.
+#'   "borough" or "cd". If `NULL`, all CDs are returned.
 #' @param region A character vector of boroughs or CDs. Selected regions much
 #'   match the geography indicated by `filter_by` argument.
 #' @param resolution The resolution of the map. Defaults to lower resolution.
 #'
-#' @return An `sf` object of CD boundaries
+#' @return An `sf` object of CD boundaries.
 #'
 #' @details For more information about the metadata included with boundaries,
 #'   see [cds_sf].

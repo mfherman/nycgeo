@@ -9,7 +9,7 @@ nyc_cds(filter_by = NULL, region = NULL, resolution = c("low",
 }
 \arguments{
 \item{filter_by}{The geography to filter by. Possible values are
-"borough" or "cd. If \code{NULL}, all CDs are returned.}
+"borough" or "cd". If \code{NULL}, all CDs are returned.}
 
 \item{region}{A character vector of boroughs or CDs. Selected regions much
 match the geography indicated by \code{filter_by} argument.}
@@ -17,7 +17,7 @@ match the geography indicated by \code{filter_by} argument.}
 \item{resolution}{The resolution of the map. Defaults to lower resolution.}
 }
 \value{
-An \code{sf} object of CD boundaries
+An \code{sf} object of CD boundaries.
 }
 \description{
 Get current boundaries for community districts (CDs) and joint interest areas

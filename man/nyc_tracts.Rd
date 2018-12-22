@@ -20,7 +20,7 @@ tract boundaries.}
 \item{resolution}{The resolution of the map. Defaults to lower resolution.}
 }
 \value{
-An \code{sf} object of census tract boundaries
+An \code{sf} object of census tract boundaries.
 }
 \description{
 Get current (2010) boundaries for census tracts in New York City in the

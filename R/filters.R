@@ -4,7 +4,6 @@
   }
 }
 
-
 filter_by_region <- function(shp, filter_by = NULL, region = NULL) {
 
   if (is.null(region) && is.null(filter_by)) {

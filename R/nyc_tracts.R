@@ -14,7 +14,7 @@
 #'   tract boundaries.
 #' @param resolution The resolution of the map. Defaults to lower resolution.
 #'
-#' @return An `sf` object of census tract boundaries
+#' @return An `sf` object of census tract boundaries.
 #'
 #' @details For more information about the metadata included with boundaries,
 #'   see [tracts_sf].
@@ -81,11 +81,7 @@ nyc_tracts <- function(filter_by = NULL,
   # append census data?
   if (add_acs_data) {
     shp <- merge(shp, nycgeo::tracts_acs_data, by = "geoid", all.x = TRUE)
-
-    if (requireNamespace("sf", quietly = TRUE) &&
-        requireNamespace("tibble", quietly = TRUE)) {
-      shp <- sf::st_as_sf(tibble::as_tibble(shp))
-    }
+    shp <- sf_to_sf_tibble(shp)
   }
   shp
 }
