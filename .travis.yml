@@ -4,6 +4,16 @@ language: R
 sudo: false
 cache: packages
 
+r:
+  - oldrel
+  - release
+  - devel
+
+os:
+  - linux
+  - osx
+
+
 addons:
   apt:
     packages:
@@ -11,3 +21,5 @@ addons:
       - libgdal-dev
       - libgeos-dev
       - libproj-dev
+
+
