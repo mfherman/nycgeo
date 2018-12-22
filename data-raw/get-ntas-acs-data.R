@@ -7,6 +7,9 @@ data(tracts_acs_data)
 data(tracts_sf_simple)
 
 
+# median interpolation
+# http://gisdiva.com/downloads/resources/How_to_Recalculate_a_Median.pdf
+
 # make a vector to select final cols later
 vars <- c("pop_white", "pop_black", "pop_hisp",
           "pop_asian", "pop_ba_above", "pop_inpov")
