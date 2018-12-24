@@ -2,29 +2,37 @@
 % Please edit documentation in R/point-in-poly.R
 \name{nyc_point_poly}
 \alias{nyc_point_poly}
-\title{Find administrative districts for a set of points}
+\title{Find which administrative districts a set of points are within}
 \usage{
 nyc_point_poly(points, geography)
 }
 \arguments{
 \item{points}{An \code{sf} object containing only point features.}
 
-\item{geography}{A character vector of geographies to. Possible values are
-"borough", "puma", "nta", "tract", or "block".}
+\item{geography}{A character vector of administrative boundaries to append to
+points. Possible values are "borough", "puma", "cd" "nta", "tract", and
+"block". If more than one geography is selected, names and codes for each
+geography is appended.}
 }
 \value{
-An \code{sf} object of point features with administrative district codes appended.
+An \code{sf} object of point features with administrative district names
+and and codes appended.
 }
 \description{
-blah blah blah
+Point-in-polygon operation for NYC administrative boundaries. Use
+\code{nyc_point_poly()} on a set of points to determine which administrative
+district each point lies within.
 }
 \details{
-blag blag
+Using \code{nyc_point_poly()} requires installing the \href{"https://r-spatial.github.io/sf/"}{sf package}.
 }
 \examples{
 if (require(sf)) {
+
+  # generate 100 random points in nyc
   points <- st_sf(geometry = st_sample(nyc_boros(), 100))
-  nyc_point_poly(points, c("boro", "nta", "block"))
+
+  nyc_point_poly(points = points, geography = c("borough", "nta", "block"))
 }
 
 }
