@@ -63,13 +63,12 @@ nyc_point_poly <- function(points, geography) {
                                                join = sf::st_within))
 
     pts_cd_poly <- pts_cd_poly[, c(names(points)[names(points) != "geometry"],
-                    "boro_cd_id", "cd_name", "geometry")]
+                    "cd_name", "boro_cd_id", "geometry")]
 
     return(pts_cd_poly)
 
   # for all other geographies or if cd and another geo is selected
   } else {
-
     # get blocks sf
     poly <- nyc_blocks()
 
@@ -77,48 +76,53 @@ nyc_point_poly <- function(points, geography) {
     pts_poly <- sf_to_sf_tibble(sf::st_join(points, poly, join = sf::st_within))
   }
 
-    # choose which variables to include depending on geograhies selected
-    if (any(geo %in% c("boro", "borough"))) {
-      geo_vars <- c("boro_name", "boro_id")
-    }
+  # set up empty vector for geo variables
+  geo_vars <- vector("character")
 
-    if (any(geo == "puma")) {
-      geo_vars <- c(geo_vars, "puma_name", "puma_id")
-    }
+  # choose which variables to include depending on geograhies selected
+  if (any(geo %in% c("boro", "borough"))) {
+    geo_vars <- c("boro_name", "boro_id")
+  }
 
-    if (any(geo == "nta")) {
-      geo_vars <- c(geo_vars, "nta_name", "nta_id")
-    }
+  if (any(geo == "puma")) {
+    geo_vars <- c(geo_vars, "puma_name", "puma_id")
+  }
 
-    if (any(geo == "tract")) {
-      geo_vars <- c(geo_vars, "tract_id")
-    }
+  if (any(geo == "nta")) {
+    geo_vars <- c(geo_vars, "nta_name", "nta_id")
+  }
 
-    if (any(geo == "block")) {
-      geo_vars <- c(geo_vars, "boro_tract_block_id")
-    }
+  if (any(geo == "tract")) {
+    geo_vars <- c(geo_vars, "tract_id")
+  }
 
-    if (length(geo) > 1 && any(geo == "cd")) {
-      cd_poly <- nyc_cds(resolution = "high")
+  if (any(geo == "block")) {
+    geo_vars <- c(geo_vars, "boro_tract_block_id")
+  }
 
-      # join points to cds using st_within
-      pts_cd_poly <- sf_to_sf_tibble(sf::st_join(points, cd_poly,
-                                               join = sf::st_within))
+  if (length(geo) > 1 && any(geo == "cd")) {
+    cd_poly <- nyc_cds(resolution = "high")
 
-      # select only cd vars
-      pts_cd_poly <- pts_cd_poly[, c("cd_name", "boro_cd_id")]
+    # join points to cds using st_within
+    pts_cd_poly <- sf_to_sf_tibble(sf::st_join(points, cd_poly,
+                                             join = sf::st_within))
 
-      sf::st_geometry(pts_cd_poly) <- NULL
+    # select only cd vars
+    pts_cd_poly <- pts_cd_poly[, c("cd_name", "boro_cd_id")]
 
-      # subset sf object to needed geo_vars, move geometry to last col
-      pts_poly <- pts_poly[, c(names(points)[names(points) != "geometry"],
-                               geo_vars, "geometry")]
+    sf::st_geometry(pts_cd_poly) <- NULL
 
-      # bind cd columns
-      pts_poly <- sf::st_sf(data.frame(pts_poly, pts_cd_poly))
+    # subset sf object to needed geo_vars, move geometry to last col
+    pts_poly <- pts_poly[, c(names(points)[names(points) != "geometry"],
+                             geo_vars, "geometry")]
 
-      return(pts_poly)
-    }
+    # bind cd columns
+    pts_poly <- sf_to_sf_tibble(
+      sf::st_sf(data.frame(pts_poly, pts_cd_poly), stringsAsFactors = FALSE)
+      )
+
+    return(pts_poly)
+  }
 
   # subset final sf object to needed geo_vars, move geometry to last col
   pts_poly[, c(names(points)[names(points) != "geometry"],

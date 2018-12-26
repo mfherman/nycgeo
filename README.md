@@ -89,18 +89,18 @@ nyc_tracts()
 #> epsg (SRID):    2263
 #> proj4string:    +proj=lcc +lat_1=41.03333333333333 +lat_2=40.66666666666666 +lat_0=40.16666666666666 +lon_0=-74 +x_0=300000.0000000001 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs
 #> # A tibble: 2,166 x 13
-#>    boro_tract_id geoid state_fips county_fips tract_id county_name
-#>    <chr>         <chr> <chr>      <chr>       <chr>    <chr>      
-#>  1 1000100       3606… 36         061         000100   New York   
-#>  2 1000201       3606… 36         061         000201   New York   
-#>  3 1000202       3606… 36         061         000202   New York   
-#>  4 1000500       3606… 36         061         000500   New York   
-#>  5 1000600       3606… 36         061         000600   New York   
-#>  6 1000700       3606… 36         061         000700   New York   
-#>  7 1000800       3606… 36         061         000800   New York   
-#>  8 1000900       3606… 36         061         000900   New York   
-#>  9 1001001       3606… 36         061         001001   New York   
-#> 10 1001002       3606… 36         061         001002   New York   
+#>    geoid boro_tract_id state_fips county_fips tract_id county_name
+#>    <chr> <chr>         <chr>      <chr>       <chr>    <chr>      
+#>  1 3606… 1000100       36         061         000100   New York   
+#>  2 3606… 1000201       36         061         000201   New York   
+#>  3 3606… 1000202       36         061         000202   New York   
+#>  4 3606… 1000500       36         061         000500   New York   
+#>  5 3606… 1000600       36         061         000600   New York   
+#>  6 3606… 1000700       36         061         000700   New York   
+#>  7 3606… 1000800       36         061         000800   New York   
+#>  8 3606… 1000900       36         061         000900   New York   
+#>  9 3606… 1001001       36         061         001001   New York   
+#> 10 3606… 1001002       36         061         001002   New York   
 #> # ... with 2,156 more rows, and 7 more variables: boro_name <chr>,
 #> #   boro_id <chr>, nta_id <chr>, nta_name <chr>, puma_id <chr>,
 #> #   puma_name <chr>, geometry <MULTIPOLYGON [US_survey_foot]>
@@ -227,3 +227,53 @@ nyc_ntas() %>%
 ```
 
 <img src="man/figures/README-join-health-1.png" width="100%" />
+
+### Finding which districts a set of points lies within
+
+[Point-in-polygon
+operations](https://en.wikipedia.org/wiki/Point_in_polygon) are common
+tasks for spatial analysis. Given a set of points we want to find out
+which polygon contains each point. A real-world application of this
+would be counting the number of schools in each community district.
+
+We start with a (non-spatial) data frame of all schools in New York, but
+with columns for latitide and longitude. Then we use those latitides and
+longitudes to convert the data frame to an sf object. From there, we can
+use the `nyc_point_poly()` function to find which community district
+(CD) each point (school) is in and then count by CD to get the total
+number of schools in each
+CD.
+
+``` r
+nyc_schools <- read_csv("https://raw.githubusercontent.com/mfherman/nycgeo/master/inst/extdata/nyc-schools.csv")
+
+schools_sf <- nyc_schools %>% 
+  st_as_sf(
+    coords = c("longitude", "latitude"),
+    crs = 4326,
+    stringsAsFactors = FALSE
+    )
+
+nyc_point_poly(schools_sf, "cd") %>% 
+  count(cd_name, boro_cd_id)
+#> Simple feature collection with 60 features and 3 fields
+#> geometry type:  MULTIPOINT
+#> dimension:      XY
+#> bbox:           xmin: 916396.5 ymin: 124365.2 xmax: 1064985 ymax: 268476.4
+#> epsg (SRID):    2263
+#> proj4string:    +proj=lcc +lat_1=41.03333333333333 +lat_2=40.66666666666666 +lat_0=40.16666666666666 +lon_0=-74 +x_0=300000.0000000001 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs
+#> # A tibble: 60 x 4
+#>    cd_name        boro_cd_id     n                                 geometry
+#>    <chr>          <chr>      <int>            <MULTIPOINT [US_survey_foot]>
+#>  1 Bronx Communi… 201           69 (1003585 236685.3, 1003631 236498.4, 10…
+#>  2 Bronx Communi… 210           32 (1026709 243584.3, 1027247 245514.1, 10…
+#>  3 Bronx Communi… 211           41 (1020487 252890.4, 1021243 250000.9, 10…
+#>  4 Bronx Communi… 212           36 (1020793 257962.4, 1020959 266963.4, 10…
+#>  5 Bronx Communi… 202           29 (1011396 236619.2, 1011409 237210.2, 10…
+#>  6 Bronx Communi… 203           72 (1009859 239268.8, 1009929 238798.2, 10…
+#>  7 Bronx Communi… 204           67 (1003566 243240.8, 1004050 244001.9, 10…
+#>  8 Bronx Communi… 205           43 (1006177 250083.5, 1006725 249559.7, 10…
+#>  9 Bronx Communi… 206           55 (1012222 247610, 1012310 247057.8, 1012…
+#> 10 Bronx Communi… 207           34 (1009189 252317.2, 1010176 252453.8, 10…
+#> # ... with 50 more rows
+```

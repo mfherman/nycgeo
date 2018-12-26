@@ -127,3 +127,23 @@ nyc_ntas() %>%
   theme(panel.grid = element_line(color = "transparent")) +
   labs(title = "Which neighborhoods have high levels of black carbon pollution?")
 ```
+
+### Finding which districts a set of points lies within
+
+[Point-in-polygon operations](https://en.wikipedia.org/wiki/Point_in_polygon) are common tasks for spatial analysis. Given a set of points we want to find out which polygon contains each point. A real-world application of this would be counting the number of schools in each community district.
+
+We start with a (non-spatial) data frame of all schools in New York, but with columns for latitide and longitude. Then we use those latitides and longitudes to convert the data frame to an sf object. From there, we can use the `nyc_point_poly()` function to find which community district (CD) each point (school) is in and then count by CD to get the total number of schools in each CD.
+
+```{r pip-schools, message = FALSE}
+nyc_schools <- read_csv("https://raw.githubusercontent.com/mfherman/nycgeo/master/inst/extdata/nyc-schools.csv")
+
+schools_sf <- nyc_schools %>% 
+  st_as_sf(
+    coords = c("longitude", "latitude"),
+    crs = 4326,
+    stringsAsFactors = FALSE
+    )
+
+nyc_point_poly(schools_sf, "cd") %>% 
+  count(cd_name, boro_cd_id)
+```
