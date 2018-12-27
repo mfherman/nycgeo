@@ -36,10 +36,10 @@ boundaries of a selected geography or a filtered subset.
 }
 \details{
 For more information about the metadata included with boundaries,
-see \link{boros_sf}, \link{pumas_sf}, \link{cds_sf}, \link{ntas_sf}, \link{tracts_sf}, or
-\link{blocks_sf}. For information about the census estimates returned, see
-\link{boros_acs_data}, \link{pumas_acs_data}, \link{ntas_acs_data}, \link{tracts_acs_data}, or
-\link{blocks_census_data}.
+see \link{borough_sf}, \link{puma_sf}, \link{cd_sf}, \link{nta_sf}, \link{tract_sf}, or \link{block_sf}.
+For information about the census estimates returned, see
+\link{borough_acs_data}, \link{puma_acs_data}, \link{nta_acs_data}, \link{tract_acs_data}, or
+\link{block_census_data}.
 }
 \examples{
 if (require(sf)) {

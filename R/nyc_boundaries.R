@@ -20,10 +20,10 @@
 #' @return An `sf` object of administrative boundaries
 #'
 #' @details For more information about the metadata included with boundaries,
-#'   see [boros_sf], [pumas_sf], [cds_sf], [ntas_sf], [tracts_sf], or
-#'   [blocks_sf]. For information about the census estimates returned, see
-#'   [boros_acs_data], [pumas_acs_data], [ntas_acs_data], [tracts_acs_data], or
-#'   [blocks_census_data].
+#'   see [borough_sf], [puma_sf], [cd_sf], [nta_sf], [tract_sf], or [block_sf].
+#'   For information about the census estimates returned, see
+#'   [borough_acs_data], [puma_acs_data], [nta_acs_data], [tract_acs_data], or
+#'   [block_census_data].
 #'
 #' @examples
 #' if (require(sf)) {
@@ -73,79 +73,100 @@ nyc_boundaries <- function(geography = c("borough", "puma", "nta",
   # set low or high resolution
   resolution <- match.arg(resolution)
 
-  # validate filter for selected geography and set geo prefix and merge by field
+  # define resolution helper functions
+  get_boro <- function(res) {
+    if (res == "high") nycgeo::borough_sf else nycgeo::borough_sf_simple
+  }
+
+  get_puma <- function(res) {
+    if (res == "high") nycgeo::puma_sf else nycgeo::puma_sf_simple
+  }
+
+  get_cd <- function(res) {
+    if (res == "high") nycgeo::cd_sf else nycgeo::cd_sf_simple
+  }
+
+  get_nta <- function(res) {
+    if (res == "high") nycgeo::nta_sf else nycgeo::nta_sf_simple
+  }
+
+  get_tract <- function(res) {
+    if (res == "high") nycgeo::tract_sf else nycgeo::tract_sf_simple
+  }
+
+  # validate filter for selected geography, get sf object, set ac
   if (geography == "borough") {
     if (!is.null(filter_by) && !(filter_by == "borough")) {
-      stop("Please choose a valid geography to filter by")
+      stop("Can only filter by borough")
     } else {
-    .geo <- "boros"
-    .merge_by <- "geoid"
+      shp <- get_boro(resolution)
+      merge_by <- "geoid"
+    }
+    if (add_acs_data) {
+      acs_data <- nycgeo::borough_acs_data
     }
   } else if (geography == "puma") {
     if (!is.null(filter_by) && !(filter_by %in% c("borough", "puma"))) {
-      stop("Please choose a valid geography to filter by")
+      stop("Can only filter by borough or puma")
     } else {
-    .geo <- "pumas"
-    .merge_by <- "geoid"
+      shp <- get_puma(resolution)
+      merge_by <- "geoid"
+    }
+    if (add_acs_data) {
+      acs_data <- nycgeo::puma_acs_data
     }
   } else if (geography == "nta") {
     if (!is.null(filter_by) && !(filter_by %in% c("borough", "puma", "nta"))) {
-      stop("Please choose a valid geography to filter by")
+      stop("Can only filter by borough, puma, or nta")
     } else {
-    .geo <- "ntas"
-    .merge_by <- "nta_id"
+      shp <- get_nta(resolution)
+      merge_by <- "nta_id"
+    }
+    if (add_acs_data) {
+      acs_data <- nycgeo::nta_acs_data
     }
   } else if (geography == "cd") {
     if (!is.null(filter_by) && !(filter_by %in% c("borough", "cd"))) {
-      stop("Please choose a valid geography to filter by")
+      stop("Can only filter by borough or cd")
     } else {
-    .geo <- "cds"
+      shp <- get_cd(resolution)
+    }
+    if (add_acs_data) {
+      stop("ACS data for community districts is not yet available.")
     }
   } else if (geography == "tract") {
     if (!is.null(filter_by) && !(filter_by %in% c("borough", "puma", "nta"))) {
-      stop("Please choose a valid geography to filter by")
+      stop("Can only filter by borough, puma, or nta")
     } else {
-    .geo <- "tracts"
-    .merge_by <- "geoid"
+      shp <- get_tract(resolution)
+      merge_by <- "geoid"
+    }
+    if (add_acs_data) {
+      acs_data <- nycgeo::tract_acs_data
     }
   } else {
-    if (!is.null(filter_by) && !(filter_by %in% c("borough","puma", "nta"))) {
-      stop("Please choose a valid geography to filter by")
+    if (!is.null(filter_by) && !(filter_by %in% c("borough", "puma", "nta"))) {
+      stop("Can only filter by borough, puma, or nta")
     } else {
-    .geo <- "blocks"
-    .merge_by <- "geoid"
+      shp <- nycgeo::block_sf
+      merge_by <- "geoid"
+    }
+    if (add_acs_data) {
+      acs_data <- nycgeo::block_census_data
     }
   }
-
-  # select low or hi res geometries and create call for appropriate sf file
-  if (resolution == "low" && geography != "block") {
-    .shp_call <- paste0(.geo, "_sf_simple")
-  } else {
-    .shp_call <- paste0(.geo, "_sf")
-  }
-
-  # get appropriate sf object
-  shp <- get(.shp_call)
 
   # if filter is requested subset by region(s)
   if (!is.null(filter_by) || !is.null(region)) {
     shp <- filter_by_region(shp, filter_by, region)
   }
 
-  # append census data?
-  if (add_acs_data && geography != "cd") {
-
-    # create call for appropriate census data
-    if (geography == "block") {
-      .acs_call <- paste0(.geo, "_census_data")
-    } else {
-      .acs_call <- paste0(.geo, "_acs_data")
-    }
-
+  # append acs data?
+  if (add_acs_data) {
     # merge appropriate census data and convert to sf tibble
-    shp <- merge(shp, get(.acs_call), by = .merge_by, all.x = TRUE)
+    shp <- merge(shp, acs_data, by = merge_by, all.x = TRUE)
     shp <- sf_to_sf_tibble(shp)
-
   }
+
   shp
 }

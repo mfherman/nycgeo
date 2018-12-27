@@ -23,10 +23,10 @@
 #' }
 #'
 #' @source <https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page>
-"tracts_sf"
+"tract_sf"
 
-#' @rdname tracts_sf
-"tracts_sf_simple"
+#' @rdname tract_sf
+"tract_sf_simple"
 
 
 #' NYC neighborhood tabulation area boundaries
@@ -63,10 +63,10 @@
 #' }
 #'
 #' @source <https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-nynta.page>
-"ntas_sf"
+"nta_sf"
 
-#' @rdname ntas_sf
-"ntas_sf_simple"
+#' @rdname nta_sf
+"nta_sf_simple"
 
 
 #' NYC borough boundaries
@@ -88,10 +88,10 @@
 #' }
 #'
 #' @source <https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page>
-"boros_sf"
+"borough_sf"
 
-#' @rdname boros_sf
-"boros_sf_simple"
+#' @rdname borough_sf
+"borough_sf_simple"
 
 #' NYC public use microdata area boundaries
 #'
@@ -114,10 +114,10 @@
 #' }
 #'
 #' @source <https://www1.nyc.gov/site/planning/data-maps/open-data.page#other>
-"pumas_sf"
+"puma_sf"
 
-#' @rdname pumas_sf
-"pumas_sf_simple"
+#' @rdname puma_sf
+"puma_sf_simple"
 
 #' NYC census block boundaries
 #'
@@ -145,7 +145,7 @@
 #' }
 #'
 #' @source <https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page>
-"blocks_sf"
+"block_sf"
 
 #' NYC community district boundaries
 #'
@@ -167,7 +167,7 @@
 #' }
 #'
 #' @source <https://www1.nyc.gov/site/planning/data-maps/open-data.page#other>
-"cds_sf"
+"cd_sf"
 
-#' @rdname cds_sf
-"cds_sf_simple"
+#' @rdname cd_sf
+"cd_sf_simple"

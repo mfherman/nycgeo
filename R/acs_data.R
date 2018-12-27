@@ -32,9 +32,8 @@
 #'   B17021_001}
 #'   }
 #'
-#'
 #' @source <https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml>
-"tracts_acs_data"
+"tract_acs_data"
 
 
 #' Neighborhood tabulation area-level American Community Survey estimates
@@ -83,7 +82,7 @@
 #'   }
 #'
 #' @source <https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml>
-"ntas_acs_data"
+"nta_acs_data"
 
 
 #' Public use microdata area-level American Community Survey estimates
@@ -122,7 +121,7 @@
 #'   }
 #'
 #' @source <https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml>
-"pumas_acs_data"
+"puma_acs_data"
 
 #' Borough-level American Community Survey estimates
 #'
@@ -160,7 +159,7 @@
 #'   }
 #'
 #' @source <https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml>
-"boros_acs_data"
+"borough_acs_data"
 
 #' Block-level Decennial Census counts
 #'
@@ -180,4 +179,4 @@
 #' }
 #'
 #' @source <https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml>
-"blocks_census_data"
+"block_census_data"
