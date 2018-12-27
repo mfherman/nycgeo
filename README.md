@@ -69,19 +69,18 @@ remotes::install_github("mfherman/nycgeo")
 ### Basic Usage
 
 The most basic usage of `nycgeo` is to get boundaries in the `sf`
-format. Use `nyc_tracts()`, `nyc_pumas()`, or `nyc_ntas()` to get your
-desired geography. To make best use of the package, you should also load
-the `sf` package when using `nycgeo`. For these examples, I’ll also load
-`tidyverse` as this will allow us to take advantage of pretty `tibble`
-printing and will come in handy when we want to manipulate and map the
-spatial data later.
+format. Use `nyc_boundaires()` to get your desired geography. To make
+best use of the package, you should also load the `sf` package when
+using `nycgeo`. For these examples, I’ll also load `tidyverse` as this
+will allow us to take advantage of pretty `tibble` printing and will
+come in handy when we want to manipulate and map the spatial data later.
 
 ``` r
 library(nycgeo)
 library(sf)
 library(tidyverse)
 
-nyc_tracts()
+nyc_boundaries(geography = "tract")
 #> Simple feature collection with 2166 features and 12 fields
 #> geometry type:  MULTIPOLYGON
 #> dimension:      XY
@@ -109,12 +108,13 @@ nyc_tracts()
 ### Filter by geography
 
 If you don’t need census tracts for the entire city, you can use the
-`filter_by` and `region` arguments of `nyc_tracts()` to specify the area
-you are interested in. For example, the following code returns only
+`filter_by` and `region` arguments of `nyc_boundaries()` to specify the
+area you are interested in. For example, the following code returns only
 census tracts in Brooklyn and Queens.
 
 ``` r
-bk_qn_tracts <- nyc_tracts(
+bk_qn_tracts <- nyc_boundaries(
+  geography = "tract",
   filter_by = "borough",
   region = c("brooklyn", "queens")
   )
@@ -166,15 +166,16 @@ ntas_acs_data
 #> #   pop_inpov_pct_est <dbl>, pop_inpov_pct_moe <dbl>
 ```
 
-To add census estimates to an `sf` object, use `add_acs_data = TRUE` in
-the appropriate `nyc_*()`call. For example, here we get all NTAs in
+To add census estimates to an `sf` object, use `add_acs_data = TRUE` to
+an `nyc_boundaries()`call. For example, here we get all NTAs in
 Manhattan with ACS data appended. One convenience of having the ACS data
 joined to the `sf` object is that you can very simply make a choropleth
 map. Here we do it with `ggplot2`, but you could use `tmap`, `leaflet`
 or any other spatial package that works with `sf` objects.
 
 ``` r
-mn_ntas <- nyc_ntas(
+mn_ntas <- nyc_boundaries(
+  geography = "nta",
   filter_by = "borough",
   region = "manhattan",
   add_acs_data = TRUE
@@ -216,7 +217,7 @@ example.
 nta_health <- read_csv("https://raw.githubusercontent.com/mfherman/nycgeo/master/inst/extdata/nta-health.csv") %>% 
   select(NTA_Code, BlackCarbon)
 
-nyc_ntas() %>% 
+nyc_boundaries(geography = "nta") %>% 
   left_join(nta_health, by = c("nta_id" = "NTA_Code")) %>% 
   ggplot() +
   geom_sf(aes(fill = BlackCarbon)) +
@@ -237,7 +238,7 @@ which polygon contains each point. A real-world application of this
 would be counting the number of schools in each community district.
 
 We start with a (non-spatial) data frame of all schools in New York, but
-with columns for latitide and longitude. Then we use those latitides and
+with columns for latitude and longitude. Then we use those latitudes and
 longitudes to convert the data frame to an sf object. From there, we can
 use the `nyc_point_poly()` function to find which community district
 (CD) each point (school) is in and then count by CD to get the total
