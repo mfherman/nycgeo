@@ -56,7 +56,7 @@ if (require(sf)) {
 
   queens_brooklyn_tracts <- nyc_boundaries(
     geography = "tract",
-    filter_by = "boro",
+    filter_by = "borough",
     region = c("queens", "brooklyn"),
     add_acs_data = TRUE
   )

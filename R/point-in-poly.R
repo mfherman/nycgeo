@@ -49,7 +49,7 @@ nyc_point_poly <- function(points, geography) {
   # validate geography selection
   geo <- tolower(geography)
 
-  if (any(!(geo %in% c("boro", "borough", "puma", "cd",
+  if (any(!(geo %in% c("borough", "puma", "cd",
                        "nta", "tract", "block")))) {
     stop("Select a valid geography", call. = FALSE)
   }
@@ -80,7 +80,7 @@ nyc_point_poly <- function(points, geography) {
   geo_vars <- vector("character")
 
   # choose which variables to include depending on geograhies selected
-  if (any(geo %in% c("boro", "borough"))) {
+  if (any(geo == "borough")) {
     geo_vars <- c("boro_name", "boro_id")
   }
 

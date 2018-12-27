@@ -40,7 +40,7 @@
 #'
 #'   queens_brooklyn_tracts <- nyc_boundaries(
 #'     geography = "tract",
-#'     filter_by = "boro",
+#'     filter_by = "borough",
 #'     region = c("queens", "brooklyn"),
 #'     add_acs_data = TRUE
 #'   )
@@ -74,45 +74,42 @@ nyc_boundaries <- function(geography = c("borough", "puma", "nta",
   resolution <- match.arg(resolution)
 
   # validate filter for selected geography and set geo prefix and merge by field
-  if (geography == c("borough")) {
-    if (!is.null(filter_by) && !(filter_by %in% c("boro", "borough"))) {
+  if (geography == "borough") {
+    if (!is.null(filter_by) && !(filter_by == "borough")) {
       stop("Please choose a valid geography to filter by")
     } else {
     .geo <- "boros"
     .merge_by <- "geoid"
     }
-  } else if (geography == c("puma")) {
-    if (!is.null(filter_by) && !(filter_by %in% c("boro", "borough", "puma"))) {
+  } else if (geography == "puma") {
+    if (!is.null(filter_by) && !(filter_by %in% c("borough", "puma"))) {
       stop("Please choose a valid geography to filter by")
     } else {
     .geo <- "pumas"
     .merge_by <- "geoid"
     }
-  } else if (geography == c("nta")) {
-    if (!is.null(filter_by) && !(filter_by %in% c("boro", "borough",
-                                                  "puma", "nta"))) {
+  } else if (geography == "nta") {
+    if (!is.null(filter_by) && !(filter_by %in% c("borough", "puma", "nta"))) {
       stop("Please choose a valid geography to filter by")
     } else {
     .geo <- "ntas"
     .merge_by <- "nta_id"
     }
-  } else if (geography == c("cd")) {
-    if (!is.null(filter_by) && !(filter_by %in% c("boro", "borough", "cd"))) {
+  } else if (geography == "cd") {
+    if (!is.null(filter_by) && !(filter_by %in% c("borough", "cd"))) {
       stop("Please choose a valid geography to filter by")
     } else {
     .geo <- "cds"
     }
-  } else if (geography == c("tract")) {
-    if (!is.null(filter_by) && !(filter_by %in% c("boro", "borough",
-                                                  "puma", "nta"))) {
+  } else if (geography == "tract") {
+    if (!is.null(filter_by) && !(filter_by %in% c("borough", "puma", "nta"))) {
       stop("Please choose a valid geography to filter by")
     } else {
     .geo <- "tracts"
     .merge_by <- "geoid"
     }
   } else {
-    if (!is.null(filter_by) && !(filter_by %in% c("boro", "borough",
-                                                  "puma", "nta"))) {
+    if (!is.null(filter_by) && !(filter_by %in% c("borough","puma", "nta"))) {
       stop("Please choose a valid geography to filter by")
     } else {
     .geo <- "blocks"

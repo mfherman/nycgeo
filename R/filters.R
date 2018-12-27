@@ -28,11 +28,11 @@ filter_by_region <- function(shp, filter_by = NULL, region = NULL) {
 
   region <- tolower(as.character(region))
 
-  if (!(filter_by %in% c("boro", "borough", "nta", "puma", "cd"))) {
+  if (!(filter_by %in% c("borough", "nta", "puma", "cd"))) {
     stop("Please choose a valid geography to filter by")
   }
 
-  if (filter_by %in% c("boro", "borough")) {
+  if (filter_by == "borough") {
     filter <- (tolower(shp$boro_name) %in% region) |
     (tolower(shp$county_name) %in% region)
   } else if (filter_by == "nta") {
