@@ -1,7 +1,7 @@
 Type: Package
 Package: nycgeo
 Title: Spatial Data Files for NYC
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person(given = "Matt",
            family = "Herman",
@@ -9,17 +9,18 @@ Authors@R:
            email = "mfherman@gmail.com")
 Maintainer: Matt Herman <mfherman@gmail.com>
 Description: Spatial data files for various geographic and administrative
-    boundaries in New York City. Data is in the in the sf (simple
-    features) format and includes boundaries for boroughs (counties),
-    public use microdata areas, neighborhood tabulation areas, and census tracts
-    . In addition, selected demographic, social, and economic estimates from the
+    boundaries in New York City as well as tools for working with NYC spatial
+    data. Data is in the in the sf (simple features) format and includes
+    boundaries for boroughs (counties), public use microdata areas, community
+    districts, neighborhood tabulation areas, census tracts, and census blocks. 
+    In addition, selected demographic, social, and economic estimates from the 
     U.S. Census Bureau American Community Survey are included.
 License: MIT + file LICENSE
 Depends:
     R (>= 2.10)
 Suggests:
-    spelling,
     sf,
+    spelling,
     tibble
 Encoding: UTF-8
 LazyData: true

@@ -10,14 +10,15 @@ status](https://travis-ci.org/mfherman/nycgeo.svg?branch=master)](https://travis
 status](https://www.r-pkg.org/badges/version/nycgeo)](https://cran.r-project.org/package=nycgeo)
 
 The `nycgeo` package contains spatial data files for various geographic
-and administrative boundaries in New York City. Data is in the [`sf`
-(simple features)](https://r-spatial.github.io/sf/) format and includes
+and administrative boundaries in New York City as well as tools for
+working with NYC spatial data. Data is in the [`sf` (simple
+features)](https://r-spatial.github.io/sf/) format and includes
 boundaries for boroughs (counties), public use microdata areas (PUMAs),
-neighborhood tabulation areas (NTAs), and census tracts. In the future,
-more boundaries will be added, such as community districts, census
-blocks, and city council districts.
+community districts (CDs), neighborhood tabulation areas (NTAs), census
+tracts, and census blocks. In the future, more boundaries will be added,
+such as city council districts, school districts, and police precincts.
 
-In addition, selected demographic, social, and economic estimates from
+Additionally, selected demographic, social, and economic estimates from
 the U.S. Census Bureau American Community Survey can be added to the
 geographic boundaries in `nycgeo`, allowing for contextualization and
 easy choropleth mapping. Finally, `nycgeo` makes it simple to access a
@@ -127,7 +128,7 @@ ggplot(bk_qn_tracts) +
 <img src="man/figures/README-filter-by-1.png" width="100%" />
 
 Note, you can select multiple regions by passing a character vector to
-the `region` argument, but you can only select a single geography to
+the `region` argument, but you can only choose a single geography to
 `filter_by`. Additionally, you can only filter by a geography that is
 *larger than or equal to* the boundaries you request. For example, it is
 not possible to filter PUMAs by NTAs because NTAs are smaller than
