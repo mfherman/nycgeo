@@ -35,18 +35,12 @@ filter_by_region <- function(shp, filter_by = NULL, region = NULL) {
   if (filter_by %in% c("boro", "borough")) {
     filter <- (tolower(shp$boro_name) %in% region) |
     (tolower(shp$county_name) %in% region)
-  }
-
-  if (filter_by == "nta") {
+  } else if (filter_by == "nta") {
     filter <- (tolower(shp$nta_id) %in% region) |
       (tolower(shp$nta_name) %in% region)
-  }
-
-  if (filter_by == "puma") {
+  } else if (filter_by == "puma") {
     filter <- as.character(shp$puma_id) %in% region
-  }
-
-  if (filter_by == "cd") {
+  } else {
     filter <- as.character(shp$boro_cd_id) %in% region
   }
 

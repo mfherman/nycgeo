@@ -2,6 +2,7 @@
 
 export(nyc_blocks)
 export(nyc_boros)
+export(nyc_boundaries)
 export(nyc_cds)
 export(nyc_ntas)
 export(nyc_point_poly)
