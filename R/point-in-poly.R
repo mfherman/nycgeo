@@ -20,7 +20,7 @@
 #' if (require(sf)) {
 #'
 #'   # generate 100 random points in nyc
-#'   points <- st_sf(geometry = st_sample(nyc_boros(), 100))
+#'   points <- st_sf(geometry = st_sample(nyc_boundaries(), 100))
 #'
 #'   nyc_point_poly(points = points, geography = c("borough", "nta", "block"))
 #' }
@@ -41,7 +41,7 @@ nyc_point_poly <- function(points, geography) {
   }
 
   # if crs doesn't match, transform points to 2263
-  if (sf::st_crs(points) != sf::st_crs(nyc_boros())) {
+  if (sf::st_crs(points) != sf::st_crs(nyc_boundaries())) {
     message("Trasnsforming points to EPSG 2263")
     points <- sf::st_transform(points, 2263)
   }
@@ -56,7 +56,7 @@ nyc_point_poly <- function(points, geography) {
 
   # if only selected geo is cd
   if (length(geo) == 1 && geo == "cd") {
-    cd_poly <- nyc_cds(resolution = "high")
+    cd_poly <- nyc_boundaries(geography = "cd", resolution = "high")
 
     # join points to cds using st_within
     pts_cd_poly <- sf_to_sf_tibble(sf::st_join(points, cd_poly,
@@ -70,7 +70,7 @@ nyc_point_poly <- function(points, geography) {
   # for all other geographies or if cd and another geo is selected
   } else {
     # get blocks sf
-    poly <- nyc_blocks()
+    poly <- nyc_boundaries(geography = "block")
 
     # join points to blocks using st_within
     pts_poly <- sf_to_sf_tibble(sf::st_join(points, poly, join = sf::st_within))
@@ -101,7 +101,7 @@ nyc_point_poly <- function(points, geography) {
   }
 
   if (length(geo) > 1 && any(geo == "cd")) {
-    cd_poly <- nyc_cds(resolution = "high")
+    cd_poly <- nyc_boundaries(geography = "cd", resolution = "high")
 
     # join points to cds using st_within
     pts_cd_poly <- sf_to_sf_tibble(sf::st_join(points, cd_poly,

@@ -30,7 +30,7 @@ Using \code{nyc_point_poly()} requires installing the \href{"https://r-spatial.g
 if (require(sf)) {
 
   # generate 100 random points in nyc
-  points <- st_sf(geometry = st_sample(nyc_boros(), 100))
+  points <- st_sf(geometry = st_sample(nyc_boundaries(), 100))
 
   nyc_point_poly(points = points, geography = c("borough", "nta", "block"))
 }
