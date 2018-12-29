@@ -70,7 +70,7 @@ remotes::install_github("mfherman/nycgeo")
 ### Basic Usage
 
 The most basic usage of `nycgeo` is to get boundaries in the `sf`
-format. Use `nyc_boundaires()` to get your desired geography. To make
+format. Use `nyc_boundaries()` to get your desired geography. To make
 best use of the package, you should also load the `sf` package when
 using `nycgeo`. For these examples, I’ll also load `tidyverse` as this
 will allow us to take advantage of pretty `tibble` printing and will
@@ -89,20 +89,20 @@ nyc_boundaries(geography = "tract")
 #> epsg (SRID):    2263
 #> proj4string:    +proj=lcc +lat_1=41.03333333333333 +lat_2=40.66666666666666 +lat_0=40.16666666666666 +lon_0=-74 +x_0=300000.0000000001 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs
 #> # A tibble: 2,166 x 13
-#>    geoid boro_tract_id state_fips county_fips tract_id county_name
-#>    <chr> <chr>         <chr>      <chr>       <chr>    <chr>      
-#>  1 3606… 1000100       36         061         000100   New York   
-#>  2 3606… 1000201       36         061         000201   New York   
-#>  3 3606… 1000202       36         061         000202   New York   
-#>  4 3606… 1000500       36         061         000500   New York   
-#>  5 3606… 1000600       36         061         000600   New York   
-#>  6 3606… 1000700       36         061         000700   New York   
-#>  7 3606… 1000800       36         061         000800   New York   
-#>  8 3606… 1000900       36         061         000900   New York   
-#>  9 3606… 1001001       36         061         001001   New York   
-#> 10 3606… 1001002       36         061         001002   New York   
-#> # ... with 2,156 more rows, and 7 more variables: boro_name <chr>,
-#> #   boro_id <chr>, nta_id <chr>, nta_name <chr>, puma_id <chr>,
+#>    geoid borough_tract_id state_fips county_fips tract_id county_name
+#>    <chr> <chr>            <chr>      <chr>       <chr>    <chr>      
+#>  1 3606… 1000100          36         061         000100   New York   
+#>  2 3606… 1000201          36         061         000201   New York   
+#>  3 3606… 1000202          36         061         000202   New York   
+#>  4 3606… 1000500          36         061         000500   New York   
+#>  5 3606… 1000600          36         061         000600   New York   
+#>  6 3606… 1000700          36         061         000700   New York   
+#>  7 3606… 1000800          36         061         000800   New York   
+#>  8 3606… 1000900          36         061         000900   New York   
+#>  9 3606… 1001001          36         061         001001   New York   
+#> 10 3606… 1001002          36         061         001002   New York   
+#> # ... with 2,156 more rows, and 7 more variables: borough_name <chr>,
+#> #   borough_id <chr>, nta_id <chr>, nta_name <chr>, puma_id <chr>,
 #> #   puma_name <chr>, geometry <MULTIPOLYGON [US_survey_foot]>
 ```
 
@@ -142,8 +142,8 @@ appended to the spatial data. To print a `tibble` of ACS data, simply
 call the data you want.
 
 ``` r
-ntas_acs_data
-#> # A tibble: 195 x 27
+nta_acs_data
+#> # A tibble: 190 x 27
 #>    nta_id pop_total_est pop_total_moe pop_white_est pop_white_moe
 #>    <chr>          <dbl>         <dbl>         <dbl>         <dbl>
 #>  1 BK09           24212          891.         17734          859.
@@ -156,7 +156,7 @@ ntas_acs_data
 #>  8 BK27           32808         1293.         14483          863.
 #>  9 BK28           93114         2087.         38709         1559.
 #> 10 BK29           66055         1757.         29318         1293.
-#> # ... with 185 more rows, and 22 more variables: pop_white_pct_est <dbl>,
+#> # ... with 180 more rows, and 22 more variables: pop_white_pct_est <dbl>,
 #> #   pop_white_pct_moe <dbl>, pop_black_est <dbl>, pop_black_moe <dbl>,
 #> #   pop_black_pct_est <dbl>, pop_black_pct_moe <dbl>, pop_hisp_est <dbl>,
 #> #   pop_hisp_moe <dbl>, pop_hisp_pct_est <dbl>, pop_hisp_pct_moe <dbl>,
@@ -257,25 +257,20 @@ schools_sf <- nyc_schools %>%
     )
 
 nyc_point_poly(schools_sf, "cd") %>% 
-  count(cd_name, boro_cd_id)
-#> Simple feature collection with 60 features and 3 fields
-#> geometry type:  MULTIPOINT
-#> dimension:      XY
-#> bbox:           xmin: 916396.5 ymin: 124365.2 xmax: 1064985 ymax: 268476.4
-#> epsg (SRID):    2263
-#> proj4string:    +proj=lcc +lat_1=41.03333333333333 +lat_2=40.66666666666666 +lat_0=40.16666666666666 +lon_0=-74 +x_0=300000.0000000001 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs
-#> # A tibble: 60 x 4
-#>    cd_name        boro_cd_id     n                                 geometry
-#>    <chr>          <chr>      <int>            <MULTIPOINT [US_survey_foot]>
-#>  1 Bronx Communi… 201           69 (1003585 236685.3, 1003631 236498.4, 10…
-#>  2 Bronx Communi… 210           32 (1026709 243584.3, 1027247 245514.1, 10…
-#>  3 Bronx Communi… 211           41 (1020487 252890.4, 1021243 250000.9, 10…
-#>  4 Bronx Communi… 212           36 (1020793 257962.4, 1020959 266963.4, 10…
-#>  5 Bronx Communi… 202           29 (1011396 236619.2, 1011409 237210.2, 10…
-#>  6 Bronx Communi… 203           72 (1009859 239268.8, 1009929 238798.2, 10…
-#>  7 Bronx Communi… 204           67 (1003566 243240.8, 1004050 244001.9, 10…
-#>  8 Bronx Communi… 205           43 (1006177 250083.5, 1006725 249559.7, 10…
-#>  9 Bronx Communi… 206           55 (1012222 247610, 1012310 247057.8, 1012…
-#> 10 Bronx Communi… 207           34 (1009189 252317.2, 1010176 252453.8, 10…
+  st_set_geometry(NULL) %>% 
+  count(cd_name, borough_cd_id)
+#> # A tibble: 60 x 3
+#>    cd_name                     borough_cd_id     n
+#>    <chr>                       <chr>         <int>
+#>  1 Bronx Community District 1  201              69
+#>  2 Bronx Community District 10 210              32
+#>  3 Bronx Community District 11 211              41
+#>  4 Bronx Community District 12 212              36
+#>  5 Bronx Community District 2  202              29
+#>  6 Bronx Community District 3  203              72
+#>  7 Bronx Community District 4  204              67
+#>  8 Bronx Community District 5  205              43
+#>  9 Bronx Community District 6  206              55
+#> 10 Bronx Community District 7  207              34
 #> # ... with 50 more rows
 ```

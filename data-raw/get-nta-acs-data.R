@@ -20,15 +20,17 @@ vars_to_select <- map(
 
 nta <- tract_sf_simple %>%
   st_set_geometry(NULL) %>%
-  left_join(tracts_acs_data, by = "geoid") %>%
-  select(-contains("pct")) %>%
+  left_join(tract_acs_data, by = "geoid") %>%
+  select(-contains("pct"), -contains("med")) %>%
+  filter(!str_detect(nta_name, "park-cemetery-etc-")) %>%
   gather(var, value, contains("pop")) %>%
   mutate(
     type = if_else(str_sub(var, -3) == "moe", "margin", "estimate"),
-    var = if_else(type == "margin", str_sub(var, 1, -5), var)
+    var = str_sub(var, 1, -5)
     ) %>%
   spread(type, value)
 
+count(nta, var)
 
 nta_calc <- nta %>%
   group_by(nta_id, var) %>%

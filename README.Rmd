@@ -52,7 +52,7 @@ library(sf)
 library(tidyverse)
 ```
 
-The most basic usage of `nycgeo` is to get boundaries in the `sf` format. Use `nyc_boundaires()` to get your desired geography. To make best use of the package, you should also load the `sf` package when using `nycgeo`. For these examples, I'll also load `tidyverse` as this will allow us to take advantage of pretty `tibble` printing and will come in handy when we want to manipulate and map the spatial data later.
+The most basic usage of `nycgeo` is to get boundaries in the `sf` format. Use `nyc_boundaries()` to get your desired geography. To make best use of the package, you should also load the `sf` package when using `nycgeo`. For these examples, I'll also load `tidyverse` as this will allow us to take advantage of pretty `tibble` printing and will come in handy when we want to manipulate and map the spatial data later.
 
 ```{r basic-usage}
 library(nycgeo)
@@ -85,7 +85,7 @@ Note, you can select multiple regions by passing a character vector to the `regi
 `nycgeo` includes selected estimates from the American Community Survey as datasets. You can access these datasets directly or have them appended to the spatial data. To print a `tibble` of ACS data, simply call the data you want.
 
 ```{r print-acs-data}
-ntas_acs_data
+nta_acs_data
 ```
 
 To add census estimates to an `sf` object, use `add_acs_data = TRUE` to an `nyc_boundaries()`call. For example, here we get all NTAs in Manhattan with ACS data appended. One convenience of having the ACS data joined to the `sf` object is that you can very simply make a choropleth map. Here we do it with `ggplot2`, but you could use `tmap`, `leaflet` or any other spatial package that works with `sf` objects.
@@ -147,5 +147,6 @@ schools_sf <- nyc_schools %>%
     )
 
 nyc_point_poly(schools_sf, "cd") %>% 
-  count(cd_name, boro_cd_id)
+  st_set_geometry(NULL) %>% 
+  count(cd_name, borough_cd_id)
 ```
