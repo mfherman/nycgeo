@@ -17,7 +17,7 @@ addons:
       - libproj-dev
 
 after_success:
-  - R CMD INSTALL
+  - R CMD INSTALL .
   - Rscript -e 'pkgdown::build_site()'
 
 deploy:
