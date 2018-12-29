@@ -1,7 +1,7 @@
 Type: Package
 Package: nycgeo
 Title: Spatial Data Files for NYC
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: 
     person(given = "Matt",
            family = "Herman",
