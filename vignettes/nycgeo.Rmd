@@ -10,12 +10,12 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  out.width = "100%"
 )
 ```
 
-
-### Basic Usage
+## Basic Usage
 
 ```{r load-packages, include = FALSE, echo = FALSE}
 library(nycgeo)
@@ -33,7 +33,7 @@ library(tidyverse)
 nyc_boundaries(geography = "tract")
 ```
 
-### Filter by geography
+## Filter by geography
 
 If you don't need census tracts for the entire city, you can use the `filter_by` and `region` arguments of `nyc_boundaries()` to specify the area you are interested in. For example, the following code returns only census tracts in Brooklyn and Queens.
 
@@ -51,7 +51,7 @@ ggplot(bk_qn_tracts) +
 
 Note, you can select multiple regions by passing a character vector to the `region` argument, but you can only choose a single geography to `filter_by`. Additionally, you can only filter by a geography that is *larger than or equal to* the boundaries you request. For example, it is not possible to filter PUMAs by NTAs because NTAs are smaller than PUMAs.
 
-### Adding American Community Survey Data
+## Adding American Community Survey Data
 
 `nycgeo` includes selected estimates from the American Community Survey as datasets. You can access these datasets directly or have them appended to the spatial data. To print a `tibble` of ACS data, simply call the data you want.
 
@@ -81,7 +81,7 @@ ggplot(mn_ntas) +
   labs(title = "Which neighborhoods in Manhattan are most educated?")
 ```
 
-### Joining with other data
+## Joining with other data
 
 One use case of `nycgeo()` is if you have non-spatial data that relates to census tracts, NTAs, or other geographies and need to join that data with spatial boundaries to plot or otherwise analyze. This non-spatial data may be coded in a variety of ways and might not have names or IDs that match your spatial data. The `sf` data provided in `nycgeo` seeks to have a variety of geographic metadata that will match whatever labels your non-spatial data has. 
 
@@ -101,7 +101,7 @@ nyc_boundaries(geography = "nta") %>%
   labs(title = "Which neighborhoods have high levels of black carbon pollution?")
 ```
 
-### Finding which districts a set of points lies within
+## Finding which districts a set of points lies within
 
 [Point-in-polygon operations](https://en.wikipedia.org/wiki/Point_in_polygon) are common tasks for spatial analysis. Given a set of points we want to find out which polygon contains each point. A real-world application of this would be counting the number of schools in each community district.
 

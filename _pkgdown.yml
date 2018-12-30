@@ -1,9 +1,39 @@
-title: nycgeo
 url: https://nycgeo.mattherman.info
 
 template:
   params:
     bootswatch: cosmo
+
+authors:
+  Matt Herman:
+    href: https://mattherman.info
+
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    intro:
+      text: Get started
+      href: articles/nycgeo.html
+    news:
+      text: News
+      href: news/index.html
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/mfherman/nycgeo
 
 reference:
 - title: Primary functions
