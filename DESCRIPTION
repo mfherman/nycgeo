@@ -22,6 +22,7 @@ Suggests:
     dplyr,
     ggplot2,
     pkgdown,
+    readr,
     scales,
     sf,
     spelling,
