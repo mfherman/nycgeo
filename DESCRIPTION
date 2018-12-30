@@ -19,11 +19,7 @@ License: MIT + file LICENSE
 Depends:
     R (>= 2.10)
 Suggests:
-    dplyr,
-    ggplot2,
     pkgdown,
-    readr,
-    scales,
     sf,
     spelling,
     tibble
