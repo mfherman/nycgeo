@@ -1,2 +1,30 @@
 title: nycgeo
 url: https://mfherman.github.io/nycgeo/
+
+reference:
+- title: Primary functions
+  contents:
+  - nyc_boundaries
+  - nyc_point_poly
+
+- title: Geographic boundaries
+  contents:
+  - borough_sf
+  - borough_sf_simple
+  - puma_sf
+  - puma_sf_simple
+  - cd_sf
+  - cd_sf_simple
+  - nta_sf
+  - nta_sf_simple
+  - tract_sf
+  - tract_sf_simple
+  - block_sf
+
+- title: Census data
+  contents:
+  - borough_acs_data
+  - puma_acs_data
+  - nta_acs_data
+  - tract_acs_data
+  - block_census_data
