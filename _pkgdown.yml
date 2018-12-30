@@ -1,6 +1,10 @@
 title: nycgeo
 url: https://nycgeo.mattherman.info
 
+template:
+  params:
+    bootswatch: cosmo
+
 reference:
 - title: Primary functions
   contents:
