@@ -52,7 +52,7 @@ filter_by_region <- function(shp, filter_by = NULL, region = NULL) {
   } else if (filter_by == "puma") {
     filter <- as.character(shp$puma_id) %in% region
   } else {
-    filter <- as.character(shp$boro_cd_id) %in% region
+    filter <- as.character(shp$borough_cd_id) %in% region
   }
 
   if (sum(filter, na.rm = TRUE) < 1) {
