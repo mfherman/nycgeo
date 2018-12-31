@@ -12,8 +12,8 @@
 \item{state_fips}{ANSI state FIPS code}
 \item{county_fips}{ANSI county FIPS code}
 \item{county_name}{County name}
-\item{boro_name}{Borough name}
-\item{boro_id}{NYC DCP borough code and census tract number}
+\item{borough_name}{Borough name}
+\item{borough_id}{NYC DCP borough code and census tract number}
 \item{puma_id}{Census Bureau public use microdata area id}
 \item{puma_name}{Census Bureau public use microdata area name}
 \item{geometry}{sfc_MULTIPOLYGON \cr

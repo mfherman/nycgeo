@@ -7,14 +7,14 @@
 \title{NYC community district boundaries}
 \format{An sf object with 71 rows and 9 variables:
 \describe{
-\item{boro_cd_id}{NYC borough and community district id; unique ids}
+\item{borough_cd_id}{NYC borough and community district id; unique ids}
 \item{cd_id}{NYC community district id; ids repeat across boroughs}
 \item{cd_name}{NYC community district names}
 \item{state_fips}{ANSI state FIPS code}
 \item{county_fips}{ANSI county FIPS code}
 \item{county_name}{County name}
-\item{boro_name}{Borough name}
-\item{boro_id}{NYC DCP borough code and census tract number}
+\item{borough_name}{Borough name}
+\item{borough_id}{NYC DCP borough code and census tract number}
 \item{geometry}{sfc_MULTIPOLYGON \cr
 NAD83 / New York Long Island (ftUS); EPSG:2263}
 }}

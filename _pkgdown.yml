@@ -29,7 +29,7 @@ navbar:
       text: Get started
       href: articles/nycgeo.html
     news:
-      text: News
+      text: Changelog
       href: news/index.html
     github:
       icon: fa-github fa-lg

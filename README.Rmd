@@ -10,7 +10,9 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  dpi = 150
+  dpi = 150,
+  cache = TRUE,
+  cache.path = "cache/readme/"
   )
 ```
 # nycgeo
@@ -33,7 +35,6 @@ One difference between the boundaries included here and the TIGER/Line® Shapefi
 
 Finally, all spatial data included in the package uses the [NAD83 / New York Long Island (ftUS) State Plane projected coordinate system (EPSG 2263)](https://epsg.io/2263), which is the standard projection used by New York City government agencies.
 
-
 ## Installation
 
 You can install `nycgeo` from [GitHub](https://https://github.com/mfherman/nycgeo) with:
@@ -41,6 +42,19 @@ You can install `nycgeo` from [GitHub](https://https://github.com/mfherman/nycge
 ``` r
 # install.packages("remotes")
 remotes::install_github("mfherman/nycgeo")
+```
+
+To get the most out of `nycgeo`, you should also install and load the [`sf package`](https://r-spatial.github.io/sf/) when you use `nycgeo`. If you haven't attached `sf`, you will get this friendly reminder when you load `nycgeo`:
+
+```{r example-load-nycgeo}
+library(nycgeo)
+```
+
+Depending on your operating system and available libraries, `sf` can be tricky to install the first time. The [`sf` website](https://r-spatial.github.io/sf/index.html#installing) is a good place to start if you're having trouble. If you're using macOS, [this is a good guide](https://medium.com/@jinwujour/mapping-with-r-on-mac-installation-8c8ef997c6c2) to installing the required libraries.
+
+``` r
+# install.packages("sf")
+library(sf)
 ```
 
 ## Examples

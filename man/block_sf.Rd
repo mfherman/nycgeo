@@ -8,14 +8,14 @@
 \describe{
 \item{geoid}{Census Bureau GEOID; can be used to join spatial data with
 Census estimates}
-\item{boro_tract_block_id}{NYC DCP borough code and census tract number}
+\item{borough_tract_block_id}{NYC DCP borough code and census tract number}
 \item{state_fips}{ANSI state FIPS code}
 \item{county_fips}{ANSI county FIPS code}
 \item{block_id}{Census Bureau block number}
 \item{tract_id}{Census Bureau tract number}
 \item{county_name}{County name}
-\item{boro_name}{Borough name}
-\item{boro_id}{NYC DCP borough code and census tract number}
+\item{borough_name}{Borough name}
+\item{borough_id}{NYC DCP borough code and census tract number}
 \item{nta_id}{NYC neighborhood tabulation area id}
 \item{nta_name}{NYC neighborhood tabulation area name}
 \item{puma_id}{Census Bureau public use microdata area id}

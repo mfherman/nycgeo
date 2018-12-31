@@ -23,6 +23,7 @@ block_census_data
 \description{
 A dataset containing U.S. Census Bureau Decennial Census population and race
 counts for all census blocks in New York City. Counts are from the 2010
-Decennial Census.
+Decennial Census. Margins of error are not included because this data
+represents an enumeration of the entire population, rather than a sample.
 }
 \keyword{datasets}

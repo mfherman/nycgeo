@@ -6,3 +6,5 @@
 ^LICENSE\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^cache$
+^index.Rmd

@@ -22,7 +22,8 @@ nta <- tract_sf_simple %>%
   st_set_geometry(NULL) %>%
   left_join(tract_acs_data, by = "geoid") %>%
   select(-contains("pct"), -contains("med")) %>%
-  filter(!str_detect(nta_name, "park-cemetery-etc-")) %>%
+  filter(!str_detect(nta_name, "park-cemetery-etc")) %>%
+  filter(!str_detect(nta_name, "Airport")) %>%
   gather(var, value, contains("pop")) %>%
   mutate(
     type = if_else(str_sub(var, -3) == "moe", "margin", "estimate"),

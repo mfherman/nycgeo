@@ -14,7 +14,7 @@
 #'   and and codes appended.
 #'
 #' @details Using `nyc_point_poly()` requires installing the [`sf`
-#'   package]("https://r-spatial.github.io/sf/").
+#'   package](https://r-spatial.github.io/sf/).
 #'
 #' @examples
 #' if (require(sf)) {

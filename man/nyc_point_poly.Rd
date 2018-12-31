@@ -24,7 +24,7 @@ Point-in-polygon operation for NYC administrative boundaries. Use
 district each point lies within.
 }
 \details{
-Using \code{nyc_point_poly()} requires installing the \href{"https://r-spatial.github.io/sf/"}{sf package}.
+Using \code{nyc_point_poly()} requires installing the \href{https://r-spatial.github.io/sf/}{sf package}.
 }
 \examples{
 if (require(sf)) {

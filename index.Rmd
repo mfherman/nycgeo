@@ -27,9 +27,22 @@ Additionally, selected demographic, social, and economic estimates from the U.S.
 
 You can install `nycgeo` from [GitHub](https://https://github.com/mfherman/nycgeo) with:
 
-```r
+``` r
 # install.packages("remotes")
 remotes::install_github("mfherman/nycgeo")
+```
+
+To get the most out of `nycgeo`, you should also install and load the [`sf package`](https://r-spatial.github.io/sf/) when you use `nycgeo`. If you haven't attached `sf`, you will get this friendly reminder when you load `nycgeo`:
+
+```{r example-load-nycgeo}
+library(nycgeo)
+```
+
+Depending on your operating system and available libraries, `sf` can be tricky to install the first time. The [`sf` website](https://r-spatial.github.io/sf/index.html#installing) is a good place to start if you're having trouble. If you're using macOS, [this is a good guide](https://medium.com/@jinwujour/mapping-with-r-on-mac-installation-8c8ef997c6c2) to installing the required libraries.
+
+``` r
+# install.packages("sf")
+library(sf)
 ```
 ## Using `nycgeo`
 

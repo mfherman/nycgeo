@@ -4,27 +4,44 @@
 \name{nta_acs_data}
 \alias{nta_acs_data}
 \title{Neighborhood tabulation area-level American Community Survey estimates}
-\format{A tibble with 195 rows and 27 variables:
+\format{A tibble with 189 rows and 27 variables:
 \describe{
-\item{nta_id}{NYC neighborhood tabulation area id}
-\item{pop_total_est}{Total population; B01001_001}
-\item{pop_white_est, pop_white_moe, pop_white_pct_est,
-pop_white_pct_moe}{Non-hispanic white population; B03002_003}
-\item{pop_black_est, pop_black_moe, pop_black_pct_est,
-pop_black_pct_moe}{Non-hispanic black population; B03002_004}
-\item{pop_asian_est, pop_asian_moe, pop_asian_pct_est,
-pop_asian_pct_moe}{Non-hispanic asian population; B03002_006}
-\item{pop_hisp_est, pop_hisp_moe, pop_hisp_pct_est,
-pop_hisp_pct_moe}{Hispanic, any race population; B03002_012}
-\item{pop_ba_above_est, pop_ba_above_moe, pop_ba_above_pct_est,
-pop_ba_above_pct_moe}{Population 25 years or older with at least a
-Bachelor's degree; B15003_022, B15003_023, B15003_024, B15003_025}
-\item{pop_educ_denom_est, pop_educ_denom_moe}{Population 25 years or older;
+\item{geoid}{Census Bureau GEOID}
+\item{pop_total_est}{Total population estimate; B01001_001}
+\item{pop_white_est, pop_white_pct_est}{Non-hispanic white population
+estimate; B03002_003}
+\item{pop_white_moe, pop_white_pct_moe}{Non-hispanic white population
+margin of error; B03002_003}
+\item{pop_black_est, pop_black_pct_est}{Non-hispanic black population
+estimate; B03002_004}
+\item{pop_black_moe, pop_black_pct_moe}{Non-hispanic black population
+margin of error; B03002_004}
+\item{pop_asian_est, pop_asian_pct_est}{Non-hispanic asian population
+estimate; B03002_006}
+\item{pop_asian_moe, pop_asian_pct_moe}{Non-hispanic asian population
+margin of error; B03002_006}
+\item{pop_hisp_est, pop_hisp_pct_est}{Hispanic, any race population
+estimate; B03002_012}
+\item{pop_hisp_moe, pop_hisp_pct_moe}{Hispanic, any race population margin
+of error; B03002_012}
+\item{pop_ba_above_est, pop_ba_above_pct_est}{Population 25 years or older
+with at least a Bachelor's degree estimate; B15003_022, B15003_023,
+B15003_024, B15003_025}
+\item{pop_ba_above_moe, pop_ba_above_pct_moe}{Population 25 years or older
+with at least a Bachelor's degree margin of error; B15003_022, B15003_023,
+B15003_024, B15003_025}
+\item{pop_educ_denom_est}{Population 25 years or older estimate;
 Denominator used to calculate Bachelor's and above percentage; B15003_001}
-\item{pop_inpov_est, pop_inpov_moe, pop_inpov_pct_est,
-pop_inpov_pct_moe}{Population with income below poverty line; B17021002}
-\item{pop_inpov_denom_est, pop_inpov_denom_moe}{Population for whom poverty
-status is determined; Denominator used to calculate in poverty percentage;
+\item{pop_educ_denom_moe}{Population 25 years or older margin of error;
+Denominator used to calculate Bachelor's and above percentage; B15003_001}
+\item{pop_inpov_est, pop_inpov_pct_est}{Population with income below
+poverty line estimate; B17021_002}
+\item{pop_inpov_moe, pop_inpov_pct_moe}{Population with income below
+poverty line margin of error; B17021_002}
+\item{pop_inpov_denom_est}{Population for whom poverty status is determined
+estimate; Denominator used to calculate in poverty percentage; B17021_001}
+\item{pop_inpov_denom_moe}{Population for whom poverty status is determined
+margin of error; Denominator used to calculate in poverty percentage;
 B17021_001}
 }}
 \source{
@@ -38,7 +55,8 @@ A dataset containing U.S. Census Bureau American Community Survey (ACS)
 estimates and margins of error of selected demographic, social, and economic
 variables for all neighborhood tabulation areas (NTAs) in New York City.
 Variables are five-year tract-level estimates from the 2013-2017 ACS
-aggregated to NTAs.
+aggregated to NTAs. Six of the 195 NTAs cover parks, cemeteries, and airports
+and do not have any population. They are not included in this dataset.
 }
 \details{
 NTAs were created by the NYC Department of City Planning to project

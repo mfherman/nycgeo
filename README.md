@@ -66,6 +66,29 @@ You can install `nycgeo` from
 remotes::install_github("mfherman/nycgeo")
 ```
 
+To get the most out of `nycgeo`, you should also install and load the
+[`sf package`](https://r-spatial.github.io/sf/) when you use `nycgeo`.
+If you haven’t attached `sf`, you will get this friendly reminder when
+you load `nycgeo`:
+
+``` r
+library(nycgeo)
+#> To work with the spatial data included in this package, you should also load the {sf} package with library(sf).
+```
+
+Depending on your operating system and available libraries, `sf` can be
+tricky to install the first time. The [`sf`
+website](https://r-spatial.github.io/sf/index.html#installing) is a good
+place to start if you’re having trouble. If you’re using macOS, [this is
+a good
+guide](https://medium.com/@jinwujour/mapping-with-r-on-mac-installation-8c8ef997c6c2)
+to installing the required libraries.
+
+``` r
+# install.packages("sf")
+library(sf)
+```
+
 ## Examples
 
 ### Basic Usage

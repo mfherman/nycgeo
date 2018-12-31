@@ -11,10 +11,11 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  out.width = "100%"
+  out.width = "100%",
+  cache = TRUE,
+  cache.path = "../cache/nycgeo/"
 )
 ```
-
 ## Basic Usage
 
 ```{r load-packages, include = FALSE, echo = FALSE}
@@ -121,3 +122,15 @@ nyc_point_poly(schools_sf, "cd") %>%
   st_set_geometry(NULL) %>% 
   count(cd_name, borough_cd_id)
 ```
+
+
+## Available datasets
+
+|Geography  |Definition       |Spatial data         |Census data               |Filter by|
+|-----------|-----------------|---------------------|--------------------------|---------|
+|`"borough"`|borough (county) |`nycgeo::borough_sf` |`nycgeo::borough_acs_data`|`"borough"`|
+|`"puma"`   |public use microdata area|`nycgeo::puma_sf`|`nycgeo::puma_acs_data`|`"borough"`,`"puma"`|
+|`"cd"`     |community district|`nycgeo::cd_sf`     |not currently available   |`"borough"`, `"cd"`|
+|`"nta"`    |neighborhood tabulation area|`nycgeo::nta_sf`|`nycgeo::nta_acs_data`|`"borough"`,`"puma"`, `"nta"`|
+|`"tract"`  |census tract     |`nycgeo::tract_sf`   |`nycgeo::tract_acs_data`  |`"borough"`,`"puma"`, `"nta"`|
+|`"block"`  |census block     |`nycgeo::block_sf`   |`nycgeo::block_census_data`|`"borough"`,`"puma"`, `"nta"`|
