@@ -19,20 +19,21 @@ License: MIT + file LICENSE
 Depends:
     R (>= 2.10)
 Suggests:
+    dplyr,
+    knitr,
     pkgdown,
+    rmarkdown,
     scales,
     sf,
     spelling,
+    testthat,
     tibble,
     tidyverse,
-    knitr,
-    rmarkdown,
-    testthat
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/mfherman/nycgeo
+URL: https://nycgeo.mattherman.info
 BugReports: https://github.com/mfherman/nycgeo/issues
 Language: en-US
 VignetteBuilder: knitr
