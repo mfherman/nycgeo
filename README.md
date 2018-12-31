@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# nycgeo
+# nycgeo <img src="man/figures/logo.png" align="right" alt="" width="140" />
 
 [![Travis build
 status](https://travis-ci.org/mfherman/nycgeo.svg?branch=master)](https://travis-ci.org/mfherman/nycgeo)
@@ -167,7 +167,7 @@ call the data you want.
 
 ``` r
 nta_acs_data
-#> # A tibble: 190 x 27
+#> # A tibble: 189 x 27
 #>    nta_id pop_total_est pop_total_moe pop_white_est pop_white_moe
 #>    <chr>          <dbl>         <dbl>         <dbl>         <dbl>
 #>  1 BK09           24212          891.         17734          859.
@@ -180,7 +180,7 @@ nta_acs_data
 #>  8 BK27           32808         1293.         14483          863.
 #>  9 BK28           93114         2087.         38709         1559.
 #> 10 BK29           66055         1757.         29318         1293.
-#> # ... with 180 more rows, and 22 more variables: pop_white_pct_est <dbl>,
+#> # ... with 179 more rows, and 22 more variables: pop_white_pct_est <dbl>,
 #> #   pop_white_pct_moe <dbl>, pop_black_est <dbl>, pop_black_moe <dbl>,
 #> #   pop_black_pct_est <dbl>, pop_black_pct_moe <dbl>, pop_hisp_est <dbl>,
 #> #   pop_hisp_moe <dbl>, pop_hisp_pct_est <dbl>, pop_hisp_pct_moe <dbl>,
@@ -195,8 +195,10 @@ To add census estimates to an `sf` object, use `add_acs_data = TRUE` to
 an `nyc_boundaries()`call. For example, here we get all NTAs in
 Manhattan with ACS data appended. One convenience of having the ACS data
 joined to the `sf` object is that you can very simply make a choropleth
-map. Here we do it with `ggplot2`, but you could use `tmap`, `leaflet`
-or any other spatial package that works with `sf` objects.
+map. Here we do it with `ggplot2`, but you could use
+[`tmap`](https://github.com/mtennekes/tmap),
+[`leaflet`](https://rstudio.github.io/leaflet/) or any other spatial
+package that works with `sf` objects.
 
 ``` r
 mn_ntas <- nyc_boundaries(

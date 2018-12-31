@@ -26,7 +26,8 @@ Suggests:
     tibble,
     tidyverse,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1

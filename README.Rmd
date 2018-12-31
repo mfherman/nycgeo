@@ -15,12 +15,12 @@ knitr::opts_chunk$set(
   cache.path = "cache/readme/"
   )
 ```
-# nycgeo
+# nycgeo <img src="man/figures/logo.png" align="right" alt="" width="140" />
 
 [![Travis build status](https://travis-ci.org/mfherman/nycgeo.svg?branch=master)](https://travis-ci.org/mfherman/nycgeo)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/nycgeo)](https://cran.r-project.org/package=nycgeo)
-  
+
 The `nycgeo` package contains spatial data files for various geographic and administrative boundaries in New York City as well as tools for working with NYC spatial data. Data is in the [`sf` (simple features)](https://r-spatial.github.io/sf/) format and includes boundaries for boroughs (counties), public use microdata areas (PUMAs), community districts (CDs), neighborhood tabulation areas (NTAs), census tracts, and census blocks. In the future, more boundaries will be added, such as city council districts, school districts, and police precincts.
 
 Additionally, selected demographic, social, and economic estimates from the U.S. Census Bureau American Community Survey can be added to the geographic boundaries in `nycgeo`, allowing for contextualization and easy choropleth mapping. Finally, `nycgeo` makes it simple to access a subset of spatial data in a particular geographic area, such as all census tracts in Brooklyn and Queens.
@@ -103,7 +103,7 @@ Note, you can select multiple regions by passing a character vector to the `regi
 nta_acs_data
 ```
 
-To add census estimates to an `sf` object, use `add_acs_data = TRUE` to an `nyc_boundaries()`call. For example, here we get all NTAs in Manhattan with ACS data appended. One convenience of having the ACS data joined to the `sf` object is that you can very simply make a choropleth map. Here we do it with `ggplot2`, but you could use `tmap`, `leaflet` or any other spatial package that works with `sf` objects.
+To add census estimates to an `sf` object, use `add_acs_data = TRUE` to an `nyc_boundaries()`call. For example, here we get all NTAs in Manhattan with ACS data appended. One convenience of having the ACS data joined to the `sf` object is that you can very simply make a choropleth map. Here we do it with `ggplot2`, but you could use [`tmap`](https://github.com/mtennekes/tmap), [`leaflet`](https://rstudio.github.io/leaflet/) or any other spatial package that works with `sf` objects.
 
 ```{r add-acs-data}
 mn_ntas <- nyc_boundaries(
@@ -165,3 +165,4 @@ nyc_point_poly(schools_sf, "cd") %>%
   st_set_geometry(NULL) %>% 
   count(cd_name, borough_cd_id)
 ```
+

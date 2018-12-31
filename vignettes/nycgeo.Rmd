@@ -60,7 +60,7 @@ Note, you can select multiple regions by passing a character vector to the `regi
 nta_acs_data
 ```
 
-To add census estimates to an `sf` object, use `add_acs_data = TRUE` to an `nyc_boundaries()`call. For example, here we get all NTAs in Manhattan with ACS data appended. One convenience of having the ACS data joined to the `sf` object is that you can very simply make a choropleth map. Here we do it with `ggplot2`, but you could use `tmap`, `leaflet` or any other spatial package that works with `sf` objects.
+To add census estimates to an `sf` object, use `add_acs_data = TRUE` to an `nyc_boundaries()`call. For example, here we get all NTAs in Manhattan with ACS data appended. One convenience of having the ACS data joined to the `sf` object is that you can very simply make a choropleth map. Here we do it with `ggplot2`, but you could use [`tmap`](https://github.com/mtennekes/tmap), [`leaflet`](https://rstudio.github.io/leaflet/) or any other spatial package that works with `sf` objects.
 
 ```{r add-acs-data}
 mn_ntas <- nyc_boundaries(

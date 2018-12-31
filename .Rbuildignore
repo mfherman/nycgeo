@@ -8,3 +8,4 @@
 ^\.Rproj\.user$
 ^cache$
 ^index.Rmd
+^pkgdown
