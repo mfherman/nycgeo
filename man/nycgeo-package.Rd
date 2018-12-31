@@ -19,6 +19,7 @@ Spatial data files for various geographic and administrative
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://nycgeo.mattherman.info}
   \item \url{https://github.com/mfherman/nycgeo}
   \item Report bugs at \url{https://github.com/mfherman/nycgeo/issues}
 }

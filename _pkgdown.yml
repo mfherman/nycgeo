@@ -3,6 +3,7 @@ url: https://nycgeo.mattherman.info
 template:
   params:
     bootswatch: cosmo
+    ganalytics: UA-112317483-2
 
 authors:
   Matt Herman:
