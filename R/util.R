@@ -39,7 +39,8 @@ filter_by_region <- function(shp, filter_by = NULL, region = NULL) {
 
   region <- tolower(as.character(region))
 
-  if (!(filter_by %in% c("borough", "nta", "puma", "cd"))) {
+  if (!(filter_by %in% c("borough", "nta", "puma", "cd",
+                         "school", "police", "cong", "council"))) {
     stop("Please choose a valid geography to filter by")
   }
 
@@ -50,9 +51,18 @@ filter_by_region <- function(shp, filter_by = NULL, region = NULL) {
     filter <- (tolower(shp$nta_id) %in% region) |
       (tolower(shp$nta_name) %in% region)
   } else if (filter_by == "puma") {
-    filter <- as.character(shp$puma_id) %in% region
-  } else {
-    filter <- as.character(shp$borough_cd_id) %in% region
+    filter <- shp$puma_id %in% region
+  } else if (filter_by == "cd") {
+    filter <- shp$borough_cd_id %in% region
+  } else if (filter_by == "school") {
+    filter <- shp$school_dist_id %in% region
+  } else if (filter_by == "council") {
+    filter <- shp$council_dist_id %in% region
+  } else if (filter_by == "police") {
+    filter <- (shp$police_precinct_id %in% region) |
+      (tolower(shp$police_precinct_name) %in% region)
+  } else if (filter_by == "cong") {
+    filter <- shp$cong_dist_id %in% region
   }
 
   if (sum(filter, na.rm = TRUE) < 1) {
@@ -61,3 +71,23 @@ filter_by_region <- function(shp, filter_by = NULL, region = NULL) {
 
   shp[filter, ]
 }
+
+
+
+# get boundary, join with points
+get_pts_boundary <- function(points, geo) {
+  poly <- nyc_boundaries(geography = geo, resolution = "high")
+  sf_to_sf_tibble(sf::st_join(points, poly, join = sf::st_within))
+}
+
+# subset sf object to needed geo_vars, move geometry to last col
+reorder_pts_poly_vars <- function(pts_poly, points, geo_vars) {
+  pts_poly[, c(names(points)[names(points) != "geometry"], geo_vars, "geometry")]
+}
+
+# bind 2 objects and convert to sf - works if one or both are sf objects to begin
+bind_sfr <- function(x, y) {
+  sf_to_sf_tibble(sf::st_sf(data.frame(x, y), stringsAsFactors = FALSE))
+}
+
+

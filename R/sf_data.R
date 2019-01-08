@@ -171,3 +171,85 @@
 
 #' @rdname cd_sf
 "cd_sf_simple"
+
+#' NYC school district boundaries
+#'
+#' A simple features (sf) dataset containing the geometry of all community
+#' school districts in New York City.
+#'
+#' @format An sf object with 32 rows and 4 variables:
+#' \describe{
+#'   \item{school_dist_id}{NYC school district id}
+#'   \item{school_dist_name}{NYC school district name}
+#'   \item{state_fips}{ANSI state FIPS code}
+#'   \item{geometry}{sfc_MULTIPOLYGON \cr
+#'   NAD83 / New York Long Island (ftUS); EPSG:2263}
+#' }
+#'
+#' @source <https://www1.nyc.gov/site/planning/data-maps/open-data.page#other>
+"school_sf"
+
+#' @rdname school_sf
+"school_sf_simple"
+
+#' NYC police precinct boundaries
+#'
+#' A simple features (sf) dataset containing the geometry of all police
+#' precincts in New York City.
+#'
+#' @format An sf object with 77 rows and 4 variables:
+#' \describe{
+#'   \item{police_precinct_id}{NYC police precinct id}
+#'   \item{police_precinct_name}{NYC police precinct name}
+#'   \item{state_fips}{ANSI state FIPS code}
+#'   \item{geometry}{sfc_MULTIPOLYGON \cr
+#'   NAD83 / New York Long Island (ftUS); EPSG:2263}
+#' }
+#'
+#' @source <https://www1.nyc.gov/site/planning/data-maps/open-data.page#other>
+"police_sf"
+
+#' @rdname police_sf
+"police_sf_simple"
+
+#' NYC city council district boundaries
+#'
+#' A simple features (sf) dataset containing the geometry of all city council
+#' districts in New York City.
+#'
+#' @format An sf object with 51 rows and 4 variables:
+#' \describe{
+#'   \item{council_dist_id}{NYC city council district id}
+#'   \item{council_dist_name}{NYC city council district name}
+#'   \item{state_fips}{ANSI state FIPS code}
+#'   \item{geometry}{sfc_MULTIPOLYGON \cr
+#'   NAD83 / New York Long Island (ftUS); EPSG:2263}
+#' }
+#'
+#' @source <https://www1.nyc.gov/site/planning/data-maps/open-data.page#other>
+"council_sf"
+
+#' @rdname council_sf
+"council_sf_simple"
+
+#' U.S Congressional district boundaries in NYC
+#'
+#' A simple features (sf) dataset containing the geometry of all U.S.
+#' Congressional districts in New York City.
+#'
+#' @format An sf object with 13 rows and 5 variables:
+#' \describe{
+#'   \item{geoid}{Census Bureau GEOID; can be used to join spatial data with
+#'   Census estimates}
+#'   \item{council_dist_id}{NYC city council district id}
+#'   \item{council_dist_name}{NYC city council district name}
+#'   \item{state_fips}{ANSI state FIPS code}
+#'   \item{geometry}{sfc_MULTIPOLYGON \cr
+#'   NAD83 / New York Long Island (ftUS); EPSG:2263}
+#' }
+#'
+#' @source <https://www1.nyc.gov/site/planning/data-maps/open-data.page#other>
+"cong_sf"
+
+#' @rdname cong_sf
+"cong_sf_simple"

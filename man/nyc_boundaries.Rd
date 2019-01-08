@@ -5,8 +5,8 @@
 \title{Get NYC administrative boundaries and census data}
 \usage{
 nyc_boundaries(geography = c("borough", "puma", "nta", "cd", "tract",
-  "block"), filter_by = NULL, region = NULL, add_acs_data = FALSE,
-  resolution = c("low", "high"))
+  "block", "school", "police", "council", "cong"), filter_by = NULL,
+  region = NULL, add_acs_data = FALSE, resolution = c("low", "high"))
 }
 \arguments{
 \item{geography}{The requested administrative boundaries. Possible values are

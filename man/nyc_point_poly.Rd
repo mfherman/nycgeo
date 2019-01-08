@@ -4,15 +4,16 @@
 \alias{nyc_point_poly}
 \title{Find which administrative districts a set of points are within}
 \usage{
-nyc_point_poly(points, geography)
+nyc_point_poly(points, geography = c("borough", "puma", "nta", "cd",
+  "tract", "block", "school", "police", "council", "cong"))
 }
 \arguments{
 \item{points}{An \code{sf} object containing only point features.}
 
 \item{geography}{A character vector of administrative boundaries to append to
-points. Possible values are "borough", "puma", "cd" "nta", "tract", and
-"block". If more than one geography is selected, names and codes for each
-geography is appended.}
+points. Possible values are "borough", "puma", "cd", "nta", "school",
+"council", "police", "cong", "tract" and "block". If more than one
+geography is selected, names and codes for each geography is appended.}
 }
 \value{
 An \code{sf} object of point features with administrative district names
@@ -32,7 +33,7 @@ if (require(sf)) {
   # generate 100 random points in nyc
   points <- st_sf(geometry = st_sample(nyc_boundaries(), 100))
 
-  nyc_point_poly(points = points, geography = c("borough", "nta", "block"))
+  nyc_point_poly(points = points, geography = c("borough", "nta", "cd"))
 }
 
 }

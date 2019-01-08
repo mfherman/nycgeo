@@ -33,6 +33,10 @@ puma_name_lookup <- read_csv("data-raw/puma-names.csv", col_types = "cc") %>%
     )
   )
 
+school_boro_lookup <- read_csv("data-raw/school-boro.csv", col_types = "cc")
+police_boro_lookup <- read_csv("data-raw/police-boro.csv", col_types = "cc")
+block_cong_crosswalk <- read_csv("data-raw/block-cong.csv", col_types = "cc")
+
 # import geo files --------------------------------------------------------
 
 # https://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page
@@ -47,7 +51,11 @@ geos <- list(
   borough = "nybb",
   puma = "nypuma",
   block = "nycb2010",
-  cd = "nycd"
+  cd = "nycd",
+  school = "nysd",
+  police = "nypp",
+  council = "nycc",
+  cong = "nycg"
   )
 
 # build list of urls
@@ -55,20 +63,24 @@ urls <- map(geos, ~ paste0(base_url, .x, tail_url))
 
 # download geojson and covert to sf
 nyc_sf <- map(urls, read_sf) %>%
-  map(~ mutate_at(.x, vars(-geometry), as.character)) %>%
-  modify_at("puma",
-            ~ left_join(.x, puma_name_lookup, by = c("PUMA" = "puma_id"))
-            ) %>%
+  map(~ mutate_at(.x, vars(-geometry), as.character))
+
+nyc_sf_processed <- nyc_sf %>%
+  modify_at("puma", ~ left_join(.x, puma_name_lookup,
+                                by = c("PUMA" = "puma_id"))) %>%
   modify_at("cd",
             ~ mutate(.x, BoroCode = str_sub(BoroCD, end = 1L))) %>%
-  map(~ left_join(.x, boro_id_lookup, by = c("BoroCode" = "borough_id"))) %>%
+  modify_at("school", ~ left_join(.x, school_boro_lookup)) %>%
+  modify_at("police", ~ left_join(.x, police_boro_lookup)) %>%
+  modify_at(.at = 1:8, ~ left_join(.x, boro_id_lookup,
+                                by = c("BoroCode" = "borough_id"))) %>%
   map(~ mutate(.x, state_fips = "36")) %>%
   map(st_transform, 2263)
 
 
 # process tracts ----------------------------------------------------------
 
-tract_sf <- nyc_sf %>%
+tract_sf <- nyc_sf_processed %>%
   pluck("tract") %>%
   mutate(geoid = paste0(state_fips, county_fips, CT2010)) %>%
   select(
@@ -101,10 +113,9 @@ nta_puma_crosswalk <- tract_nta_puma_crosswalk %>%
   distinct(nta_id, puma_id, puma_name) %>%
   filter(!str_detect(nta_id, "98|99")) # remove ntas with pumas (park, cemetary, etc)
 
-
 # process boroughs --------------------------------------------------------
 
-borough_sf <- nyc_sf %>%
+borough_sf <- nyc_sf_processed %>%
   pluck("borough") %>%
   mutate(geoid = paste0(state_fips, county_fips)) %>%
   select(
@@ -120,7 +131,7 @@ borough_sf <- nyc_sf %>%
 
 # process ntas ------------------------------------------------------------
 
-nta_sf <- nyc_sf %>%
+nta_sf <- nyc_sf_processed %>%
   pluck("nta") %>%
   select(
     nta_id = NTACode,
@@ -137,7 +148,7 @@ nta_sf <- nyc_sf %>%
 
 # process pumas -----------------------------------------------------------
 
-puma_sf <- nyc_sf %>%
+puma_sf <- nyc_sf_processed %>%
   pluck("puma") %>%
   mutate(geoid = paste0("360", PUMA)) %>%
   select(
@@ -152,37 +163,9 @@ puma_sf <- nyc_sf %>%
     ) %>%
   arrange(borough_id, puma_id)
 
-
-# process blocks ----------------------------------------------------------
-
-block_sf <- nyc_sf %>%
-  pluck("block") %>%
-  mutate(geoid = paste0(state_fips, county_fips, CT2010, CB2010)) %>%
-  left_join(
-    tract_nta_puma_crosswalk,
-    by = c("CT2010" = "tract_id", "county_fips")
-    ) %>%
-  select(
-    geoid,
-    borough_tract_block_id = BCTCB2010,
-    state_fips,
-    county_fips,
-    block_id = CB2010,
-    tract_id = CT2010,
-    county_name,
-    borough_name,
-    borough_id = BoroCode,
-    nta_id,
-    nta_name,
-    puma_id,
-    puma_name
-  ) %>%
-  arrange(borough_tract_block_id)
-
-
 # process cds -------------------------------------------------------------
 
-cd_sf <- nyc_sf %>%
+cd_sf <- nyc_sf_processed %>%
   pluck("cd") %>%
   mutate(
     cd_id = as.character(as.integer(str_sub(BoroCD, 2, 3))),
@@ -205,11 +188,97 @@ cd_sf <- nyc_sf %>%
   ) %>%
   arrange(borough_cd_id)
 
+# process school ----------------------------------------------------------
+
+school_sf <- nyc_sf_processed %>%
+  pluck("school") %>%
+  mutate(
+    school_dist_name = paste("Community School District", SchoolDist)
+  ) %>%
+  select(
+    school_dist_id = SchoolDist,
+    school_dist_name,
+    state_fips
+  ) %>%
+  group_by(school_dist_id, school_dist_name, state_fips) %>%
+  summarise() %>% # dissolve 2 parts of SD 10 that are split
+  ungroup() %>%
+  arrange(as.numeric(school_dist_id))
+
+# process police ----------------------------------------------------------
+
+police_sf <- nyc_sf_processed %>%
+  pluck("police") %>%
+  transmute(
+    police_precinct_id = Precinct,
+    police_precinct_name = case_when(
+      police_precinct_id == "14" ~ "Midtown South Precinct",
+      police_precinct_id == "18" ~ "Midtown North Precinct",
+      police_precinct_id == "22" ~ "Central Park Precinct",
+      TRUE ~ paste(scales::ordinal(as.numeric(police_precinct_id)), "Precinct")
+      ),
+    state_fips
+    ) %>%
+  arrange(as.numeric(police_precinct_id))
+
+# process cong ------------------------------------------------------------
+
+cong_sf <- nyc_sf_processed %>%
+  pluck("cong") %>%
+  transmute(
+    geoid = paste0(state_fips, str_pad(CongDist, 2, pad = "0")),
+    cong_dist_id = CongDist,
+    cong_dist_name = paste0("NY-", cong_dist_id),
+    state_fips
+    ) %>%
+  arrange(as.numeric(geoid))
+
+# process council ---------------------------------------------------------
+
+council_sf <- nyc_sf_processed %>%
+  pluck("council") %>%
+  transmute(
+    council_dist_id = CounDist,
+    council_dist_name = paste("City Council District", council_dist_id),
+    state_fips
+  ) %>%
+  arrange(as.numeric(council_dist_id))
+
+# process blocks ----------------------------------------------------------
+
+block_sf <- nyc_sf_processed %>%
+  pluck("block") %>%
+  mutate(geoid = paste0(state_fips, county_fips, CT2010, CB2010)) %>%
+  left_join(
+    tract_nta_puma_crosswalk,
+    by = c("CT2010" = "tract_id", "county_fips")
+  ) %>%
+  left_join(block_cong_crosswalk, by = "geoid") %>%
+  left_join(st_set_geometry(cong_sf, NULL), by = "cong_dist_id") %>%
+  select(
+    geoid = geoid.x,
+    borough_tract_block_id = BCTCB2010,
+    state_fips = state_fips.x,
+    county_fips,
+    block_id = CB2010,
+    tract_id = CT2010,
+    county_name,
+    borough_name,
+    borough_id = BoroCode,
+    nta_id,
+    nta_name,
+    puma_id,
+    puma_name,
+    cong_dist_id,
+    cong_dist_name
+  ) %>%
+  arrange(borough_tract_block_id)
 
 # simplify sf objects -----------------------------------------------------
 
 # set up list of sf objects to simplify
-boundaries <- lst(borough_sf, nta_sf, tract_sf, puma_sf, block_sf, cd_sf)
+boundaries <- lst(borough_sf, nta_sf, tract_sf, puma_sf, block_sf, cd_sf,
+                  council_sf, school_sf, police_sf, cong_sf)
 
 # simplify each object to make smaller boundary files available
 boundaries_simple <- boundaries %>%
@@ -217,7 +286,6 @@ boundaries_simple <- boundaries %>%
   map(~ ms_simplify(.x, keep_shapes = TRUE)) %>%
   set_names(paste0(names(list_modify(boundaries, "block_sf" = NULL)), "_simple")) %>%
   map(~ st_as_sf(as_tibble(.x)))
-
 
 # save data ---------------------------------------------------------------
 

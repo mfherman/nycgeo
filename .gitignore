@@ -5,3 +5,4 @@ inst/doc
 .Ruserdata
 docs/*
 cache/*
+data-raw/cd115-block.txt

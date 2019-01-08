@@ -22,7 +22,7 @@ test_that("boundaries are correct dims", {
   expect_equal(ncol(nyc_boundaries("tract", add_acs_data = TRUE)),
                ncol(tract_sf) + ncol(tract_acs_data) - 1)
   expect_equal(nrow(nyc_boundaries("block")), 38796)
-  expect_equal(ncol(nyc_boundaries("block")), 14)
+  expect_equal(ncol(nyc_boundaries("block")), 16)
   expect_equal(ncol(nyc_boundaries("block", add_acs_data = TRUE)),
                ncol(block_sf) + ncol(block_census_data) - 1)
 })

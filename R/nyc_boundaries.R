@@ -55,8 +55,9 @@
 #'
 #' @export
 
-nyc_boundaries <- function(geography = c("borough", "puma", "nta",
-                                         "cd", "tract", "block"),
+nyc_boundaries <- function(geography = c("borough", "puma", "nta", "cd",
+                                         "tract", "block", "school", "police",
+                                         "council", "cong"),
                            filter_by = NULL,
                            region = NULL,
                            add_acs_data = FALSE,
@@ -92,6 +93,22 @@ nyc_boundaries <- function(geography = c("borough", "puma", "nta",
 
   get_tract <- function(res) {
     if (res == "high") nycgeo::tract_sf else nycgeo::tract_sf_simple
+  }
+
+  get_school <- function(res) {
+    if (res == "high") nycgeo::school_sf else nycgeo::school_sf_simple
+  }
+
+  get_police <- function(res) {
+    if (res == "high") nycgeo::police_sf else nycgeo::police_sf_simple
+  }
+
+  get_council <- function(res) {
+    if (res == "high") nycgeo::council_sf else nycgeo::council_sf_simple
+  }
+
+  get_cong <- function(res) {
+    if (res == "high") nycgeo::cong_sf else nycgeo::cong_sf_simple
   }
 
   # validate filter for selected geography, get sf object, set ac
@@ -144,7 +161,7 @@ nyc_boundaries <- function(geography = c("borough", "puma", "nta",
     if (add_acs_data) {
       acs_data <- nycgeo::tract_acs_data
     }
-  } else {
+  } else if (geography == "block") {
     if (!is.null(filter_by) && !(filter_by %in% c("borough", "puma", "nta"))) {
       stop("Can only filter by borough, puma, or nta")
     } else {
@@ -153,6 +170,46 @@ nyc_boundaries <- function(geography = c("borough", "puma", "nta",
     }
     if (add_acs_data) {
       acs_data <- nycgeo::block_census_data
+    }
+  } else if (geography == "school") {
+    if (!is.null(filter_by) && !(filter_by %in% c("school"))) {
+      stop("Can only filter by school district")
+    } else {
+      shp <- get_school(resolution)
+      merge_by <- "school_dist_id"
+    }
+    if (add_acs_data) {
+      stop("ACS data for school districts is not yet available.")
+    }
+  } else if (geography == "police") {
+    if (!is.null(filter_by) && !(filter_by %in% c("police"))) {
+      stop("Can only filter by police precinct")
+    } else {
+      shp <- get_police(resolution)
+      merge_by <- "police_precinct_id"
+    }
+    if (add_acs_data) {
+      stop("ACS data for police precincts is not yet available.")
+    }
+  } else if (geography == "council") {
+    if (!is.null(filter_by) && !(filter_by %in% c("council"))) {
+      stop("Can only filter by city council district")
+    } else {
+      shp <- get_council(resolution)
+      merge_by <- "council_dist_id"
+    }
+    if (add_acs_data) {
+      stop("ACS data for city council districts is not yet available.")
+    }
+  } else if (geography == "cong") {
+    if (!is.null(filter_by) && !(filter_by %in% c("cong"))) {
+      stop("Can only filter by congressional district")
+    } else {
+      shp <- get_council(resolution)
+      merge_by <- "cong_dist_id"
+    }
+    if (add_acs_data) {
+      stop("ACS data for congressional districts is not yet available.")
     }
   }
 

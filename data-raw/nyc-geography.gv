@@ -1,0 +1,48 @@
+graph boxes_and_circles {
+
+  node [shape = box
+        fontname = Helvetica
+        fontsize = 10
+        fontcolor = gray15
+        color = gray40]
+
+
+  edge [color = grey40]
+
+  council [label = '@@7']
+  city   [label = '@@11']
+  boro    [label = '@@1']
+  police  [label = '@@10']
+  cd      [label = '@@3']
+  puma    [label = '@@2']
+  nta     [label = '@@4']
+  tract   [label = '@@5']
+  block   [label = '@@6']
+  cong    [label = '@@9']
+  school  [label = '@@8']
+
+  city -- boro
+  city -- police
+  city -- council
+  city -- school
+  city -- cong
+  boro -- puma
+  boro -- cd
+  puma -- nta
+  nta -- tract
+  tract -- block
+  cong -- block
+
+}
+
+  [1]: 'Borough (County)'
+  [2]: 'Public Use Microdata Area'
+  [3]: 'Community District'
+  [4]: 'Neighborhood Tabulation Area'
+  [5]: 'Census Tract'
+  [6]: 'Census Block'
+  [7]: 'City Council District'
+  [8]: 'School District'
+  [9]: 'U.S. Congressional District'
+  [10]: 'Police Precinct'
+  [11]: 'New York City'
