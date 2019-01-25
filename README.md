@@ -15,8 +15,8 @@ working with NYC spatial data. Data is in the [`sf` (simple
 features)](https://r-spatial.github.io/sf/) format and includes
 boundaries for boroughs (counties), public use microdata areas (PUMAs),
 community districts (CDs), neighborhood tabulation areas (NTAs), census
-tracts, and census blocks. In the future, more boundaries will be added,
-such as city council districts, school districts, and police precincts.
+tracts, census blocks, city council districts, school districts, and
+police precincts.
 
 Additionally, selected demographic, social, and economic estimates from
 the U.S. Census Bureau American Community Survey can be added to the
@@ -115,16 +115,16 @@ nyc_boundaries(geography = "tract")
 #> # A tibble: 2,166 x 13
 #>    geoid borough_tract_id state_fips county_fips tract_id county_name
 #>    <chr> <chr>            <chr>      <chr>       <chr>    <chr>      
-#>  1 3606… 1000100          36         061         000100   New York   
-#>  2 3606… 1000201          36         061         000201   New York   
-#>  3 3606… 1000202          36         061         000202   New York   
-#>  4 3606… 1000500          36         061         000500   New York   
-#>  5 3606… 1000600          36         061         000600   New York   
-#>  6 3606… 1000700          36         061         000700   New York   
-#>  7 3606… 1000800          36         061         000800   New York   
-#>  8 3606… 1000900          36         061         000900   New York   
-#>  9 3606… 1001001          36         061         001001   New York   
-#> 10 3606… 1001002          36         061         001002   New York   
+#>  1 3606~ 1000100          36         061         000100   New York   
+#>  2 3606~ 1000201          36         061         000201   New York   
+#>  3 3606~ 1000202          36         061         000202   New York   
+#>  4 3606~ 1000500          36         061         000500   New York   
+#>  5 3606~ 1000600          36         061         000600   New York   
+#>  6 3606~ 1000700          36         061         000700   New York   
+#>  7 3606~ 1000800          36         061         000800   New York   
+#>  8 3606~ 1000900          36         061         000900   New York   
+#>  9 3606~ 1001001          36         061         001001   New York   
+#> 10 3606~ 1001002          36         061         001002   New York   
 #> # ... with 2,156 more rows, and 7 more variables: borough_name <chr>,
 #> #   borough_id <chr>, nta_id <chr>, nta_name <chr>, puma_id <chr>,
 #> #   puma_name <chr>, geometry <MULTIPOLYGON [US_survey_foot]>
