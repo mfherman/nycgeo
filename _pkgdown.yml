@@ -9,6 +9,9 @@ authors:
   Matt Herman:
     href: https://mattherman.info
 
+development:
+  mode: auto
+
 navbar:
   structure:
     left:
@@ -55,6 +58,14 @@ reference:
   - tract_sf
   - tract_sf_simple
   - block_sf
+  - school_sf
+  - school_sf_simple
+  - police_sf
+  - police_sf_simple
+  - council_sf
+  - council_sf_simple
+  - cong_sf
+  - cong_sf_simple
 
 - title: Census data
   contents:
