@@ -9,9 +9,6 @@ authors:
   Matt Herman:
     href: https://mattherman.info
 
-development:
-  mode: auto
-
 navbar:
   structure:
     left:
