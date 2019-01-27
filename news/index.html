@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Block-level Decennial Census counts — block_census_data • nycgeo</title>
+<title>Changelog • nycgeo</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,17 +37,12 @@
 
 
 
-<meta property="og:title" content="Block-level Decennial Census counts — block_census_data" />
-
-<meta property="og:description" content="A dataset containing U.S. Census Bureau Decennial Census population and race
-counts for all census blocks in New York City. Counts are from the 2010
-Decennial Census. Margins of error are not included because this data
-represents an enumeration of the entire population, rather than a sample." />
+<meta property="og:title" content="Changelog" />
 
 <meta property="og:image" content="https://nycgeo.mattherman.info/logo.png" />
 <meta name="twitter:card" content="summary" />
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -72,7 +67,7 @@ represents an enumeration of the entire population, rather than a sample." />
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -85,7 +80,7 @@ represents an enumeration of the entire population, rather than a sample." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nycgeo</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -127,50 +122,42 @@ represents an enumeration of the entire population, rather than a sample." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Block-level Decennial Census counts</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mfherman/nycgeo/blob/master/R/acs_data.R'><code>R/acs_data.R</code></a></small>
-    <div class="hidden name"><code>block_census_data.Rd</code></div>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/mfherman/nycgeo/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    
-    <p>A dataset containing U.S. Census Bureau Decennial Census population and race
-counts for all census blocks in New York City. Counts are from the 2010
-Decennial Census. Margins of error are not included because this data
-represents an enumeration of the entire population, rather than a sample.</p>
-    
-    </div>
-
-    <pre class="usage"><span class='no'>block_census_data</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>A tibble with 39148 rows and 11 variables:</p><dl class='dl-horizontal'>
-<dt>geoid</dt><dd><p>Census Bureau GEOID</p></dd>
-<dt>pop_total</dt><dd><p>Total population; P001001</p></dd>
-<dt>med_age</dt><dd><p>Median age; P013001</p></dd>
-<dt>pop_white, pop_white_pct</dt><dd><p>Non-hispanic white population; P005003</p></dd>
-<dt>pop_black, pop_black_pct</dt><dd><p>Non-hispanic black population; P005004</p></dd>
-<dt>pop_asian, pop_asian_pct</dt><dd><p>Non-hispanic asian population; P005006</p></dd>
-<dt>pop_hisp, pop_hisp_pct</dt><dd><p>Hispanic, any race population; P004003</p></dd>
-</dl>
-    
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p><a href='https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml'>https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml</a></p>
-    
-
+    <div id="nycgeo-0-1-0-9000" class="section level1">
+<h1 class="page-header">
+<a href="#nycgeo-0-1-0-9000" class="anchor"></a>nycgeo 0.1.0.9000</h1>
+<ul>
+<li>Added school district (<code><a href="../reference/school_sf.html">nycgeo::school_sf</a></code>), police precinct(<code><a href="../reference/police_sf.html">nycgeo::police_sf</a></code>) , city council (<code><a href="../reference/council_sf.html">nycgeo::council_sf</a></code>), and U.S. Congressional (<code><a href="../reference/cong_sf.html">nycgeo::cong_sf</a></code>) boundaries.</li>
+<li>Updated <code><a href="../reference/nta_acs_data.html">nycgeo::nta_acs_data</a></code> to include properly aggregated data from <code><a href="../reference/tract_acs_data.html">nycgeo::tract_acs_data</a></code>. Also, removed NTAs without population (e.g. parks, cemeteries, airports) from <code><a href="../reference/tract_acs_data.html">nycgeo::tract_acs_data</a></code>.</li>
+<li>Fixed bug in <code><a href="../reference/nyc_boundaries.html">nyc_boundaries()</a></code> when filtering by cd.</li>
+<li>Added tests.</li>
+<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+<li>Added a package logo.</li>
+<li>Updated ACS datasets documentation.</li>
+</ul>
+</div>
+    <div id="nycgeo-0-1-0" class="section level1">
+<h1 class="page-header">
+<a href="#nycgeo-0-1-0" class="anchor"></a>nycgeo 0.1.0</h1>
+<ul>
+<li>Initial release!</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#source">Source</a></li>
-          </ul>
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#nycgeo-0-1-0-9000">0.1.0.9000</a></li>
+        <li><a href="#nycgeo-0-1-0">0.1.0</a></li>
+      </ul>
+    </div>
   </div>
+
 </div>
 
       <footer>

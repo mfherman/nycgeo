@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>nycgeo: Spatial Data Files for NYC — nycgeo-package • nycgeo</title>
+<title>NYC neighborhood tabulation area boundaries — nta_sf • nycgeo</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,21 +37,15 @@
 
 
 
-<meta property="og:title" content="nycgeo: Spatial Data Files for NYC — nycgeo-package" />
+<meta property="og:title" content="NYC neighborhood tabulation area boundaries — nta_sf" />
 
-<meta property="og:description" content="
-Spatial data files for various geographic and administrative
-    boundaries in New York City as well as tools for working with NYC spatial
-    data. Data is in the in the sf (simple features) format and includes
-    boundaries for boroughs (counties), public use microdata areas, community
-    districts, neighborhood tabulation areas, census tracts, and census blocks. 
-    In addition, selected demographic, social, and economic estimates from the 
-    U.S. Census Bureau American Community Survey are included." />
+<meta property="og:description" content="A simple features (sf) dataset containing the geometry of all neighborhood
+tabulation areas (NTAs) in New York City." />
 
 <meta property="og:image" content="https://nycgeo.mattherman.info/logo.png" />
 <meta name="twitter:card" content="summary" />
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -89,7 +83,7 @@ Spatial data files for various geographic and administrative
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nycgeo</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -131,32 +125,55 @@ Spatial data files for various geographic and administrative
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>nycgeo: Spatial Data Files for NYC</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mfherman/nycgeo/blob/master/R/nycgeo-package.R'><code>R/nycgeo-package.R</code></a></small>
-    <div class="hidden name"><code>nycgeo-package.Rd</code></div>
+    <h1>NYC neighborhood tabulation area boundaries</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mfherman/nycgeo/blob/master/R/sf_data.R'><code>R/sf_data.R</code></a></small>
+    <div class="hidden name"><code>nta_sf.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><img src='figures/logo.png' align='right' /></p>
-<p>Spatial data files for various geographic and administrative
-    boundaries in New York City as well as tools for working with NYC spatial
-    data. Data is in the in the sf (simple features) format and includes
-    boundaries for boroughs (counties), public use microdata areas, community
-    districts, neighborhood tabulation areas, census tracts, and census blocks. 
-    In addition, selected demographic, social, and economic estimates from the 
-    U.S. Census Bureau American Community Survey are included.</p>
+    <p>A simple features (sf) dataset containing the geometry of all neighborhood
+tabulation areas (NTAs) in New York City.</p>
     
     </div>
 
-        
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <pre class="usage"><span class='no'>nta_sf</span>
 
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://nycgeo.mattherman.info'>https://nycgeo.mattherman.info</a></p></li>
-<li><p><a href='https://github.com/mfherman/nycgeo'>https://github.com/mfherman/nycgeo</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/mfherman/nycgeo/issues'>https://github.com/mfherman/nycgeo/issues</a></p></li>
-</ul></div>
+<span class='no'>nta_sf_simple</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>An sf object with 195 rows and 10 variables:</p><dl class='dl-horizontal'>
+<dt>nta_id</dt><dd><p>NYC neighborhood tabulation area id</p></dd>
+<dt>nta_name</dt><dd><p>NYC neighborhood tabulation area name</p></dd>
+<dt>state_fips</dt><dd><p>ANSI state FIPS code</p></dd>
+<dt>county_fips</dt><dd><p>ANSI county FIPS code</p></dd>
+<dt>county_name</dt><dd><p>County name</p></dd>
+<dt>borough_name</dt><dd><p>Borough name</p></dd>
+<dt>borough_id</dt><dd><p>NYC DCP borough code and census tract number</p></dd>
+<dt>puma_id</dt><dd><p>Census Bureau public use microdata area id</p></dd>
+<dt>puma_name</dt><dd><p>Census Bureau public use microdata area name</p></dd>
+<dt>geometry</dt><dd><p>sfc_MULTIPOLYGON <br />
+NAD83 / New York Long Island (ftUS); EPSG:2263</p></dd>
+</dl>
+    
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-nynta.page'>https://www1.nyc.gov/site/planning/data-maps/open-data/dwn-nynta.page</a></p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Neighborhood tabulation areas (NTAs) were created by the NYC Department of
+City Planning to project populations at a small area level. The boundaries
+roughly match neighborhoods, but some neighborhoods were combined to reach
+the minimum population of 15,000 per NTA. Each NTA was created from whole
+census tracts to allow for aggregating census data to the NTA level.
+Additionally, NTAs do not cross public use microdata area (PUMA) boundaries.</p>
+<p>NTAs are useful geographies because they offer a compromise between very
+small areas like census blocks or tracts and larger areas like counties,
+community districts, or PUMAs. Especially when using data from the American
+Community Survey, NTAs can be useful to reduce the margin of error of single
+census tract estimates.</p>
     
 
   </div>
@@ -164,11 +181,13 @@ Spatial data files for various geographic and administrative
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#format">Format</a></li>
+
+      <li><a href="#source">Source</a></li>
+
+      <li><a href="#details">Details</a></li>
           </ul>
 
-    <h2>Author</h2>
-    <p><strong>Maintainer</strong>: Matt Herman <a href='mailto:mfherman@gmail.com'>mfherman@gmail.com</a></p>
   </div>
 </div>
 

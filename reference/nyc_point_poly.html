@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find which administrative districts a set of points are within — nyc_point_poly_old • nycgeo</title>
+<title>Find which administrative districts a set of points are within — nyc_point_poly • nycgeo</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,7 +37,7 @@
 
 
 
-<meta property="og:title" content="Find which administrative districts a set of points are within — nyc_point_poly_old" />
+<meta property="og:title" content="Find which administrative districts a set of points are within — nyc_point_poly" />
 
 <meta property="og:description" content="Point-in-polygon operation for NYC administrative boundaries. Use
 nyc_point_poly() on a set of points to determine which administrative
@@ -46,7 +46,7 @@ district each point lies within." />
 <meta property="og:image" content="https://nycgeo.mattherman.info/logo.png" />
 <meta name="twitter:card" content="summary" />
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -84,7 +84,7 @@ district each point lies within." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nycgeo</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -127,19 +127,20 @@ district each point lies within." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Find which administrative districts a set of points are within</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mfherman/nycgeo/blob/master/R/nyc_point_poly_old.R'><code>R/nyc_point_poly_old.R</code></a></small>
-    <div class="hidden name"><code>nyc_point_poly_old.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/mfherman/nycgeo/blob/master/R/nyc_point_poly.R'><code>R/nyc_point_poly.R</code></a></small>
+    <div class="hidden name"><code>nyc_point_poly.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
     <p>Point-in-polygon operation for NYC administrative boundaries. Use
-<code><a href='nyc_point_poly.html'>nyc_point_poly()</a></code> on a set of points to determine which administrative
+<code>nyc_point_poly()</code> on a set of points to determine which administrative
 district each point lies within.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>nyc_point_poly_old</span>(<span class='no'>points</span>, <span class='no'>geography</span>)</pre>
+    <pre class="usage"><span class='fu'>nyc_point_poly</span>(<span class='no'>points</span>, <span class='kw'>geography</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"borough"</span>, <span class='st'>"puma"</span>, <span class='st'>"nta"</span>, <span class='st'>"cd"</span>,
+  <span class='st'>"tract"</span>, <span class='st'>"block"</span>, <span class='st'>"school"</span>, <span class='st'>"police"</span>, <span class='st'>"council"</span>, <span class='st'>"cong"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,9 +152,9 @@ district each point lies within.</p>
     <tr>
       <th>geography</th>
       <td><p>A character vector of administrative boundaries to append to
-points. Possible values are "borough", "puma", "cd" "nta", "tract", and
-"block". If more than one geography is selected, names and codes for each
-geography is appended.</p></td>
+points. Possible values are "borough", "puma", "cd", "nta", "school",
+"council", "police", "cong", "tract" and "block". If more than one
+geography is selected, names and codes for each geography is appended.</p></td>
     </tr>
     </table>
     
@@ -164,7 +165,7 @@ and and codes appended.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Using <code><a href='nyc_point_poly.html'>nyc_point_poly()</a></code> requires installing the <a href='https://r-spatial.github.io/sf/'>sf package</a>.</p>
+    <p>Using <code>nyc_point_poly()</code> requires installing the <a href='https://r-spatial.github.io/sf/'>sf package</a>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -173,27 +174,27 @@ and and codes appended.</p>
   <span class='co'># generate 100 random points in nyc</span>
   <span class='no'>points</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/sf/topics/sf'>st_sf</a></span>(<span class='kw'>geometry</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/sf/topics/st_sample'>st_sample</a></span>(<span class='fu'><a href='nyc_boundaries.html'>nyc_boundaries</a></span>(), <span class='fl'>100</span>))
 
-  <span class='fu'><a href='nyc_point_poly.html'>nyc_point_poly</a></span>(<span class='kw'>points</span> <span class='kw'>=</span> <span class='no'>points</span>, <span class='kw'>geography</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"borough"</span>, <span class='st'>"nta"</span>, <span class='st'>"block"</span>))
-}</div><div class='output co'>#&gt; Simple feature collection with 104 features and 5 fields
+  <span class='fu'>nyc_point_poly</span>(<span class='kw'>points</span> <span class='kw'>=</span> <span class='no'>points</span>, <span class='kw'>geography</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"borough"</span>, <span class='st'>"nta"</span>, <span class='st'>"cd"</span>))
+}</div><div class='output co'>#&gt; Simple feature collection with 103 features and 6 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
-#&gt; bbox:           xmin: 919371.1 ymin: 134237.3 xmax: 1060982 ymax: 272193
+#&gt; bbox:           xmin: 914354.3 ymin: 124868 xmax: 1065947 ymax: 268347.5
 #&gt; epsg (SRID):    2263
 #&gt; proj4string:    +proj=lcc +lat_1=41.03333333333333 +lat_2=40.66666666666666 +lat_0=40.16666666666666 +lon_0=-74 +x_0=300000.0000000001 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs
-#&gt; # A tibble: 104 x 6
-#&gt;    borough_name borough_id nta_name nta_id borough_tract_b…
-#&gt;    &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;           
-#&gt;  1 Queens       4          Woodside QN63   40295002007     
-#&gt;  2 Brooklyn     3          East Ne… BK85   31130001002     
-#&gt;  3 Queens       4          Springf… QN02   40330005001     
-#&gt;  4 Staten Isla… 5          New Spr… SI05   50291021083     
-#&gt;  5 Bronx        2          West Co… BX63   20063002039     
-#&gt;  6 Queens       4          Laurelt… QN66   40630001001     
-#&gt;  7 Queens       4          Middle … QN21   40661001001     
-#&gt;  8 Brooklyn     3          Sheepsh… BK17   30620001003     
-#&gt;  9 Queens       4          Middle … QN21   40663003000     
-#&gt; 10 Queens       4          Hammels… QN12   40972021029     
-#&gt; # … with 94 more rows, and 1 more variable: geometry &lt;POINT [US_survey_foot]&gt;</div><div class='input'>
+#&gt; # A tibble: 103 x 7
+#&gt;    borough_name borough_id nta_name nta_id cd_name borough_cd_id
+#&gt;    &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;        
+#&gt;  1 Queens       4          Baisley… QN76   Queens… 412          
+#&gt;  2 Queens       4          Hunters… QN31   Queens… 402          
+#&gt;  3 Staten Isla… 5          Todt Hi… SI24   Staten… 502          
+#&gt;  4 Staten Isla… 5          Charles… SI11   Staten… 503          
+#&gt;  5 Bronx        2          Allerto… BX31   Bronx … 211          
+#&gt;  6 Bronx        2          park-ce… BX99   Bronx … 210          
+#&gt;  7 Queens       4          Bayside… QN46   Queens… 411          
+#&gt;  8 Staten Isla… 5          Charles… SI11   Staten… 503          
+#&gt;  9 Staten Isla… 5          Charles… SI11   Staten… 503          
+#&gt; 10 Staten Isla… 5          Old Tow… SI36   Staten… 502          
+#&gt; # … with 93 more rows, and 1 more variable: geometry &lt;POINT [US_survey_foot]&gt;</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

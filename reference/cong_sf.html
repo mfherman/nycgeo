@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NYC city council district boundaries — council_sf • nycgeo</title>
+<title>U.S Congressional district boundaries in NYC — cong_sf • nycgeo</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,15 +37,15 @@
 
 
 
-<meta property="og:title" content="NYC city council district boundaries — council_sf" />
+<meta property="og:title" content="U.S Congressional district boundaries in NYC — cong_sf" />
 
-<meta property="og:description" content="A simple features (sf) dataset containing the geometry of all city council
-districts in New York City." />
+<meta property="og:description" content="A simple features (sf) dataset containing the geometry of all U.S.
+Congressional districts in New York City." />
 
 <meta property="og:image" content="https://nycgeo.mattherman.info/logo.png" />
 <meta name="twitter:card" content="summary" />
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -83,7 +83,7 @@ districts in New York City." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nycgeo</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -125,25 +125,27 @@ districts in New York City." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>NYC city council district boundaries</h1>
+    <h1>U.S Congressional district boundaries in NYC</h1>
     <small class="dont-index">Source: <a href='https://github.com/mfherman/nycgeo/blob/master/R/sf_data.R'><code>R/sf_data.R</code></a></small>
-    <div class="hidden name"><code>council_sf.Rd</code></div>
+    <div class="hidden name"><code>cong_sf.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A simple features (sf) dataset containing the geometry of all city council
-districts in New York City.</p>
+    <p>A simple features (sf) dataset containing the geometry of all U.S.
+Congressional districts in New York City.</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>council_sf</span>
+    <pre class="usage"><span class='no'>cong_sf</span>
 
-<span class='no'>council_sf_simple</span></pre>
+<span class='no'>cong_sf_simple</span></pre>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>An sf object with 51 rows and 4 variables:</p><dl class='dl-horizontal'>
+    <p>An sf object with 13 rows and 5 variables:</p><dl class='dl-horizontal'>
+<dt>geoid</dt><dd><p>Census Bureau GEOID; can be used to join spatial data with
+Census estimates</p></dd>
 <dt>council_dist_id</dt><dd><p>NYC city council district id</p></dd>
 <dt>council_dist_name</dt><dd><p>NYC city council district name</p></dd>
 <dt>state_fips</dt><dd><p>ANSI state FIPS code</p></dd>

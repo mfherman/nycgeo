@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NYC police precinct boundaries — police_sf • nycgeo</title>
+<title>Borough-level American Community Survey estimates — borough_acs_data • nycgeo</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,15 +37,17 @@
 
 
 
-<meta property="og:title" content="NYC police precinct boundaries — police_sf" />
+<meta property="og:title" content="Borough-level American Community Survey estimates — borough_acs_data" />
 
-<meta property="og:description" content="A simple features (sf) dataset containing the geometry of all police
-precincts in New York City." />
+<meta property="og:description" content="A dataset containing U.S. Census Bureau American Community Survey (ACS)
+estimates and margins of error of selected demographic, social, and economic
+variables for all boroughs in New York City. Variables are five-year
+estimates from the 2013-2017 ACS." />
 
 <meta property="og:image" content="https://nycgeo.mattherman.info/logo.png" />
 <meta name="twitter:card" content="summary" />
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
@@ -83,7 +85,7 @@ precincts in New York City." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nycgeo</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -125,35 +127,74 @@ precincts in New York City." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>NYC police precinct boundaries</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mfherman/nycgeo/blob/master/R/sf_data.R'><code>R/sf_data.R</code></a></small>
-    <div class="hidden name"><code>police_sf.Rd</code></div>
+    <h1>Borough-level American Community Survey estimates</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mfherman/nycgeo/blob/master/R/acs_data.R'><code>R/acs_data.R</code></a></small>
+    <div class="hidden name"><code>borough_acs_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A simple features (sf) dataset containing the geometry of all police
-precincts in New York City.</p>
+    <p>A dataset containing U.S. Census Bureau American Community Survey (ACS)
+estimates and margins of error of selected demographic, social, and economic
+variables for all boroughs in New York City. Variables are five-year
+estimates from the 2013-2017 ACS.</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>police_sf</span>
-
-<span class='no'>police_sf_simple</span></pre>
+    <pre class="usage"><span class='no'>borough_acs_data</span></pre>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>An sf object with 77 rows and 4 variables:</p><dl class='dl-horizontal'>
-<dt>police_precinct_id</dt><dd><p>NYC police precinct id</p></dd>
-<dt>police_precinct_name</dt><dd><p>NYC police precinct name</p></dd>
-<dt>state_fips</dt><dd><p>ANSI state FIPS code</p></dd>
-<dt>geometry</dt><dd><p>sfc_MULTIPOLYGON <br />
-NAD83 / New York Long Island (ftUS); EPSG:2263</p></dd>
+    <p>A tibble with 5 rows and 35 variables:</p>
+<dl class='dl-horizontal'>
+<dt>geoid</dt><dd><p>Census Bureau GEOID</p></dd>
+<dt>pop_total_est</dt><dd><p>Total population estimate; B01001_001</p></dd>
+<dt>med_age_est</dt><dd><p>Median age estimate; B01002_001</p></dd>
+<dt>med_age_moe</dt><dd><p>Median age margin of error; B01002_001</p></dd>
+<dt>med_hhinc_est</dt><dd><p>Median annual household income estimate (dollars);
+B19013_001</p></dd>
+<dt>med_hhinc_moe</dt><dd><p>Median annual household income margin of error
+(dollars); B19013_001</p></dd>
+<dt>pop_white_est, pop_white_pct_est</dt><dd><p>Non-hispanic white population
+estimate; B03002_003</p></dd>
+<dt>pop_white_moe, pop_white_pct_moe</dt><dd><p>Non-hispanic white population
+margin of error; B03002_003</p></dd>
+<dt>pop_black_est, pop_black_pct_est</dt><dd><p>Non-hispanic black population
+estimate; B03002_004</p></dd>
+<dt>pop_black_moe, pop_black_pct_moe</dt><dd><p>Non-hispanic black population
+margin of error; B03002_004</p></dd>
+<dt>pop_asian_est, pop_asian_pct_est</dt><dd><p>Non-hispanic asian population
+estimate; B03002_006</p></dd>
+<dt>pop_asian_moe, pop_asian_pct_moe</dt><dd><p>Non-hispanic asian population
+margin of error; B03002_006</p></dd>
+<dt>pop_hisp_est, pop_hisp_pct_est</dt><dd><p>Hispanic, any race population
+estimate; B03002_012</p></dd>
+<dt>pop_hisp_moe, pop_hisp_pct_moe</dt><dd><p>Hispanic, any race population margin
+of error; B03002_012</p></dd>
+<dt>pop_ba_above_est, pop_ba_above_pct_est</dt><dd><p>Population 25 years or older
+with at least a Bachelor's degree estimate; B15003_022, B15003_023,
+B15003_024, B15003_025</p></dd>
+<dt>pop_ba_above_moe, pop_ba_above_pct_moe</dt><dd><p>Population 25 years or older
+with at least a Bachelor's degree margin of error; B15003_022, B15003_023,
+B15003_024, B15003_025</p></dd>
+<dt>pop_educ_denom_est</dt><dd><p>Population 25 years or older estimate;
+Denominator used to calculate Bachelor's and above percentage; B15003_001</p></dd>
+<dt>pop_educ_denom_moe</dt><dd><p>Population 25 years or older margin of error;
+Denominator used to calculate Bachelor's and above percentage; B15003_001</p></dd>
+<dt>pop_inpov_est, pop_inpov_pct_est</dt><dd><p>Population with income below
+poverty line estimate; B17021_002</p></dd>
+<dt>pop_inpov_moe, pop_inpov_pct_moe</dt><dd><p>Population with income below
+poverty line margin of error; B17021_002</p></dd>
+<dt>pop_inpov_denom_est</dt><dd><p>Population for whom poverty status is determined
+estimate; Denominator used to calculate in poverty percentage; B17021_001</p></dd>
+<dt>pop_inpov_denom_moe</dt><dd><p>Population for whom poverty status is determined
+margin of error; Denominator used to calculate in poverty percentage;
+B17021_001</p></dd>
 </dl>
     
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p><a href='https://www1.nyc.gov/site/planning/data-maps/open-data.page#other'>https://www1.nyc.gov/site/planning/data-maps/open-data.page#other</a></p>
+    <p><a href='https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml'>https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml</a></p>
     
 
   </div>
