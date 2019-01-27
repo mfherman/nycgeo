@@ -134,3 +134,7 @@ nyc_point_poly(schools_sf, "cd") %>%
 |`"nta"`    |neighborhood tabulation area|`nycgeo::nta_sf`|`nycgeo::nta_acs_data`|`"borough"`,`"puma"`, `"nta"`|
 |`"tract"`  |census tract     |`nycgeo::tract_sf`   |`nycgeo::tract_acs_data`  |`"borough"`,`"puma"`, `"nta"`|
 |`"block"`  |census block     |`nycgeo::block_sf`   |`nycgeo::block_census_data`|`"borough"`,`"puma"`, `"nta"`|
+|`"council"`|city council district|`nycgeo::council_sf`|not currently available|none     |
+|`"police"` |police precinct  |`nycgeo::police_sf`  |not currently available   |none     |
+|`"school"` |school district  |`nycgeo::school_sf`  |not currently available   |none     |
+|`"cong"`   |u.s. congressional district|`nycgeo::cong_sf` |not currently available|none |
