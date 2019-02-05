@@ -132,7 +132,9 @@
 <ul>
 <li>Added school district (<code><a href="../reference/school_sf.html">nycgeo::school_sf</a></code>), police precinct(<code><a href="../reference/police_sf.html">nycgeo::police_sf</a></code>) , city council (<code><a href="../reference/council_sf.html">nycgeo::council_sf</a></code>), and U.S. Congressional (<code><a href="../reference/cong_sf.html">nycgeo::cong_sf</a></code>) boundaries.</li>
 <li>Updated <code><a href="../reference/nta_acs_data.html">nycgeo::nta_acs_data</a></code> to include properly aggregated data from <code><a href="../reference/tract_acs_data.html">nycgeo::tract_acs_data</a></code>. Also, removed NTAs without population (e.g. parks, cemeteries, airports) from <code><a href="../reference/tract_acs_data.html">nycgeo::tract_acs_data</a></code>.</li>
-<li>Fixed bug in <code><a href="../reference/nyc_boundaries.html">nyc_boundaries()</a></code> when filtering by cd.</li>
+<li>Fixed bug in <code><a href="../reference/nyc_boundaries.html">nyc_boundaries()</a></code> when filtering by CD.</li>
+<li>
+<code><a href="../reference/nyc_point_poly.html">nyc_point_poly()</a></code> now returns <code>county_fips</code> column when requesting tracts.</li>
 <li>Added tests.</li>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 <li>Added a package logo.</li>
