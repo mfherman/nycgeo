@@ -70,7 +70,7 @@ nyc_point_poly <- function(points, geography = c("borough", "puma", "nta",
   }
 
   if (any(geo == "tract")) {
-    geo_vars <- c(geo_vars, "tract_id")
+    geo_vars <- c(geo_vars, "county_fips", "tract_id")
   }
 
   if (any(geo == "block")) {
